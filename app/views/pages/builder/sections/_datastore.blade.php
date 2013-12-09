@@ -92,19 +92,19 @@
                         <div class="row form-group">
                             <div class="col-md-6">
                                 <label for="mysql-databases-{{ $dbid }}-name">DB Name</label>
-                                <input type="text" id="mysql-databases-{{ $dbid }}-name" name="mysql[databases][{{ $dbid }}][name]" required="" placeholder="database name" value="" class="form-control">
+                                <input type="text" id="mysql-databases-{{ $dbid }}-name" name="mysql[databases][{{ $dbid }}][name]" placeholder="database name" value="" class="form-control">
                             </div>
 
                             <div class="col-md-6">
                                 <label for="mysql-databases-{{ $dbid }}-host">DB Host</label>
-                                <input type="text" id="mysql-databases-{{ $dbid }}-host" name="mysql[databases][{{ $dbid }}][host]" required="" placeholder="database host" value="localhost" class="form-control">
+                                <input type="text" id="mysql-databases-{{ $dbid }}-host" name="mysql[databases][{{ $dbid }}][host]" placeholder="database host" value="localhost" class="form-control">
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <div class="col-md-6">
                                 <label for="mysql-databases-{{ $dbid }}-user">Username</label>
-                                <input type="text" id="mysql-databases-{{ $dbid }}-user" name="mysql[databases][{{ $dbid }}][user]" required="" placeholder="username" value="" class="form-control">
+                                <input type="text" id="mysql-databases-{{ $dbid }}-user" name="mysql[databases][{{ $dbid }}][user]" placeholder="username" value="" class="form-control">
 
                                 <p class="help-block">
                                     At this time, one user can only be assigned to one database. You should not enter "root"
@@ -114,7 +114,7 @@
 
                             <div class="col-md-6">
                                 <label for="mysql-databases-{{ $dbid }}-password">Password</label>
-                                <input type="text" id="mysql-databases-{{ $dbid }}-password" name="mysql[databases][{{ $dbid }}][password]" required="" placeholder="password" value="" class="form-control">
+                                <input type="text" id="mysql-databases-{{ $dbid }}-password" name="mysql[databases][{{ $dbid }}][password]" placeholder="password" value="" class="form-control">
                             </div>
                         </div>
 
