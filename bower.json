@@ -1,0 +1,29 @@
+{
+  "name": "protobox",
+  "version": "0.0.1",
+  "homepage": "https://github.com/protobox/protobox-web",
+  "description": "Protobox Web",
+  "main": "public/assets/css/styles-all.css",
+  "keywords": [
+    "protobox"
+  ],
+  "authors": [
+    "Patrick Heeney"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "latest",
+    "bootstrap": "~3.0.*"
+  },
+  "resolutions": {
+    "jquery": "2.0.3"
+  }
+}

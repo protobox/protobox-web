@@ -1,0 +1,30 @@
+{
+  "name": "protobox",
+  "description": "Protobox Website",
+  "private": true,
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-contrib-imagemin": "~0.3.0",
+    "grunt-contrib-less": "~0.8.3",
+    "grunt-contrib-watch": "~0.5.3"
+  },
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/protobox/protobox-web.git"
+  },
+  "author": "Redfox Media",
+  "license": "Proprietary",
+  "bugs": {
+    "url": "https://github.com/protobox/protobox-web/issues"
+  },
+  "homepage": "http://github.com/protobox/protobox"
+}

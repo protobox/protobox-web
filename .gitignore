@@ -4,3 +4,7 @@ composer.phar
 composer.lock
 .DS_Store
 Thumbs.db
+node_modules/*
+app/assets/components/*
+app/config/production/*
+app/storage/docs/*

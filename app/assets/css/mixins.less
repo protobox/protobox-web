@@ -1,0 +1,19 @@
+// Mixin for generating new styles
+.btn-styles(@btn-color: #555) {
+  #gradient > .vertical(@start-color: @btn-color; @end-color: lighten(@btn-color, 12%));
+  .reset-filter(); // Disable gradients for IE9 because filter bleeds through rounded corners
+  background-repeat: repeat-x;
+  border-color: lighten(@btn-color, 14%);
+
+  &:hover,
+  &:focus  {
+    background-color: lighten(@btn-color, 12%);
+    background-position: 0 -15px;
+  }
+
+  &:active,
+  &.active {
+    background-color: lighten(@btn-color, 12%);
+    border-color: lighten(@btn-color, 14%);
+  }
+}

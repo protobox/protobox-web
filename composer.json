@@ -4,7 +4,10 @@
 	"keywords": ["protobox"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.0.*"
+		"laravel/framework": "4.0.*",
+		"mitch/hashids": "dev-master",
+		"symfony/yaml": "2.5.*@dev",
+		"erusev/parsedown": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
@@ -14,7 +17,10 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+        "psr-0": {
+            "Protobox\\": "app/domain/"
+        }
 	},
 	"scripts": {
 		"post-install-cmd": [

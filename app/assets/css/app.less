@@ -1,0 +1,328 @@
+
+//
+// Load core variables and mixins
+// --------------------------------------------------
+
+//@import "../components/bootstrap/less/variables.less";
+@import "variables.less";
+@import "../components/bootstrap/less/mixins.less";
+@import "mixins.less"; //overrides
+
+//
+// Bootstrap
+// --------------------------------------------------
+
+// Reset
+@import "../components/bootstrap/less/normalize.less";
+@import "../components/bootstrap/less/print.less";
+
+// Core CSS
+@import "../components/bootstrap/less/scaffolding.less";
+@import "../components/bootstrap/less/type.less";
+@import "../components/bootstrap/less/code.less";
+@import "../components/bootstrap/less/grid.less";
+@import "../components/bootstrap/less/tables.less";
+@import "../components/bootstrap/less/forms.less";
+@import "../components/bootstrap/less/buttons.less";
+
+// Components
+@import "../components/bootstrap/less/component-animations.less";
+@import "../components/bootstrap/less/glyphicons.less";
+@import "../components/bootstrap/less/dropdowns.less";
+@import "../components/bootstrap/less/button-groups.less";
+@import "../components/bootstrap/less/input-groups.less";
+@import "../components/bootstrap/less/navs.less";
+@import "../components/bootstrap/less/navbar.less";
+@import "../components/bootstrap/less/breadcrumbs.less";
+@import "../components/bootstrap/less/pagination.less";
+@import "../components/bootstrap/less/pager.less";
+@import "../components/bootstrap/less/labels.less";
+@import "../components/bootstrap/less/badges.less";
+//@import "../components/bootstrap/less/jumbotron.less";
+//@import "../components/bootstrap/less/thumbnails.less";
+@import "../components/bootstrap/less/alerts.less";
+//@import "../components/bootstrap/less/progress-bars.less";
+//@import "../components/bootstrap/less/media.less";
+@import "../components/bootstrap/less/list-group.less";
+@import "../components/bootstrap/less/panels.less";
+@import "../components/bootstrap/less/wells.less";
+@import "../components/bootstrap/less/close.less";
+
+// Components w/ JavaScript
+@import "../components/bootstrap/less/modals.less";
+@import "../components/bootstrap/less/tooltip.less";
+@import "../components/bootstrap/less/popovers.less";
+@import "../components/bootstrap/less/carousel.less";
+
+// Utility classes
+@import "../components/bootstrap/less/utilities.less";
+@import "../components/bootstrap/less/responsive-utilities.less";
+
+//
+// Global
+// --------------------------------------------------
+
+body {
+  position: relative; /* For scrollyspy */
+  padding-top: @navbar-height; /* Account for fixed navbar */
+  background: @body-bg;
+  font-family: @font-family-base;
+}
+
+//
+// Main Menu
+// --------------------------------------------------
+
+.navbar-main {
+  /*text-shadow: 0 -1px 0 rgba(0,0,0,.15);*/
+  text-shadow: none;
+  background-color: #f6f6f6;
+  border-color:@gray-lighter;
+  border-bottom:transparent;
+
+  &.scrolled {
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-collapse {
+    border-color: #463265;
+  }
+
+  .navbar-brand {
+    color: @brand-primary;
+    font-size:1.5em;
+    padding-right:25px;
+
+    &:hover {
+      color: @brand-primary;
+    }
+  }
+
+  .navbar-nav {
+    > li {
+      padding:9px 4px;
+    }
+
+    > li > a {
+      color:@text-color;
+      padding-top:6px;
+      padding-bottom:6px;
+      border-radius: @border-radius-small;
+      font-size:0.9em;
+    }
+
+    > li > a:hover {
+      color:@link-color;
+    }
+
+    .active > a,
+    .active > a:hover {
+      color:#fff;
+      background-color: @brand-primary;
+    }
+
+    .register > a {
+      background-color: #eee;
+    }
+
+    .register > a:hover {
+      color: @brand-primary;
+      background-color: #eee;
+    }
+  }
+
+  .navbar-toggle {
+    border-color: #563d7c;
+  }
+
+  .navbar-toggle:hover {
+    background-color: #463265;
+    border-color: #463265;
+  }
+}
+
+//
+// Block Header
+// --------------------------------------------------
+
+.block-header {
+  padding: 30px 15px; /* side padding builds on .container 15px, so 30px */
+  font-size: 16px;
+  text-align: center;
+  text-shadow: none;
+
+  h1 {
+    font-size:28px;
+    font-weight: 200;
+    color: @brand-primary;
+  }
+
+  p {
+    color: #747c81;
+    font-weight: 100;
+    line-height: 1.5;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .btn {
+    margin-top:1.8em;
+  }
+}
+
+@media (min-width: 768px) {
+  .block-header {
+    font-size: 21px;
+    text-align: left;
+
+    h1 {
+      font-size: 30px;
+      line-height: 1;
+    }
+  }
+}
+
+//
+// Sidebar Menu
+// --------------------------------------------------
+
+/* By default it's not affixed in mobile views, so undo that */
+.block-sidebar.affix {
+  position: static;
+}
+
+.block-sidebar {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.block-switcher {
+
+}
+
+/* First level of nav */
+.block-sidegroup {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-shadow: none;
+  background-color: #222;
+  border-radius: 5px;
+
+  /* All levels of nav */
+  .nav > li > a {
+    display: block;
+    color: #626262;
+    padding: 8px 20px;
+  }
+
+  .nav > li > a:hover,
+  .nav > li > a:focus {
+    text-decoration: none;
+    color:#fff;
+    background-color: #1c1c1c;
+    border-right:none;
+  }
+
+  .nav > .active > a,
+  .nav > .active:hover > a,
+  .nav > .active:focus > a {
+    font-weight: normal;
+    color: #fff;
+    background-color: #1c1c1c;
+  }
+
+  /* Nav: second level (shown on .active) */
+  .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    margin-bottom: 8px;
+  }
+
+  .nav .nav > li > a {
+    padding-top:    3px;
+    padding-bottom: 3px;
+    padding-left: 30px;
+    font-size: 90%;
+  }
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+  .block-sidegroup .nav > .active > ul {
+    display: block;
+  }
+  /* Widen the fixed sidebar */
+  .block-sidebar.affix,
+  .block-sidebar.affix-bottom {
+    width: 213px;
+  }
+  .block-sidebar.affix {
+    position: fixed; /* Undo the static from mobile first approach */
+    top: 30px;
+  }
+  .block-sidebar.affix-bottom {
+    position: absolute; /* Undo the static from mobile first approach */
+  }
+  .block-sidebar.affix-bottom .block-sidenav,
+  .block-sidebar.affix .block-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Widen the fixed sidebar again */
+  .block-sidebar.affix-bottom,
+  .block-sidebar.affix {
+    width: 263px;
+  }
+}
+
+//
+// Buttons
+// --------------------------------------------------
+
+.btn-really-large {
+  font-size:.8em;
+  padding:.6em 1.8em;
+}
+
+.btn-gigantic {
+  padding:.6em 0;
+  font-size:2em;
+}
+
+//
+// Headers
+// --------------------------------------------------
+
+.page-header {
+  margin-top:0;
+}
+
+//
+// Sections
+// --------------------------------------------------
+
+.nav-section {
+  margin:0 0 20px 0;
+}
+
+//
+// Builder
+// --------------------------------------------------
+
+.build-generate {
+  margin-top:20px;
+}
+
+//
+// Footer
+// --------------------------------------------------
+
+.footer {
+  text-align: center;
+}
