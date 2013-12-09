@@ -25,9 +25,7 @@ class BuilderController extends BaseController {
 			return Redirect::route('builder')->withInput()->withErrors($builder->errors());
 		}
 
-		dd($builder->output());
-
-		return $this->download($builder->output(), 'common.yml');
+		return $this->download($builder->output(), 'custom.yml');
 	}
 
 
