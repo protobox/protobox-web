@@ -21,7 +21,8 @@
   ],
   "dependencies": {
     "jquery": "latest",
-    "bootstrap": "~3.0.*"
+    "bootstrap": "~3.0.*",
+    "selectize": "latest"
   },
   "resolutions": {
     "jquery": "2.0.3"

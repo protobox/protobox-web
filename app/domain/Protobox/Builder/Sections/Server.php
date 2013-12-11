@@ -24,7 +24,7 @@ class Server extends Section {
 			// Dotfiles
 			//
 			
-			'dotfiles_install' => 1,
+			'dotfiles_install' => 0,
 			'dotfiles_git' => [],
 			'dotfiles_files' => [],
 			'dotfiles_bash' => '',

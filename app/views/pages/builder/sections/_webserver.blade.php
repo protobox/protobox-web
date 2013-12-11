@@ -45,8 +45,8 @@
                             <div class="col-xs-12">
                                 <label for="apache-modules">Apache Modules</label>
                                 <select id="apache-modules" name="webserver[apache][modules][]" multiple="multiple" class="form-control select-tags-editable">
-                                    @foreach($section->param('apache_modules', []) as $mod)
-                                    <option selected value="{{ $mod }}">{{ $mod }}</option>
+                                    @foreach($section->param('apache_modules_available', []) as $name => $value)
+                                    <option value="php5-{{ $value }}" {{ in_array($value, Input::old('webserver.apache.modules', $section->param('apache_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,93 +61,19 @@
 
         @foreach($section->param('apache_virtualhosts', []) as $vhostid => $vhost)
         <!-- apache / vhost -->
-        <div class="row" id="apache-vhosts-{{ $vhostid }}">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Apache Virtual Host</h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                                <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="webserver[apache][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $vhost['server_name'] }}" value="{{ $vhost['server_name'] }}" class="form-control">
-
-                                <p class="help-block">Don't forget to add to your computer's hosts file!</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
-                                <select id="apache-vhosts-{{ $vhostid }}-serveraliases" name="webserver[apache][vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
-                                    @foreach($vhost['server_alias'] as $alias)
-                                    <option value="{{ $alias }}" selected="selected"></option>
-                                    @endforeach
-                                </select>
-
-                                <p class="help-block">Separated by comma</p>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-docroot">Document Root</label>
-                                <input type="text" id="apache-vhosts-{{ $vhostid }}-docroot" name="webserver[apache][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $vhost['document_root'] }}" value="{{ $vhost['document_root'] }}" class="form-control">
-
-                                <p class="help-block">Location of your site's index.php file, or other landing page.</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-port">Port</label>
-                                <input type="text" id="apache-vhosts-{{ $vhostid }}-port" name="webserver[apache][vhosts][{{ $vhostid }}][port]" placeholder="{{ $vhost['port'] }}" value="{{ $vhost['port'] }}" class="form-control">
-
-                                <p class="help-block">
-                                    80 for normal browsing, if you choose another append it to the URL,
-                                    ex: http://{{ $vhost['server_name'] }}:1337
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-setenv">Environment Variables</label>
-                                <select id="apache-vhosts-{{ $vhostid }}-setenv" name="webserver[apache][vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
-                                @foreach($vhost['environment'] as $env)
-                                <option value="{{ $env }}" selected="selected"></option>
-                                @endforeach
-                                </select>
-
-                                <p class="help-block">"name value", separated by comma</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="apache-vhosts-{{ $vhostid }}-override">AllowOverride</label>
-                                <select id="apache-vhosts-{{ $vhostid }}-override" name="webserver[apache][vhosts][{{ $vhostid }}][override][]" multiple="multiple" class="form-control select-tags-editable">
-                                @foreach($vhost['override'] as $ovr)
-                                <option value="{{ $ovr }}" selected="selected"></option>
-                                @endforeach
-                                </select>
-
-                                <p class="help-block">
-                                    Separated by comma, "All" is probably fine.
-                                    <a href="http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride" target="_blank">Click here for more hardcore information.</a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <p class="text-center">
-                            <button type="button" class="btn btn-danger btn-sm deleteParentContainer" data-parent-id="{{ $vhostid }}">Remove this vhost</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'data'])
         <!-- end apache / vhost -->
         @endforeach
         
+        <script type="text/template" id="apache-vhosts-template">
+        <!-- apache / vhost -->
+        @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'template', 'vhostid' => '{vhostid}'])
+        <!-- end apache / vhost -->
+        </script>
+
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block addParentContainer" data-source-url="/extensions/apache/vhost">Add another Apache vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#apache-vhosts-template" data-id-start="{{ count($section->param('apache_virtualhosts', [])) }}" data-replace="vhostid:[id]" data-append=".row">Add another Apache vhost</button>
             </div>
         </div>
 
@@ -188,83 +114,19 @@
 
         @foreach($section->param('nginx_virtualhosts', []) as $vhostid => $vhost)
         <!-- nginx / vhost -->
-        <div class="row" id="nginx-vhosts-{{ $vhostid }}">
-            <div class="col-xs-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Nginx Virtual Host</h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="nginx-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                                <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="webserver[nginx][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $vhost['server_name'] }}" value="{{ $vhost['server_name'] }}" class="form-control">
-
-                                <p class="help-block">Don't forget to add to your computer's hosts file!</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="nginx-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
-                                <select id="nginx-vhosts-{{ $vhostid }}-serveraliases" name="webserver[nginx][vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
-                                    @foreach($vhost['server_alias'] as $alias)
-                                    <option value="{{ $alias }}" selected="selected"></option>
-                                    @endforeach
-                                </select>
-
-                                <p class="help-block">Separated by comma</p>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="nginx-vhosts-{{ $vhostid }}-docroot">Document Root</label>
-                                <input type="text" id="nginx-vhosts-{{ $vhostid }}-docroot" name="webserver[nginx][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $vhost['document_root'] }}" value="{{ $vhost['document_root'] }}" class="form-control">
-
-                                <p class="help-block">Location of your site's index.php file, or other landing page.</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="nginx-vhosts-{{ $vhostid }}-port">Port</label>
-                                <input type="text" id="nginx-vhosts-{{ $vhostid }}-port" name="webserver[nginx][vhosts][{{ $vhostid }}][port]" placeholder="{{ $vhost['port'] }}" value="{{ $vhost['port'] }}" class="form-control">
-
-                                <p class="help-block">
-                                    80 for normal browsing, if you choose another append it to the URL,
-                                    ex: http://{{ $vhost['server_name'] }}:1337
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="row form-group">
-                            <div class="col-md-6">
-                                <label for="nginx-vhosts-{{ $vhostid }}-setenv">Environment Variables</label>
-                                <select id="nginx-vhosts-{{ $vhostid }}-setenv" name="webserver[nginx][vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
-                                @foreach($vhost['environment'] as $env)
-                                <option value="{{ $env }}" selected="selected"></option>
-                                @endforeach
-                                </select>
-
-                                <p class="help-block">"name value", separated by comma</p>
-                            </div>
-
-                            <div class="col-md-6">
-                                &nbsp;
-                            </div>
-                        </div>
-
-                        <p class="text-center">
-                            <button type="button" class="btn btn-danger btn-sm deleteParentContainer" data-parent-id="{{ $vhostid }}">Remove this vhost</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end apache / vhost -->
+        @include('pages.builder.sections.webserver._nginx_virtualhost', ['type' => 'data'])
+        <!-- end nginx / vhost -->
         @endforeach
         
+        <script type="text/template" id="nginx-vhosts-template">
+        <!-- nginx / vhost -->
+        @include('pages.builder.sections.webserver._nginx_virtualhost', ['type' => 'template', 'vhostid' => '{vhostid}'])
+        <!-- end nginx / vhost -->
+        </script>
+
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block addParentContainer" data-source-url="/extensions/apache/vhost">Add another Nginx vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#nginx-vhosts-template" data-id-start="{{ count($section->param('nginx_virtualhosts', [])) }}" data-replace="vhostid:[id]" data-append=".row">Add another Nginx vhost</button>
             </div>
         </div>
 

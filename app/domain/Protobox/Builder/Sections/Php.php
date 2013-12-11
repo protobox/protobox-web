@@ -1,5 +1,7 @@
 <?php namespace Protobox\Builder\Sections;
 
+use DateTimeZone;
+
 class Php extends Section {
 
 	private $versions = [
@@ -10,6 +12,9 @@ class Php extends Section {
 
 	public function defaults()
 	{
+		$yaml = $this->builder->files()->get(dirname(__FILE__).'/data/php.yml');
+		$data = $this->parser->parse($yaml);
+
 		return [
 
 			//
@@ -19,19 +24,22 @@ class Php extends Section {
 			'php_install' => 1,
 			'php_versions' => $this->versions,
 			'php_modules' => [
-				'php5-cli',
-				'php5-intl',
-				'php5-mcrypt',
-				'php5-curl',
-				'php5-gd'
+				'cli',
+				'intl',
+				'mcrypt',
+				'curl',
+				'gd'
 			],
+			'php_modules_available' => $data['php_modules'],
 			'php_ini' => [
 				'display_errors' => 'On',
 				'display_startup_errors' => 'On',
 				'error_reporting' => '-1',
 				'short_open_tag' => 'On',
 			],
+			'php_ini_available' => $data['ini'],
 			'php_timezone' => 'America/Chicago',
+			'php_timezone_available' => $this->timezone_available(),
 
 			//
 			// PEAR
@@ -39,6 +47,7 @@ class Php extends Section {
 
 			'pear_install' => 0,
 			'pear_modules' => [],
+			'pear_modules_available' => $data['pear_modules'],
 
 			//
 			// PECL
@@ -46,6 +55,7 @@ class Php extends Section {
 
 			'pecl_install' => 0,
 			'pecl_modules' => [],
+			'pecl_modules_available' => $data['pecl_modules'],
 
 			//
 			// Composer
@@ -72,13 +82,14 @@ class Php extends Section {
 			'xdebug_install' => 1,
 			'xdebug_webgrind' => 1,
 			'xdebug_settings' => [
-				'default_enable' => 1,
-				'remote_autostart' => 0,
-				'remote_connect_back' => 1,
-				'remote_enable' => 1,
-				'remote_handler' => 'dbgp',
-				'remote_port' => 9000
+				'xdebug.default_enable' => 1,
+				'xdebug.remote_autostart' => 0,
+				'xdebug.remote_connect_back' => 1,
+				'xdebug.remote_enable' => 1,
+				'xdebug.remote_handler' => 'dbgp',
+				'xdebug.remote_port' => 9000
 			],
+			'xdebug_settings_available' => $data['xdebug_settings'],
 
 			//
 			// Xhprof
@@ -167,6 +178,37 @@ class Php extends Section {
 				'timezone' => $php['timezone'],
 			]
 		];
+	}
+
+	//
+	// PHP Timzone
+	//
+
+	private function timezone_available()
+	{
+		$zones = [
+			'Africa' => DateTimeZone::AFRICA,
+			'America' => DateTimeZone::AMERICA,
+			'Antarctica' => DateTimeZone::ANTARCTICA,
+			'Aisa' => DateTimeZone::ASIA,
+			'Atlantic' => DateTimeZone::ATLANTIC,
+			'Europe' => DateTimeZone::EUROPE,
+			'Indian' => DateTimeZone::INDIAN,
+			'Pacific' => DateTimeZone::PACIFIC
+		];
+
+		$tzlist =[];
+
+		foreach ($zones as $name => $mask)
+		{
+			if ( ! isset($tzlist[$name])) $tzlist[$name] = [];
+
+			$tzlist[$name] = DateTimeZone::listIdentifiers($mask);
+		}
+
+		$tzlist['UTC'] = ['UTC'];
+
+		return $tzlist;
 	}
 
 }

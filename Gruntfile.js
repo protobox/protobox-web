@@ -46,6 +46,7 @@ module.exports = function(grunt) {
           '<%= app.components %>/selectize/dist/js/standalone/selectize.min.js',
           //'<%= app.components %>/eldarion-ajax/js/eldarion-ajax-core.js',
           //'<%= app.components %>/eldarion-ajax/js/eldarion-ajax-handlers.js',
+          //'<%= app.components %>/dropzone/downloads/dropzone.js',
 
           // App
           '<%= app.assets %>/js/app.js'

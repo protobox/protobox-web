@@ -30,7 +30,7 @@ class BuilderServiceProvider extends ServiceProvider {
     {
         $this->app['boxbuilder'] = $this->app->share(function($app)
         {
-            $builder = new BoxBuilder($app['request'], $app['validator']);
+            $builder = new BoxBuilder($app['request'], $app['validator'], $app['files']);
 
             return $builder->build();
         });

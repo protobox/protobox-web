@@ -51,8 +51,8 @@
                     <div class="col-xs-12">
                         <label for="php-modules-php">PHP Modules</label>
                         <select id="php-modules-php" name="php[modules][]" multiple="multiple" class="form-control select-tags">
-                        @foreach($section->param('php_modules', []) as $name)
-                        <option value="{{ $name }}" selected="selected"></option>
+                        @foreach($section->param('php_modules_available', []) as $name)
+                        <option value="{{ $name }}" {{ in_array($name, Input::old('php.modules', $section->param('php_modules', []))) ? 'selected="selected"' : '' }}>{{ $name }}</option>
                         @endforeach
                         </select>
                     </div>
@@ -63,9 +63,17 @@
                 <div class="row form-group">
                     <div class="col-xs-12">
                         <label for="php-ini-displayer">INI Settings</label>
-                        <select id="php-ini-displayer" multiple="multiple" class="form-control select-tags-user-input" data-target-container="php-ini" data-target-name="php[ini]" tabindex="-1">
-                        @foreach($section->param('php_ini', []) as $name => $value)
-                        <option value="{{ $name }}" selected="selected"></option>
+                        <select id="php-ini-displayer" multiple="multiple" class="form-control select-tags-user-input" data-target-container="php-ini" data-target-name="php[ini]">
+                        @foreach($section->param('php_ini_available', []) as $name => $values)
+                        @if(is_array($values))
+                        <optgroup label="{{ $name }}">
+                            @foreach($values as $value)
+                            <option value="{{ $value }}" {{ in_array($value, Input::old('php.ini', $section->param('php_ini', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </optgroup>
+                        @else
+                            <option value="{{ $name }}" {{ in_array($name, Input::old('php.ini', $section->param('php_ini', []))) ? 'selected="selected"' : '' }}>{{ $name }}</option>
+                        @endif
                         @endforeach
                         </select>
 
@@ -83,7 +91,13 @@
                     <div class="col-xs-12">
                         <label for="php-timezone">PHP Timezone</label>
                         <select id="php-timezone" name="php[timezone]" class="form-control select-tag">
-                        <option value="{{ $section->param('php_timezone') }}" selected="selected"></option>
+                        @foreach($section->param('php_timezone_available', []) as $name => $zones)
+                        <optgroup label="{{ $name }}">
+                            @foreach($zones as $value)
+                            <option value="{{ $value }}" {{ $value == $section->param('php_timezone') ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </optgroup>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -108,11 +122,11 @@
                     <div class="col-md-12">
                         <label for="php-pear-install">
                             <input type="checkbox" id="php-pear-install" name="php[pear][install]" {{ $section->param('pear_install') ? 'checked="checked"' : '' }} value="{{ $section->param('pear_install') }}">
-                            Install
+                            Install PEAR
                         </label>
 
                         <p class="help-block">
-                        You can toggle this setting to turn on/off the PHP installation.
+                        You can toggle this setting to turn on/off the PEAR installation.
                         </p>
                     </div>
                 </div>
@@ -123,8 +137,12 @@
                     <div class="col-xs-12">
                         <label for="php-pear-modules">PEAR Modules</label>
                         <select id="php-pear-modules" name="php[pear][modules][]" multiple="multiple" class="form-control select-tags selectized">
-                        @foreach($section->param('pear_modules', []) as $name)
-                        <option value="{{ $name }}" selected="selected"></option>
+                        @foreach($section->param('pear_modules_available', []) as $name => $modules)
+                        <optgroup label="{{ $name }}">
+                            @foreach($modules as $value)
+                            <option value="{{ $value }}" {{ in_array($name, Input::old('php.pear.modules', $section->param('pear_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </optgroup>
                         @endforeach
                         </select>
                     </div>
@@ -150,11 +168,11 @@
                     <div class="col-md-12">
                         <label for="php-pecl-install">
                             <input type="checkbox" id="php-pecl-install" name="php[pecl][install]" {{ $section->param('pecl_install') ? 'checked="checked"' : '' }} value="{{ $section->param('pecl_install') }}">
-                            Install
+                            Install PECL
                         </label>
 
                         <p class="help-block">
-                        You can toggle this setting to turn on/off the PHP installation.
+                        You can toggle this setting to turn on/off the PECL installation.
                         </p>
                     </div>
                 </div>
@@ -165,8 +183,12 @@
                     <div class="col-xs-12">
                         <label for="php-pecl-modules">PECL Modules</label>
                         <select id="php-pecl-modules" name="php[pecl][modules][]" multiple="multiple" class="form-control select-tags selectized">
-                        @foreach($section->param('pecl_modules', []) as $name)
-                        <option value="{{ $name }}" selected="selected"></option>
+                        @foreach($section->param('pecl_modules_available', []) as $name => $modules)
+                        <optgroup label="{{ $name }}">
+                            @foreach($modules as $value)
+                            <option value="{{ $value }}" {{ in_array($name, Input::old('php.pecl.modules', $section->param('pecl_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </optgroup>
                         @endforeach
                         </select>
                     </div>
@@ -213,8 +235,8 @@
                     <div class="col-xs-12">
                         <label for="xdebug-settings-displayer">Settings</label>
                         <select id="xdebug-settings-displayer" multiple="multiple" class="form-control select-tags-user-input" data-target-container="xdebug-settings" data-target-name="php[xdebug][settings]">
-                        @foreach($section->param('xdebug_settings', []) as $name => $value)
-                        <option value="{{ $name }}" selected="selected"></option>
+                        @foreach($section->param('xdebug_settings_available', []) as $name => $value)
+                        <option value="{{ $value }}" {{ in_array($value, array_keys($section->param('xdebug_settings', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                         @endforeach
                         </select>
 

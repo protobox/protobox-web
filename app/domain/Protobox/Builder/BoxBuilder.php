@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Factory as Validator;
+use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 use Config;
 
@@ -10,6 +11,8 @@ class BoxBuilder {
 	protected $request;
 
 	protected $validator;
+
+	protected $files;
 
 	protected $validation;
 
@@ -28,15 +31,26 @@ class BoxBuilder {
 
 	protected $errors = [];
 
-	public function __construct(Request $request = null, Validator $validator = null)
+	public function __construct(Request $request = null,  Validator $validator = null, Filesystem $files = null)
 	{
 		$this->request = $request;
 		$this->validator = $validator;
+		$this->files = $files;
 	}
 
 	public function request()
 	{
 		return $this->request;
+	}
+
+	public function validator()
+	{
+		return $this->validator;
+	}
+
+	public function files()
+	{
+		return $this->files;
 	}
 
 	public function build()
@@ -46,6 +60,7 @@ class BoxBuilder {
 			$class_name = 'Protobox\\Builder\\Sections\\' . ucwords($section);
 			$class = new $class_name;
 			$class->builder($this);
+			$class->init();
 
 			$this->store[$section] = $class;
 		}

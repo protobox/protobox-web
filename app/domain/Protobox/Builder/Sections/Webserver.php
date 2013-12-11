@@ -20,6 +20,7 @@ class Webserver extends Section {
 			
 			'apache_install' => 1,
 			'apache_modules' => ['rewrite'],
+			'apache_modules_available' => $this->apache_modules_available(),
 			'apache_virtualhosts' => [
 				[
 					'server_name' => 'app.dev',
@@ -140,6 +141,34 @@ class Webserver extends Section {
 				'mpm_module' => 'fpm',
 				'vhosts' => $nginx_vhosts
 			]
+		];
+	}
+
+	//
+	// Apache
+	//
+
+	private function apache_modules_available()
+	{
+		return [
+			'cache',
+			'cgid',
+			'dav',
+			'dav_fs',
+			'disk_cache',
+			'expires',
+			'headers',
+			'info',
+			'ldap',
+			'mime_magic',
+			'php',
+			'proxy_ajp',
+			'proxy_balancer',
+			'proxy',
+			'rewrite',
+			'ssl',
+			'userdir',
+			'vhost_alias',
 		];
 	}
 

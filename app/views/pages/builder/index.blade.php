@@ -1,6 +1,8 @@
 @extends('layouts.default')
 
 @section('content')
+<div id="dropzone" class="dropzone"><p>upload your config</p></div>
+
 <div class="block-header">
     <div class="container">
         <div class="row">
@@ -15,7 +17,7 @@
     </div>
 </div>
 
-<div class="container bs-docs-container">
+<div class="container content-container">
     <div class="row">
         <div class="col-md-3">
             @include('pages.builder._menu')
