@@ -308,9 +308,11 @@
             
             var form = $(
                 '<form action="' + PROTOBOX_CONFIG.UPLOAD + '" method="post">' +
-                    '<input type="hidden" name="config" value="' + config + '" />' +
+                    '<input type="hidden" name="config" value="' + config + '" />' + 
+                    '<input type="hidden" name="_token" value="' + PROTOBOX_CONFIG.TOKEN + '">' + 
                 '</form>'
             );
+            
             $('body').append(form);
             $(form).submit();
         }

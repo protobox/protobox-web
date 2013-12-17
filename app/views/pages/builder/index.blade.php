@@ -39,6 +39,15 @@
             </div>
             @endif
 
+            @if(count($messages->all()))
+            <div class="alert alert-success fade in" id="global_error_box">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                @foreach($messages->all() as $msg)
+                <p>{{ $msg }}</p>
+                @endforeach
+            </div>
+            @endif
+
             <div class="build-section">
                 <div class="tab-content">
                    @foreach($builder->sections() as $section)

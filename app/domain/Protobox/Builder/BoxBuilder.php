@@ -23,6 +23,7 @@ class BoxBuilder {
 		'php',
 		'datastore',
 		'queues',
+		'monitoring',
 		'devtools',
 		'applications'
 	];
@@ -116,6 +117,20 @@ class BoxBuilder {
 		return $this->errors ?: $this->validation->errors();
 	}
 
+	public function load($data)
+	{
+		$output = Yaml::parse($data);
+		
+		$code = $this->prepare();
+
+		foreach($this->store as $section)
+		{
+			$code += $section->load($output);
+		}
+
+		return $code;
+	}
+
 	public function output()
 	{
 		$code = $this->prepare();
@@ -128,12 +143,12 @@ class BoxBuilder {
 		return Yaml::dump($code, 100, 2);
 	}
 
-	private function prepare()
+	private function prepare($output = [])
 	{
 		return [
 			'protobox' => [
 				'version' => Config::get('protobox.version'),
-				'document' => 'abc123'
+				'document' => isset($output['protobox']['document']) ? $output['protobox']['document'] : 'abc123'
 			]
 		];
 	}

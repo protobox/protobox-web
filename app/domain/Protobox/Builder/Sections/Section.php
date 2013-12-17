@@ -40,6 +40,11 @@ class Section {
 		return [];
 	}
 
+	public function load($output)
+	{
+		return [];
+	}
+
 	public function output()
 	{
 		return [];

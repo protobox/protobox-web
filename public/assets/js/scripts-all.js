@@ -1,4 +1,4 @@
-/*! protobox - v0.0.1 - 2013-12-11
+/*! protobox - v0.0.1 - 2013-12-16
 * http://github.com/protobox/protobox
 * Copyright (c) 2013 
 */
@@ -1867,9 +1867,11 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
             
             var form = $(
                 '<form action="' + PROTOBOX_CONFIG.UPLOAD + '" method="post">' +
-                    '<input type="hidden" name="config" value="' + config + '" />' +
+                    '<input type="hidden" name="config" value="' + config + '" />' + 
+                    '<input type="hidden" name="_token" value="' + PROTOBOX_CONFIG.TOKEN + '">' + 
                 '</form>'
             );
+            
             $('body').append(form);
             $(form).submit();
         }

@@ -4,6 +4,10 @@
 Route::get('/', ['as' => 'builder', 'uses' => 'BuilderController@index']);
 Route::post('/', ['as' => 'builder.create', 'uses' => 'BuilderController@create']);
 
+// Upload + Share
+Route::post('upload', ['as' => 'upload', 'uses' => 'ShareController@create']);
+Route::get('share/{id}', ['as' => 'share', 'uses' => 'ShareController@show']);
+
 // About
 Route::get('about', ['as' => 'about', 'uses' => 'HomeController@about']);
 
@@ -32,12 +36,6 @@ Route::get('bin/{id}/raw', ['as' => 'bin.raw', 'uses' => 'PastesController@raw']
 
 // Docs
 Route::get('docs/{path?}', ['as' => 'docs', 'uses' => 'DocsController@index'])->where('path', '.+');
-
-// Config Loader
-Route::get('upload', ['as' => 'upload', 'uses' => 'UploadController@index']);
-
-// Config Share
-Route::get('config', ['as' => 'upload', 'uses' => 'ConfigController@index']);
 
 // Account Area
 Route::group(['before' => 'auth', 'prefix' => 'account'], function()

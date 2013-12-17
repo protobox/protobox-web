@@ -32,6 +32,15 @@ class Server extends Section {
 		];
 	}
 
+	public function load($output)
+	{
+		return [
+			'server' => [
+				'packages' => isset($output['server']['packages']) ? $output['server']['packages'] : [],
+			]
+		];
+	}
+
 	public function output()
 	{
 		$server = $this->builder->request()->get('server');

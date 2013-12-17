@@ -78,6 +78,18 @@ class Vagrant extends Section {
 		];
 	}
 
+	public function load($output)
+	{
+		return [
+			'vagrant' => [
+				'box' => isset($output['vm']['box']) ? $output['vm']['box'] : '',
+				'local_name' => isset($output['vm']['hostname']) ? $output['vm']['hostname'] : '',
+				'local_ip' => isset($output['vm']['network']['private_network']) ? $output['vm']['network']['private_network'] : '',
+				'local_memory' => isset($output['vm']['virtualbox']['virtualbox']['modifyvm']['memory']) ? $output['vm']['virtualbox']['virtualbox']['modifyvm']['memory'] : '',
+			]
+		];
+	}
+
 	public function output()
 	{
 		$vagrant = $this->builder->request()->get('vagrant');
