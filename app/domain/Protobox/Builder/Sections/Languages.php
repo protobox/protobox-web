@@ -2,17 +2,25 @@
 
 use DateTimeZone;
 
-class Php extends Section {
+class Languages extends Section {
 
-	private $versions = [
+	private $php_versions = [
 		'55' => '5.5',
 		'54' => '5.4',
 		'53' => '5.3'
 	];
 
+	public function languages()
+	{
+		return [
+			'php' => 'PHP',
+			'hhvm' => 'PHP - HipHop'
+		];
+	}
+
 	public function defaults()
 	{
-		$yaml = $this->builder->files()->get(dirname(__FILE__).'/data/php.yml');
+		$yaml = $this->builder->files()->get(dirname(__FILE__).'/Data/php.yml');
 		$data = $this->parser->parse($yaml);
 
 		return [
@@ -22,7 +30,7 @@ class Php extends Section {
 			//
 			
 			'php_install' => 1,
-			'php_versions' => $this->versions,
+			'php_versions' => $this->php_versions,
 			'php_modules' => [
 				'cli',
 				'intl',
@@ -99,17 +107,34 @@ class Php extends Section {
 			'xhprof_xhgui' => 1,
 			'xhprof_location' => '/srv/www/web/xhprof',
 
+			//
+			// HHVM
+			//
+
+			'hhvm_install' => 0
+
 		];
 	}
 
 	public function valid()
 	{
 		$php = $this->builder->request()->get('php');
+		$hhvm = $this->builder->request()->get('hhvm');
+
+		// Make sure only one language is selected
+		if (
+			isset($php['install']) && (int) $php['install'] == 1 &&
+			isset($hhvm['install']) && (int) $hhvm['install'] == 1
+		)
+		{
+			$this->setError('Please choose either PHP or HHVM (not both)');
+
+			return false;
+		}
 
 		// Check to see if a valid PHP version was selected
 		if (
-			isset($php['install']) && 
-			(int) $php['install'] == 1 && 
+			isset($php['install']) && (int) $php['install'] == 1 && 
 			! in_array($php['version'], array_keys($this->versions))
 		)
 		{
@@ -123,13 +148,17 @@ class Php extends Section {
 
 	public function rules()
 	{
+		$rules = [];
 		$php = $this->builder->request()->get('php');
 
-		if ( ! isset($php['install']) || (int) $php['install'] != 1) return [];
+		if (isset($php['install']) && (int) $php['install'] != 1)
+		{
+			$rules += [
+				'php.version' => 'required'
+			];
+		}
 
-		return [
-			'php.version' => 'required'
-		];
+		return $rules;
 	}
 
 	public function fields()
@@ -139,9 +168,29 @@ class Php extends Section {
 		];
 	}
 
+	public function load($output)
+	{
+		return [
+			'php' => [
+				'install' => isset($output['php']['install']) ? $output['php']['install'] : 0,
+				'version' => isset($output['php']['version']) ? $output['php']['version'] : '',
+				'modules' => isset($output['php']['modules']) ? $output['php']['modules'] : [],
+				'pear' => [
+					'install' => isset($output['php']['pear']['install']) ? (int) $output['php']['pear']['install'] : 0,
+					'modules' => isset($output['php']['pear']['modules']) ? $output['php']['pear']['modules'] : [],
+				]
+			],
+
+			'hhvm' => [
+				'install' => isset($output['hhvm']['install']) ? $output['hhvm']['install'] : 0,
+			]
+		];
+	}
+
 	public function output()
 	{
 		$php = $this->builder->request()->get('php');
+		$hhvm = $this->builder->request()->get('hhvm');
 
 		return [
 			'php' => [
@@ -176,6 +225,10 @@ class Php extends Section {
 				],
 				'ini' => $php['ini'],
 				'timezone' => $php['timezone'],
+			],
+
+			'hhvm' => [
+				'install' => isset($hhvm['install']) ? (int) $hhvm['install'] : 0
 			]
 		];
 	}

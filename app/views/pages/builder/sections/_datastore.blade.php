@@ -1,4 +1,5 @@
 <input type="hidden" name="mysql[_prevent_empty]" />
+<input type="hidden" name="mariadb[_prevent_empty]" />
 
 <div class="page-header">
     <h1>{{ trans('builder/'.$name.'.name') }}</h1>
@@ -29,7 +30,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="mysql-install">
-                                    <input type="checkbox" id="mysql-install" name="mysql[install]" {{ $section->param('mysql_install') ? 'checked="checked"' : '' }} value="{{ $section->param('mysql_install') }}">
+                                    <input type="checkbox" id="mysql-install" name="mysql[install]" {{ Input::old('mysql.install', $section->param('mysql_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('mysql_install') }}">
                                     Install
                                 </label>
 
@@ -66,7 +67,7 @@
                 </div>
             </div>
         </div>
-        <!-- end mysql msyql settings -->
+        <!-- end mysql settings -->
 
         @foreach($section->param('mysql_databases', []) as $dbid => $db)
         <!-- mysql / databases -->
@@ -88,6 +89,42 @@
 
     </div>
     <!-- end mysql -->
+
+    <!-- mariadb -->
+    <div class="tab-pane" id="section-datastore-mariadb">
+
+        <!-- mariadb settings -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">MariaDB Settings</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <!-- mariadb install -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="mariadb-install">
+                                    <input type="checkbox" id="mariadb-install" name="mariadb[install]" {{ Input::old('mariadb.install', $section->param('mariadb_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('mysql_install') }}">
+                                    Install
+                                </label>
+
+                                <p class="help-block">
+                                You can toggle this setting to turn on/off the MariaDB installation.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- end mariadb install -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end mariadb settings -->
+
+    </div>
+    <!-- end mariadb -->
 
     <!-- postgresql -->
     <div class="tab-pane" id="section-datastore-postgresql">

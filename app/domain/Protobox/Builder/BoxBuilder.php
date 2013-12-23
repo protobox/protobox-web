@@ -20,7 +20,7 @@ class BoxBuilder {
 		'vagrant',
 		'server',
 		'webserver',
-		'php',
+		'languages',
 		'datastore',
 		'queues',
 		'monitoring',

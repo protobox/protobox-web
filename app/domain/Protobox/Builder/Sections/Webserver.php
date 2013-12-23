@@ -23,11 +23,11 @@ class Webserver extends Section {
 			'apache_modules_available' => $this->apache_modules_available(),
 			'apache_virtualhosts' => [
 				[
-					'server_name' => 'app.dev',
-					'server_alias' => ['www.app.dev'],
-					'document_root' => '/srv/www/app.dev',
+					'servername' => 'app.dev',
+					'server_aliases' => ['www.app.dev'],
+					'docroot' => '/srv/www/app.dev',
 					'port' => '80',
-					'environment' => ['APP_ENV dev'],
+					'setenv' => ['APP_ENV dev'],
 					'override' => ['All']
 				]
 			],
@@ -40,10 +40,10 @@ class Webserver extends Section {
 			'nginx_virtualhosts' => [
 				[
 					'server_name' => 'app.dev',
-					'server_alias' => ['www.app.dev'],
-					'document_root' => '/srv/www/app.dev',
+					'server_aliases' => ['www.app.dev'],
+					'docroot' => '/srv/www/app.dev',
 					'port' => '80',
-					'environment' => ['APP_ENV dev']
+					'setenv' => ['APP_ENV dev']
 				]
 			],
 
@@ -70,6 +70,22 @@ class Webserver extends Section {
 		}
 
 		return true;
+	}
+
+	public function load($output)
+	{
+		return [
+			'apache' => [
+				'install' => isset($output['apache']['install']) ? $output['apache']['install'] : 0,
+				'modules' => isset($output['apache']['modules']) ? $output['apache']['modules'] : [],
+				'vhosts' => isset($output['apache']['vhosts']) ? $output['apache']['vhosts'] : [],
+			],
+
+			'nginx' => [
+				'install' => isset($output['nginx']['install']) ? $output['nginx']['install'] : 0,
+				'vhosts' => isset($output['nginx']['vhosts']) ? $output['nginx']['vhosts'] : [],
+			]
+		];
 	}
 
 	public function output()

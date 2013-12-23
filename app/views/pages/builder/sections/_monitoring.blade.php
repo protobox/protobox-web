@@ -7,7 +7,7 @@
 @if (count($section->platforms()))
 <ul class="nav nav-pills nav-section">
     @foreach($section->platforms() as $type => $name)
-    <li class="{{ $type == 'local' ? 'active' : '' }}"><a href="#section-monitoring-{{ $type }}" data-toggle="tab">{{ $name }}</a></li>
+    <li class="{{ $type == 'newrelic' ? 'active' : '' }}"><a href="#section-monitoring-{{ $type }}" data-toggle="tab">{{ $name }}</a></li>
     @endforeach
 </ul>
 @endif

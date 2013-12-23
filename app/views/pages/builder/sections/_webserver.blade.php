@@ -58,8 +58,8 @@
             </div>
         </div>
         <!-- end apache settings -->
-
-        @foreach($section->param('apache_virtualhosts', []) as $vhostid => $vhost)
+        
+        @foreach(Input::old('apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
         <!-- apache / vhost -->
         @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'data'])
         <!-- end apache / vhost -->

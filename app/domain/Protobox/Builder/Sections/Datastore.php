@@ -6,8 +6,8 @@ class Datastore extends Section {
 	{
 		return [
 			'mysql' => 'MySQL',
-			'postgresql' => 'PostgreSQL',
 			'mariadb' => 'MariaDB',
+			'postgresql' => 'PostgreSQL',
 			'mongodb' => 'MongoDB',
 			'redis' => 'Redis',
 			'riak' => 'Riak'

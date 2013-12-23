@@ -2,7 +2,7 @@
 
 return array(
 
-	'name' => 'PHP',
+	'name' => 'Languages',
 
 );
 

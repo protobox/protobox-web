@@ -9,7 +9,7 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                        <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="webserver[apache][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : $vhost['server_name'] }}" value="{{ $type == 'template' ? '' : $vhost['server_name'] }}" class="form-control">
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="webserver[apache][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : $vhost['servername'] }}" value="{{ $type == 'template' ? '' : $vhost['servername'] }}" class="form-control">
 
                         <p class="help-block">Don't forget to add to your computer's hosts file!</p>
                     </div>
@@ -18,7 +18,7 @@
                         <label for="apache-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
                         <select id="apache-vhosts-{{ $vhostid }}-serveraliases" name="webserver[apache][vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type != 'template')
-                            @foreach($vhost['server_alias'] as $alias)
+                            @foreach($vhost['serveraliases'] as $alias)
                             <option value="{{ $alias }}" selected="selected">{{ $alias }}</option>
                             @endforeach
                         @endif
@@ -31,7 +31,7 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-docroot">Document Root</label>
-                        <input type="text" id="apache-vhosts-{{ $vhostid }}-docroot" name="webserver[apache][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : $vhost['document_root'] }}" value="{{ $type == 'template' ? '' : $vhost['document_root'] }}" class="form-control">
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-docroot" name="webserver[apache][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : $vhost['docroot'] }}" value="{{ $type == 'template' ? '' : $vhost['docroot'] }}" class="form-control">
 
                         <p class="help-block">Location of your site's index.php file, or other landing page.</p>
                     </div>
@@ -42,7 +42,7 @@
 
                         <p class="help-block">
                             80 for normal browsing, if you choose another append it to the URL,
-                            ex: http://{{ $vhost['server_name'] }}:1337
+                            ex: http://{{ $vhost['servername'] }}:1337
                         </p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <label for="apache-vhosts-{{ $vhostid }}-setenv">Environment Variables</label>
                         <select id="apache-vhosts-{{ $vhostid }}-setenv" name="webserver[apache][vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type != 'template')
-                            @foreach($vhost['environment'] as $env)
+                            @foreach($vhost['setenv'] as $env)
                             <option value="{{ $env }}" selected="selected">{{ $env }}</option>
                             @endforeach
                         @endif
