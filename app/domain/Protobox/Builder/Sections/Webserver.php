@@ -24,7 +24,7 @@ class Webserver extends Section {
 			'apache_virtualhosts' => [
 				[
 					'servername' => 'app.dev',
-					'server_aliases' => ['www.app.dev'],
+					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/srv/www/app.dev',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev'],
