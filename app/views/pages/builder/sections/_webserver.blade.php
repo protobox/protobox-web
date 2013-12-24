@@ -29,7 +29,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="apache-install">
-                                    <input type="checkbox" id="apache-install" name="webserver[apache][install]" {{ $section->param('apache_install') ? 'checked="checked"' : '' }} value="{{ $section->param('apache_install') }}">
+                                    <input type="checkbox" id="apache-install" name="webserver[apache][install]" {{ Input::old('apache.install', $section->param('apache_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -45,8 +45,8 @@
                             <div class="col-xs-12">
                                 <label for="apache-modules">Apache Modules</label>
                                 <select id="apache-modules" name="webserver[apache][modules][]" multiple="multiple" class="form-control select-tags-editable">
-                                    @foreach($section->param('apache_modules_available', []) as $name => $value)
-                                    <option value="php5-{{ $value }}" {{ in_array($value, Input::old('webserver.apache.modules', $section->param('apache_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                    @foreach(Input::old('apache.modules', $section->param('apache_modules_available', [])) as $name => $value)
+                                    <option value="{{ $value }}" {{ in_array($value, Input::old('apache.modules', $section->param('apache_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <!-- end apache settings -->
-        
+
         @foreach(Input::old('apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
         <!-- apache / vhost -->
         @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'data'])
@@ -73,7 +73,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#apache-vhosts-template" data-id-start="{{ count($section->param('apache_virtualhosts', [])) }}" data-replace="vhostid:[id]" data-append=".row">Add another Apache vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#apache-vhosts-template" data-id-start="{{ count(Input::old('apache.vhosts', $section->param('apache_virtualhosts', []))) }}" data-replace="vhostid:[id]" data-append=".row">Add another Apache vhost</button>
             </div>
         </div>
 
@@ -95,7 +95,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="nginx-install">
-                                    <input type="checkbox" id="nginx-install" name="webserver[nginx][install]" {{ $section->param('nginx_install') ? 'checked="checked"' : '' }} value="{{ $section->param('nginx_install') }}">
+                                    <input type="checkbox" id="nginx-install" name="webserver[nginx][install]" {{ Input::old('nginx.install', $section->param('nginx_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -112,7 +112,7 @@
         </div>
         <!-- end nginx settings -->
 
-        @foreach($section->param('nginx_virtualhosts', []) as $vhostid => $vhost)
+        @foreach(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', [])) as $vhostid => $vhost)
         <!-- nginx / vhost -->
         @include('pages.builder.sections.webserver._nginx_virtualhost', ['type' => 'data'])
         <!-- end nginx / vhost -->
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#nginx-vhosts-template" data-id-start="{{ count($section->param('nginx_virtualhosts', [])) }}" data-replace="vhostid:[id]" data-append=".row">Add another Nginx vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#nginx-vhosts-template" data-id-start="{{ count(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', []))) }}" data-replace="vhostid:[id]" data-append=".row">Add another Nginx vhost</button>
             </div>
         </div>
 

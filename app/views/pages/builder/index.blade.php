@@ -17,8 +17,8 @@
     </div>
 </div>
 
-<div class="container content-container">
-    <div class="row">
+<div class="container">
+    <div class="row content-container">
         <div class="col-md-3">
             @include('pages.builder._menu')
         </div>

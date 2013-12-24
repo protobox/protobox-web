@@ -30,7 +30,8 @@ class Languages extends Section {
 			//
 			
 			'php_install' => 1,
-			'php_versions' => $this->php_versions,
+			'php_version' => '54',
+			'php_versions_available' => $this->php_versions,
 			'php_modules' => [
 				'cli',
 				'intl',
@@ -81,7 +82,7 @@ class Languages extends Section {
 			// PHPMyAdmin
 			//
 
-			'phpmyadmin_install' => 0,
+			'phpmyadmin_install' => 1,
 
 			//
 			// Xdebug
@@ -90,12 +91,12 @@ class Languages extends Section {
 			'xdebug_install' => 1,
 			'xdebug_webgrind' => 1,
 			'xdebug_settings' => [
-				'xdebug.default_enable' => 1,
-				'xdebug.remote_autostart' => 0,
-				'xdebug.remote_connect_back' => 1,
-				'xdebug.remote_enable' => 1,
-				'xdebug.remote_handler' => 'dbgp',
-				'xdebug.remote_port' => 9000
+				'default_enable' => 1,
+				'remote_autostart' => 0,
+				'remote_connect_back' => 1,
+				'remote_enable' => 1,
+				'remote_handler' => 'dbgp',
+				'remote_port' => 9000
 			],
 			'xdebug_settings_available' => $data['xdebug_settings'],
 
@@ -135,7 +136,7 @@ class Languages extends Section {
 		// Check to see if a valid PHP version was selected
 		if (
 			isset($php['install']) && (int) $php['install'] == 1 && 
-			! in_array($php['version'], array_keys($this->versions))
+			! in_array($php['version'], array_keys($this->php_versions))
 		)
 		{
 			$this->setError('Please choose a valid PHP version.');
@@ -151,7 +152,7 @@ class Languages extends Section {
 		$rules = [];
 		$php = $this->builder->request()->get('php');
 
-		if (isset($php['install']) && (int) $php['install'] != 1)
+		if (isset($php['install']) && (int) $php['install'] == 1)
 		{
 			$rules += [
 				'php.version' => 'required'
@@ -178,7 +179,31 @@ class Languages extends Section {
 				'pear' => [
 					'install' => isset($output['php']['pear']['install']) ? (int) $output['php']['pear']['install'] : 0,
 					'modules' => isset($output['php']['pear']['modules']) ? $output['php']['pear']['modules'] : [],
-				]
+				],
+				'pecl' => [
+					'install' => isset($output['php']['pecl']['install']) ? (int) $output['php']['pecl']['install'] : 0,
+					'modules' => isset($output['php']['pecl']['modules']) ? $output['php']['pecl']['modules'] : [],
+				],
+				'composer' => [
+					'install' => isset($output['php']['composer']['install']) ? (int) $output['php']['composer']['install'] : 0,
+				],
+				'mailcatcher' => [
+					'install' => isset($output['php']['mailcatcher']['install']) ? (int) $output['php']['mailcatcher']['install'] : 0,
+				],
+				'phpmyadmin' => [
+					'install' => isset($output['php']['phpmyadmin']['install']) ? (int) $output['php']['phpmyadmin']['install'] : 0,
+				],
+				'xdebug' => [
+					'install' => isset($output['php']['xdebug']['install']) ? (int) $output['php']['xdebug']['install'] : 0,
+					'webgrind' => isset($output['php']['xdebug']['webgrind']) ? (int) $output['php']['xdebug']['webgrind'] : 0,
+					'settings' => isset($output['php']['xdebug']['settings']) ? $output['php']['xdebug']['settings'] : [],
+				],
+				'xhprof' => [
+					'install' => isset($output['php']['xhprof']['install']) ? (int) $output['php']['xhprof']['install'] : 0,
+					'xhgui' => isset($output['php']['xhprof']['xhgui']) ? (int) $output['php']['xhprof']['xhgui'] : 0,
+				],
+				'ini' => isset($output['php']['ini']) ? $output['php']['ini'] : [],
+				'timezone' => isset($output['php']['timezone']) ? $output['php']['timezone'] : '',	
 			],
 
 			'hhvm' => [

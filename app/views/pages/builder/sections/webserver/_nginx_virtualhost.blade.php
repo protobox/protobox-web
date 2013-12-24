@@ -1,4 +1,3 @@
-
 <div class="row" id="nginx-vhosts-{{ $vhostid }}">
     <div class="col-xs-12">
         <div class="panel panel-default">
@@ -10,7 +9,7 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="webserver[nginx][vhosts][{{ $vhostid }}][server_name]" placeholder="{{ $type == 'template' ? '' : $vhost['server_name'] }}" value="{{ $type == 'template' ? '' : $vhost['server_name'] }}" class="form-control">
+                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="webserver[nginx][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : $vhost['servername'] }}" value="{{ $type == 'template' ? '' : $vhost['servername'] }}" class="form-control">
 
                         <p class="help-block">Don't forget to add to your computer's hosts file!</p>
                     </div>
@@ -19,7 +18,7 @@
                         <label for="nginx-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
                         <select id="nginx-vhosts-{{ $vhostid }}-serveraliases" name="webserver[nginx][vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type != 'template')
-                            @foreach($vhost['server_aliases'] as $alias)
+                            @foreach($vhost['serveraliases'] as $alias)
                             <option value="{{ $alias }}" selected="selected">{{ $alias }}</option>
                             @endforeach
                         @endif
@@ -43,7 +42,7 @@
 
                         <p class="help-block">
                             80 for normal browsing, if you choose another append it to the URL,
-                            ex: http://{{ $vhost['server_name'] }}:1337
+                            ex: http://{{ $vhost['servername'] }}:1337
                         </p>
                     </div>
                 </div>

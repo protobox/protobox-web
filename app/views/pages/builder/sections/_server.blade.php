@@ -17,14 +17,13 @@
                     <div class="col-xs-12">
                         <label for="server-packages">Installed Packages</label>
                         <select id="server-packages" name="server[packages][]" multiple="multiple" class="form-control select-tags-editable">
-                            @foreach($section->param('packages', []) as $package)
+                            @foreach(Input::old('server.packages', $section->param('packages', [])) as $package)
                             <option selected value="{{ $package }}">{{ $package }}</option>
                             @endforeach
                         </select>
 
                         <p class="help-block">
-                            Packages to install via the OS package manager, separated by comma.
-                            Do not add Apache/Nginx or PHP here - you will choose those later.
+                            Packages to install via the OS package manager, separated by comma. Do not add Apache/Nginx or PHP here - you will choose those later.
                         </p>
 
                         <p class="help-block">
@@ -99,14 +98,14 @@
 
             <div class="panel-body">
                 <p>
-                    You can also add all your ssh keys and config files (<code>id_rsa</code>, <code>config</code>, etc),
-                    to the <code>./data/ssh/</code> folder. During initial startup they will automatically be copied to the VM.
+                    You can also add all your ssh keys and config files (<code>id_rsa</code>, <code>config</code>, etc), to the <code>./data/ssh/</code> folder. During initial startup they will automatically be copied to the VM.
                 </p>
             </div>
 
         </div>
     </div>
 </div>
+<!-- end ssh keys -->
 
 <!-- dotfiles -->
 <div class="row">
@@ -120,7 +119,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="server-dotfiles-install">
-                            <input type="checkbox" id="server-dotfiles-install" name="server[dotfiles][install]" {{ $section->param('dotfiles_install') ? 'checked="checked"' : '' }} value="{{ $section->param('dotfiles_install') }}">
+                            <input type="checkbox" id="server-dotfiles-install" name="server[dotfiles][install]" {{ Input::old('server.dotfiles.install', $section->param('dotfiles_install')) ? 'checked="checked"' : '' }} value="1">
                             Install
                         </label>
 
@@ -133,10 +132,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="vagrant-local-name">Dotfiles Repository</label>
-                        @foreach($section->param('dotfiles_git', []) as $dotgit)
-                        <input type="text" name="server[dotfiles][git][]" placeholder="" value="{{ $dotgit }}" class="form-control">
-                        @endforeach
-                        <input type="text" name="server[dotfiles][git][]" placeholder="" value="" class="form-control">
+                        <input type="text" name="server[dotfiles][repo]" placeholder="{{ $section->param('dotfiles_repo') }}" value="{{ Input::old('server.dotfiles.repo', $section->param('dotfiles_repo')) }}" class="form-control">
 
                         <p class="help-block">
                         You can add a git repository of dotfiles here to be copied into the VM. Make sure you also setup SSH keys to access the GIT repository. 
@@ -155,3 +151,4 @@
         </div>
     </div>
 </div>
+<!-- end dotfiles -->

@@ -17,7 +17,7 @@
           </ul>
      </div>
 
-     <div class="block-sharegroup">
+     {{-- <div class="block-sharegroup">
           <a class="btn btn-primary">Share Box</a>
-     </div>
+     </div> --}}
 </div>

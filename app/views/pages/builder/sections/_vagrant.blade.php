@@ -14,7 +14,6 @@
 
 <div class="tab-content">
     <div class="tab-pane active" id="section-vagrant-local">
-        <input type="hidden" id="vagrant-box" name="vagrant[box]" value="" />
 
         <!-- local virtual machine -->
         <div class="row">
@@ -28,32 +27,29 @@
                         <div class="row form-group">
                             <div class="col-md-12 {{ $errors->first('vagrant.box_url', 'has-error') }}">
                                 <label>Operating System</label>
+                                <input type="hidden" id="vagrant-box" name="vagrant[box]" value="{{ Input::old('vagrant.box', $section->param('local_vm_os_name')) }}" />
 
                                 @foreach($section->param('local_vm_os', []) as $os)
                                 <label class="radio">
-                                <input type="radio" class="update-input" name="vagrant[box_url]" value="{{ $os['url'] }}" data-update="vagrant-box:{{ $os['name'] }}" data-update="php-version:{{ $os['php'] }}">
+                                <input type="radio" class="update-input" name="vagrant[box_url]" value="{{ $os['url'] }}" data-update="vagrant-box:{{ $os['name'] }}" data-update="php-version:{{ $os['php'] }}" {{ Input::old('vagrant.box_url', $section->param('local_vm_os_url')) == $os['url'] ? 'checked="checked"' : '' }}>
                                 {{ $os['label'] }}
-                                @if (isset($os['php_versions']))
+                                {{-- @if (isset($os['php_versions']))
                                 (PHP
                                 @foreach($os['php_versions'] as $osphp)
                                 <span class="label php-version-{{ str_replace('.', '-', $osphp) }}">{{ $osphp }}</span>
                                 @endforeach
                                 )
-                                @endif
+                                @endif --}}
                                 </label>
                                 @endforeach
 
                                 <p class="help-block">
-                                Choose the operating system for your VM. It will be downloaded the first time you
-                                run Vagrant. <a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">More
-                                information may be found here</a>.
+                                Choose the operating system for your VM. It will be downloaded the first time you run Vagrant. <a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">Read more about vagrant boxes here</a>.
                                 </p>
 
-                                <p class="help-block">
-                                Note: Listed are the PHP installs that we have confirmed as working for their respective
-                                operating system. You are welcome to attempt to install higher if you'd like, but
-                                we cannot guarantee it will work. In fact in most cases it won't.
-                                </p>
+                                {{-- <p class="help-block">
+                                Note: Listed are the PHP installs that we have confirmed as working for their respective operating system. You are welcome to attempt to install higher if you'd like, but we cannot guarantee it will work. In fact in most cases it won't.
+                                </p> --}}
                             </div>
                         </div>
 
@@ -63,8 +59,7 @@
                                 <input type="text" id="vagrant-local-name" name="vagrant[local_name]" placeholder="{{ $section->param('local_vm_name') }}" value="{{ Input::old('vagrant.local_name', $section->param('local_vm_name')) }}" class="form-control">
 
                                 <p class="help-block">
-                                Your personal name for the box. Should be unique to your system.
-                                If you have multiple boxes running, name each one differently.
+                                Your personal name for the box. Should be unique to your system. If you have multiple boxes running, name each one differently.
                                 </p>
                             </div>
                         </div>
@@ -75,8 +70,7 @@
                                 <input type="text" id="vagrant-local-ip" name="vagrant[local_ip]" placeholder="{{ $section->param('local_vm_ip') }}" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" oninvalid="setCustomValidity('IP address format: {{ $section->param('local_vm_ip') }}')" value="{{ Input::old('vagrant.local_ip', $section->param('local_vm_ip')) }}" class="form-control">
 
                                 <p class="help-block">
-                                IP address to use for accessing the VM. This is the IP address you will need to enter
-                                into your <code>hosts</code> file for every virtual hosts you create later on.
+                                IP address to use for accessing the VM. This is the IP address you will need to enter into your <code>hosts</code> file for every virtual hosts you create later on.
                                 </p>
                             </div>
                             <div class="col-md-6 {{ $errors->first('vagrant.local_memory', 'has-error') }}">

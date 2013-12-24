@@ -24,7 +24,6 @@ class Vagrant extends Section {
 					'name' => 'precise64',
 					'php' => '55',
 					'php_versions' => ['5.4', '5.5'],
-					'selected' => true,
 				],
 				[
 					'label' => 'Ubuntu 10.04 Lucid x64',
@@ -34,6 +33,8 @@ class Vagrant extends Section {
 					'php_versions' => ['5.4', '5.5'],
 				]
 			],
+			'local_vm_os_url' => 'http://files.vagrantup.com/precise64.box',
+			'local_vm_os_name' => 'precise64',
 			'local_vm_name' => 'protobox',
 			'local_vm_ip' => '192.168.5.10',
 			'local_vm_memory' => '512',
@@ -83,9 +84,10 @@ class Vagrant extends Section {
 		return [
 			'vagrant' => [
 				'box' => isset($output['vm']['box']) ? $output['vm']['box'] : '',
+				'box_url' => isset($output['vm']['box_url']) ? $output['vm']['box_url'] : '',
 				'local_name' => isset($output['vm']['hostname']) ? $output['vm']['hostname'] : '',
 				'local_ip' => isset($output['vm']['network']['private_network']) ? $output['vm']['network']['private_network'] : '',
-				'local_memory' => isset($output['vm']['virtualbox']['virtualbox']['modifyvm']['memory']) ? $output['vm']['virtualbox']['virtualbox']['modifyvm']['memory'] : '',
+				'local_memory' => isset($output['vm']['provider']['virtualbox']['modifyvm']['memory']) ? $output['vm']['provider']['virtualbox']['modifyvm']['memory'] : '',
 			]
 		];
 	}

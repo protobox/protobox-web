@@ -25,7 +25,7 @@ class Server extends Section {
 			//
 			
 			'dotfiles_install' => 0,
-			'dotfiles_git' => [],
+			'dotfiles_repo' => '',
 			'dotfiles_files' => [],
 			'dotfiles_bash' => '',
 
@@ -37,6 +37,10 @@ class Server extends Section {
 		return [
 			'server' => [
 				'packages' => isset($output['server']['packages']) ? $output['server']['packages'] : [],
+				'dotfiles' => [
+					'install' => isset($output['server']['dotfiles']['install']) ? (int) $output['server']['dotfiles']['install'] : 0,
+					'repo' => isset($output['server']['dotfiles']['repo']) ? $output['server']['dotfiles']['repo'] : '',
+				]
 			]
 		];
 	}
@@ -78,22 +82,11 @@ class Server extends Section {
 			]
 		];
 
-		$dot_git_repos = [
-			[
-				'repo' => 'git@github.com:patrickheeney/dotfiles.git',
-				'path' => '/home/{{ ansible_user_id }}'
-			],
-			[
-				'repo' => 'git@github.com:patrickheeney/dotfiles.git',
-				'path' => '/home/{{ ansible_user_id }}/.vimrc'
-			]
-		];
-
 		$dot_files = [];
 
 		return [
 			'server' => [
-				'packages' => $server['packages'],
+				'packages' => isset($server['dotfiles']['repo']) ? $server['packages'] : [],
 				'ssh' => [
 					'authorized_keys' => $ssh_authorized_keys,
 					'private_keys' => $ssh_private_keys,
@@ -101,7 +94,7 @@ class Server extends Section {
 				],
 				'dotfiles' => [
 					'install' => isset($server['dotfiles']['install']) ? (int) $server['dotfiles']['install'] : 0,
-					'git' => $dot_git_repos,
+					'repo' => isset($server['dotfiles']['repo']) ? $server['dotfiles']['repo'] : '',
 					'files' => $dot_files,
 					'bash_aliases' => null
 				]

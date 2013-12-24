@@ -4146,7 +4146,7 @@ body {
   }
 }
 .content-container {
-  min-height: 400px;
+  min-height: 500px;
 }
 /* By default it's not affixed in mobile views, so undo that */
 .block-sidebar.affix {
@@ -4246,6 +4246,9 @@ body {
 }
 .build-generate {
   margin-top: 20px;
+}
+.application-selection {
+  margin-bottom: 20px;
 }
 .footer {
   text-align: center;

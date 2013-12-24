@@ -78,3 +78,9 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+Route::filter('clear_input', function()
+{
+	// Clear session on each page load, otherwise users can get stuck with invalid data
+	if (Session::has('_old_input')) Session::flush();
+});

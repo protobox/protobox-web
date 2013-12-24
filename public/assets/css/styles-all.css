@@ -1,4 +1,4 @@
-/*! protobox - v0.0.1 - 2013-12-11
+/*! protobox - v0.0.1 - 2013-12-24
 * http://github.com/protobox/protobox
 * Copyright (c) 2013 
 */
@@ -4150,7 +4150,7 @@ body {
   }
 }
 .content-container {
-  min-height: 400px;
+  min-height: 500px;
 }
 /* By default it's not affixed in mobile views, so undo that */
 .block-sidebar.affix {
@@ -4250,6 +4250,9 @@ body {
 }
 .build-generate {
   margin-top: 20px;
+}
+.application-selection {
+  margin-bottom: 20px;
 }
 .footer {
   text-align: center;

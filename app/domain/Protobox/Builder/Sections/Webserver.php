@@ -39,8 +39,8 @@ class Webserver extends Section {
 			'nginx_install' => 0,
 			'nginx_virtualhosts' => [
 				[
-					'server_name' => 'app.dev',
-					'server_aliases' => ['www.app.dev'],
+					'servername' => 'app.dev',
+					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/srv/www/app.dev',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev']
@@ -74,16 +74,50 @@ class Webserver extends Section {
 
 	public function load($output)
 	{
+		$apache_vhosts = [];
+		if (isset($output['apache']['vhosts']))
+		{
+			foreach ($output['apache']['vhosts'] as $vhost)
+			{
+				$apache_vhosts[] = [
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
+					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
+					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
+					'port' => isset($vhost['port']) ? (int) $vhost['port'] : '',
+					'setenv' => isset($vhost['setenv']) ? $vhost['setenv'] : [],
+					'override' => isset($vhost['override']) ? $vhost['override'] : [],
+				];
+			}
+		}
+
+		$nginx_vhosts = [];
+		if (isset($output['nginx']['vhosts']))
+		{
+			foreach ($output['nginx']['vhosts'] as $vhost)
+			{
+				$nginx_vhosts[] = [
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'servername' => isset($vhost['server_name']) ? $vhost['server_name'] : '',
+					'serveraliases' => isset($vhost['server_aliases']) ? $vhost['server_aliases'] : [],
+					'docroot' => isset($vhost['www_root']) ? $vhost['www_root'] : '',
+					'port' => isset($vhost['listen_port']) ? (int) $vhost['listen_port'] : '',
+					'index_files' => isset($vhost['index_files']) ? $vhost['index_files'] : [],
+					'setenv' => isset($vhost['envvars']) ? $vhost['envvars'] : [],
+				];
+			}
+		}
+
 		return [
 			'apache' => [
-				'install' => isset($output['apache']['install']) ? $output['apache']['install'] : 0,
+				'install' => isset($output['apache']['install']) ? (int) $output['apache']['install'] : 0,
 				'modules' => isset($output['apache']['modules']) ? $output['apache']['modules'] : [],
-				'vhosts' => isset($output['apache']['vhosts']) ? $output['apache']['vhosts'] : [],
+				'vhosts' => $apache_vhosts,
 			],
 
 			'nginx' => [
-				'install' => isset($output['nginx']['install']) ? $output['nginx']['install'] : 0,
-				'vhosts' => isset($output['nginx']['vhosts']) ? $output['nginx']['vhosts'] : [],
+				'install' => isset($output['nginx']['install']) ? (int) $output['nginx']['install'] : 0,
+				'vhosts' => $nginx_vhosts,
 			]
 		];
 	}
@@ -92,19 +126,19 @@ class Webserver extends Section {
 	{
 		$webserver = $this->builder->request()->get('webserver');
 
-        $apache_vhosts = [
+		$apache_vhosts = [
 			[
 				'name' => 'protobox',
 				'servername' => 'protobox.dev',
 				'serveraliases' => ['www.protobox.dev'],
 				'docroot' => '/srv/www/web/protobox',
 				'port' => 80,
-				'setenv' => ['APP_ENV' => 'dev'],
+				'setenv' => ['APP_ENV dev'],
 				'override' => ['All']
 			]
-        ];
+		];
 
-        $nginx_vhosts = [
+		$nginx_vhosts = [
 			[
 				'name' => 'protobox',
 				'server_name' => 'protobox.dev',
@@ -112,9 +146,9 @@ class Webserver extends Section {
 				'www_root' => '/srv/www/web/protobox',
 				'listen_port' => 80,
 				'index_files' => ['index.html', 'index.htm', 'index.php'],
-				'envvars' => ['APP_ENV' => 'dev']
+				'envvars' => ['APP_ENV dev']
 			]
-        ];
+		];
 
 		foreach($webserver['apache']['vhosts'] as $vhost)
 		{

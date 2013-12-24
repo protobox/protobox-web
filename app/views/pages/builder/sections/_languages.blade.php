@@ -29,7 +29,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="php-install">
-                                    <input type="checkbox" id="php-install" name="php[install]" {{ Input::old('php.install', $section->param('php_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('php_install') }}">
+                                    <input type="checkbox" id="php-install" name="php[install]" {{ Input::old('php.install', $section->param('php_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -44,15 +44,14 @@
                         <div class="row form-group">
                             <div class="col-xs-12">
                                 <label>PHP Version</label><br>
-                                @foreach($section->param('php_versions', []) as $version => $name)
+                                @foreach($section->param('php_versions_available', []) as $version => $name)
                                 <label class="radio-inline">
-                                    <input type="radio" name="php[version]" value="{{ $version }}" {{ Input::old('php.version', '55') == $version ? 'checked="checked"' : '' }}> {{ $name }}
+                                    <input type="radio" name="php[version]" value="{{ $version }}" {{ Input::old('php.version', $section->param('php_version')) == $version ? 'checked="checked"' : '' }}> {{ $name }}
                                 </label>
                                 @endforeach
 
                                 <p class="help-block">
-                                    Ubuntu appears to have occasional problems using a non-default PHP repo version. If using Ubuntu, proceed with caution and
-                                    <a href="#vagrant" data-toggle="tab">please reference the default PHP versions outline here.</a>
+                                    Ubuntu appears to have occasional problems using a non-default PHP repo version. If using Ubuntu, proceed with caution.
                                 </p>
                             </div>
                         </div>
@@ -63,7 +62,7 @@
                             <div class="col-xs-12">
                                 <label for="php-modules-php">PHP Modules</label>
                                 <select id="php-modules-php" name="php[modules][]" multiple="multiple" class="form-control select-tags">
-                                @foreach($section->param('php_modules_available', []) as $name)
+                                @foreach(Input::old('php.modules', $section->param('php_modules_available', [])) as $name)
                                 <option value="{{ $name }}" {{ in_array($name, Input::old('php.modules', $section->param('php_modules', []))) ? 'selected="selected"' : '' }}>{{ $name }}</option>
                                 @endforeach
                                 </select>
@@ -80,11 +79,11 @@
                                 @if(is_array($values))
                                 <optgroup label="{{ $name }}">
                                     @foreach($values as $value)
-                                    <option value="{{ $value }}" {{ in_array($value, Input::old('php.ini', $section->param('php_ini', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $value }}" {{ in_array($value, array_keys(Input::old('php.ini', $section->param('php_ini', [])))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </optgroup>
                                 @else
-                                    <option value="{{ $name }}" {{ in_array($name, Input::old('php.ini', $section->param('php_ini', []))) ? 'selected="selected"' : '' }}>{{ $name }}</option>
+                                    <option value="{{ $name }}" {{ in_array($name, array_keys(Input::old('php.ini', $section->param('php_ini', [])))) ? 'selected="selected"' : '' }}>{{ $name }}</option>
                                 @endif
                                 @endforeach
                                 </select>
@@ -106,7 +105,7 @@
                                 @foreach($section->param('php_timezone_available', []) as $name => $zones)
                                 <optgroup label="{{ $name }}">
                                     @foreach($zones as $value)
-                                    <option value="{{ $value }}" {{ Input::old('php.timezone', ($value == $section->param('php_timezone'))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $value }}" {{ Input::old('php.timezone', $section->param('php_timezone')) == $value ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </optgroup>
                                 @endforeach
@@ -133,7 +132,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="php-pear-install">
-                                    <input type="checkbox" id="php-pear-install" name="php[pear][install]" {{ Input::old('php.pear.install', $section->param('pear_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('pear_install') }}">
+                                    <input type="checkbox" id="php-pear-install" name="php[pear][install]" {{ Input::old('php.pear.install', $section->param('pear_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install PEAR
                                 </label>
 
@@ -152,7 +151,7 @@
                                 @foreach($section->param('pear_modules_available', []) as $name => $modules)
                                 <optgroup label="{{ $name }}">
                                     @foreach($modules as $value)
-                                    <option value="{{ $value }}" {{ in_array($name, Input::old('php.pear.modules', $section->param('pear_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $value }}" {{ in_array($value, Input::old('php.pear.modules', $section->param('pear_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </optgroup>
                                 @endforeach
@@ -179,7 +178,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="php-pecl-install">
-                                    <input type="checkbox" id="php-pecl-install" name="php[pecl][install]" {{ Input::old('php.pecl.install', $section->param('pecl_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('pecl_install') }}">
+                                    <input type="checkbox" id="php-pecl-install" name="php[pecl][install]" {{ Input::old('php.pecl.install', $section->param('pecl_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install PECL
                                 </label>
 
@@ -198,7 +197,7 @@
                                 @foreach($section->param('pecl_modules_available', []) as $name => $modules)
                                 <optgroup label="{{ $name }}">
                                     @foreach($modules as $value)
-                                    <option value="{{ $value }}" {{ in_array($name, Input::old('php.pecl.modules', $section->param('pecl_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                    <option value="{{ $value }}" {{ in_array($value, Input::old('php.pecl.modules', $section->param('pecl_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
                                 </optgroup>
                                 @endforeach
@@ -236,7 +235,7 @@
 
                             <div class="col-xs-6">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="php[xdebug][webgrind]" {{ $section->param('xdebug_webgrind') ? 'checked="checked"' : '' }} value="{{ $section->param('xdebug_webgrind') }}"> Install Webgrind
+                                    <input type="checkbox" name="php[xdebug][webgrind]" {{ Input::old('php.xdebug.webgrind', $section->param('xdebug_webgrind')) ? 'checked="checked"' : '' }} value="1"> Install Webgrind
                                 </label>
 
                                 <p class="help-block">
@@ -248,15 +247,15 @@
                                 <label for="xdebug-settings-displayer">Settings</label>
                                 <select id="xdebug-settings-displayer" multiple="multiple" class="form-control select-tags-user-input" data-target-container="xdebug-settings" data-target-name="php[xdebug][settings]">
                                 @foreach($section->param('xdebug_settings_available', []) as $name => $value)
-                                <option value="{{ $value }}" {{ in_array($value, Input::old('php.xdebug.settings', array_keys($section->param('xdebug_settings', [])))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
+                                <option value="{{ $value }}" {{ in_array($value, array_keys(Input::old('php.xdebug.settings', $section->param('xdebug_settings', [])))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                 @endforeach
                                 </select>
 
                                 <div id="xdebug-settings" style="display: none;">
-                                    @foreach($section->param('xdebug_settings', []) as $name => $value)
+                                    @foreach(Input::old('php.xdebug.settings', $section->param('xdebug_settings', [])) as $name => $value)
                                     <input type="hidden" name="php[xdebug][settings][{{ $name }}]" data-option-name="{{ $name }}" value="{{ $value }}">
                                     @endforeach
-                               </div>
+                                </div>
 
                                 <p class="help-block">
                                     Not using Xdebug? Still pounding out <code>var_dump()</code> and <code>print_r()</code> and <code>echo</code>?<br>
@@ -282,7 +281,7 @@
                         <div class="row form-group">
                             <div class="col-xs-12">
                                 <label class="checkbox-inline">
-                                    <input type="checkbox" name="php[xhprof][install]" class="update-other-input" {{ Input::old('php.xhprof.install', $section->param('xhprof_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('xhprof_install') }}" data-update-php[composer]="1"> Install Xhprof
+                                    <input type="checkbox" name="php[xhprof][install]" class="update-other-input" {{ Input::old('php.xhprof.install', $section->param('xhprof_install')) ? 'checked="checked"' : '' }} value="1" data-update-php[composer]="1"> Install Xhprof
                                 </label>
 
                                 <p class="help-block">
@@ -308,11 +307,26 @@
                     </div>
 
                     <div class="panel-body">
+                        <!-- phpmyadmin install -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="php-phpmyadmin-install">
+                                    <input type="checkbox" id="php-phpmyadmin-install" name="php[phpmyadmin][install]" {{ Input::old('php.phpmyadmin.install', $section->param('phpmyadmin_install')) ? 'checked="checked"' : '' }} value="1">
+                                    Install phpMyAdmin
+                                </label>
+
+                                <p class="help-block">
+                                    <a href="http://www.phpmyadmin.net/home_page/index.php" target="_blank">phpMyAdmin</a> will be available at <code>http://localhost/phpmyadmin</code>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- end phpmyadmin install -->
+
                         <!-- composer install -->
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="php-composer-install">
-                                    <input type="checkbox" id="php-composer-install" name="php[composer][install]" {{ Input::old('php.composer.install', $section->param('composer_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('composer_install') }}">
+                                    <input type="checkbox" id="php-composer-install" name="php[composer][install]" {{ Input::old('php.composer.install', $section->param('composer_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install Composer
                                 </label>
 
@@ -327,7 +341,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="php-mailcatcher-install">
-                                    <input type="checkbox" id="php-mailcatcher-install" name="php[mailcatcher][install]" {{ Input::old('php.mailcatcher.install', $section->param('mailcatcher_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('mailcatcher_install') }}">
+                                    <input type="checkbox" id="php-mailcatcher-install" name="php[mailcatcher][install]" {{ Input::old('php.mailcatcher.install', $section->param('mailcatcher_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install Mailcatcher
                                 </label>
 
@@ -360,7 +374,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="hhvm-install">
-                                    <input type="checkbox" id="hhvm-install" name="hhvm[install]" {{ Input::old('hhvm.install', $section->param('hhvm_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('hhvm_install') }}">
+                                    <input type="checkbox" id="hhvm-install" name="hhvm[install]" {{ Input::old('hhvm.install', $section->param('hhvm_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 

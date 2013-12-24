@@ -211,6 +211,44 @@
         }
     };
 
+    Protobox.prototype.applicationTemplate = function (e) {
+        var $this       = $(this),
+            group       = $this.data('application'),
+            app         = $('#' + group).val(),
+            name        = 'application-' + app + '-template',
+            template    = $('#' + name);
+
+        if (template) {
+            if ( ! templatesAdded[name])
+                templatesAdded[name] = [];
+
+            var id_start    = 0,
+                replacement = $this.data('replace'),
+                append      = $this.data('append'),
+                default_id  = templatesAdded[name].length > 0
+                    ? templatesAdded[name][templatesAdded[name].length-1] 
+                    : id_start,
+                name_id     = default_id + 1,
+                content     = template.html();
+
+            $.each(replacement.split(','), function(key, value) {
+                var replace = value.split(':'),
+                    re = new RegExp('{' + replace[0] + '}', 'g');
+
+                if (replace[1] == '[id]') {
+                    content = content.replace(re, name_id);
+                } else {
+                    content = content.replace(re, replace[1]);
+                }
+            });
+
+            var $row = $(content).prependTo($(append));
+            Protobox.prototype.selectize($row);
+
+            templatesAdded[name].push(name_id);
+        }
+    }
+
     Protobox.prototype.ajaxErrors = function(e) {
         if (data.errors) {
             var hnd = $el.data('append'),
@@ -324,6 +362,8 @@
 
         $(document).on('click', '[data-template]', Protobox.prototype.template);
         $(document).on('click', '[data-template-remove]', Protobox.prototype.templateRemove);
+
+        $(document).on('click', '[data-application]', Protobox.prototype.applicationTemplate);
 
         //Eldarion ajax error handling
         //$(document).on('eldarion-ajax:success', Protobox.prototype.ajaxErrors);

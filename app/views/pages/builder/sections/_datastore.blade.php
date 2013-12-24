@@ -1,6 +1,3 @@
-<input type="hidden" name="mysql[_prevent_empty]" />
-<input type="hidden" name="mariadb[_prevent_empty]" />
-
 <div class="page-header">
     <h1>{{ trans('builder/'.$name.'.name') }}</h1>
 </div>
@@ -16,6 +13,7 @@
 <div class="tab-content">
     <!-- mysql -->
     <div class="tab-pane active" id="section-datastore-mysql">
+        <input type="hidden" name="mysql[_prevent_empty]" />
 
         <!-- msyql settings -->
         <div class="row">
@@ -30,7 +28,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="mysql-install">
-                                    <input type="checkbox" id="mysql-install" name="mysql[install]" {{ Input::old('mysql.install', $section->param('mysql_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('mysql_install') }}">
+                                    <input type="checkbox" id="mysql-install" name="mysql[install]" {{ Input::old('mysql.install', $section->param('mysql_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -41,8 +39,9 @@
                         </div>
                         <!-- end mysql install -->
 
+                        <!-- root password -->
                         <div class="row form-group">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="mysql-root_password">Root Password</label>
                                 <input type="text" id="mysql-root_password" name="mysql[root_password]" value="{{ Input::old('datastore.mysql.root_password', $section->param('mysql_root_password')) }}" class="form-control">
 
@@ -50,18 +49,8 @@
                                     Assign a password to the root user. <strong>Database will only be installed when a password is entered here.</strong>
                                 </p>
                             </div>
-
-                            <div class="col-md-6">
-                                <label for="mysql-phpmyadmin">phpMyAdmin</label><br>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="mysql-phpmyadmin" name="mysql[phpmyadmin]" value="1"> Install phpMyAdmin
-                                </label>
-
-                                <p class="help-block">
-                                    If installed it will be available from <code>http://{SERVER_IP_ADDRESS}/phpmyadmin</code>.
-                                </p>
-                            </div>
                         </div>
+                        <!-- end root password -->
                     </div>
 
                 </div>
@@ -69,7 +58,7 @@
         </div>
         <!-- end mysql settings -->
 
-        @foreach($section->param('mysql_databases', []) as $dbid => $db)
+        @foreach(Input::old('mysql.databases', $section->param('mysql_databases', [])) as $dbid => $db)
         <!-- mysql / databases -->
         @include('pages.builder.sections.datastore._mysql_database', ['type' => 'data'])
         <!-- end mysql / databases -->
@@ -92,6 +81,7 @@
 
     <!-- mariadb -->
     <div class="tab-pane" id="section-datastore-mariadb">
+        <input type="hidden" name="mariadb[_prevent_empty]" />
 
         <!-- mariadb settings -->
         <div class="row">
@@ -106,7 +96,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="mariadb-install">
-                                    <input type="checkbox" id="mariadb-install" name="mariadb[install]" {{ Input::old('mariadb.install', $section->param('mariadb_install')) ? 'checked="checked"' : '' }} value="{{ $section->param('mysql_install') }}">
+                                    <input type="checkbox" id="mariadb-install" name="mariadb[install]" {{ Input::old('mariadb.install', $section->param('mariadb_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -126,33 +116,30 @@
     </div>
     <!-- end mariadb -->
 
-    <!-- postgresql -->
-    <div class="tab-pane" id="section-datastore-postgresql">
-
-        <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <strong>PostgreSQL</strong> is coming soon.
-        </div>
-
-    </div>
-    <!-- end postgresql -->
-
     <!-- mariadb -->
     <div class="tab-pane" id="section-datastore-mariadb">
 
         <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>MariaDB</strong> is coming soon.
         </div>
 
     </div>
     <!-- end mariadb -->
 
+    <!-- postgresql -->
+    <div class="tab-pane" id="section-datastore-postgresql">
+
+        <div class="alert alert-warning fade in">
+            <strong>PostgreSQL</strong> is coming soon.
+        </div>
+
+    </div>
+    <!-- end postgresql -->
+
     <!-- mongodb -->
     <div class="tab-pane" id="section-datastore-mongodb">
 
         <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>Mongdb</strong> is coming soon.
         </div>
 
@@ -163,7 +150,6 @@
     <div class="tab-pane" id="section-datastore-redis">
 
         <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>Redis</strong> is coming soon.
         </div>
 
@@ -174,7 +160,6 @@
     <div class="tab-pane" id="section-datastore-riak">
 
         <div class="alert alert-warning fade in">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>Riak</strong> is coming soon.
         </div>
 

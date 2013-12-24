@@ -10,9 +10,10 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="mysql-{{ $dbid }}-grant">Privileges</label>
-
                         <select id="mysql-{{ $dbid }}-grant" name="mysql[databases][{{ $dbid }}][grant][]" multiple="multiple" size="6" class="form-control select-tags">
-                        <option value="ALL" selected="selected">ALL</option>
+                        @foreach($db['grant'] as $grant)
+                        <option value="{{ $grant }}" selected="selected">{{ $grant }}</option>
+                        @endforeach
                         </select>
                     </div>
                 </div>
@@ -20,40 +21,44 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="mysql-databases-{{ $dbid }}-name">DB Name</label>
-                        <input type="text" id="mysql-databases-{{ $dbid }}-name" name="mysql[databases][{{ $dbid }}][name]" placeholder="database name" value="" class="form-control">
+                        <input type="text" id="mysql-databases-{{ $dbid }}-name" name="mysql[databases][{{ $dbid }}][name]" placeholder="{{ $db['name'] }}" value="{{ $db['name'] }}" class="form-control">
                     </div>
 
                     <div class="col-md-6">
                         <label for="mysql-databases-{{ $dbid }}-host">DB Host</label>
-                        <input type="text" id="mysql-databases-{{ $dbid }}-host" name="mysql[databases][{{ $dbid }}][host]" placeholder="database host" value="localhost" class="form-control">
+                        <input type="text" id="mysql-databases-{{ $dbid }}-host" name="mysql[databases][{{ $dbid }}][host]" placeholder="{{ $db['host'] }}" value="{{ $db['host'] }}" class="form-control">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="mysql-databases-{{ $dbid }}-user">Username</label>
-                        <input type="text" id="mysql-databases-{{ $dbid }}-user" name="mysql[databases][{{ $dbid }}][user]" placeholder="username" value="" class="form-control">
-
-                        <p class="help-block">
-                            At this time, one user can only be assigned to one database. You should not enter "root"
-                            here! You should not have a single user appear twice!
-                        </p>
+                        <input type="text" id="mysql-databases-{{ $dbid }}-user" name="mysql[databases][{{ $dbid }}][user]" placeholder="{{ $db['user'] }}" value="{{ $db['user'] }}" class="form-control">
                     </div>
 
                     <div class="col-md-6">
                         <label for="mysql-databases-{{ $dbid }}-password">Password</label>
-                        <input type="text" id="mysql-databases-{{ $dbid }}-password" name="mysql[databases][{{ $dbid }}][password]" placeholder="password" value="" class="form-control">
+                        <input type="text" id="mysql-databases-{{ $dbid }}-password" name="mysql[databases][{{ $dbid }}][password]" placeholder="{{ $db['password'] }}" value="{{ $db['password'] }}" class="form-control">
                     </div>
                 </div>
+
+                @if ($type != 'template')
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            Protobox will import the databases automatically if a <code>DB_NAME.sql</code> is found at <code>./data/sql/DB_NAME.sql</code>. Optionally you can specify an import file manually below.
+                        </p>
+                    </div>
+                </div>
+                @endif
 
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="mysql-databases-{{ $dbid }}-sql_file">Import Database From File</label>
-                        <input type="text" id="mysql-databases-{{ $dbid }}-sql_file" name="mysql[databases][{{ $dbid }}][sql_file]" placeholder="/vagrant/data/sql/database_name.sql" value="" class="form-control">
+                        <input type="text" id="mysql-databases-{{ $dbid }}-sql_file" name="mysql[databases][{{ $dbid }}][sql_file]" placeholder="/vagrant/data/sql/database_name.sql" value="{{ $db['sql_file'] }}" class="form-control">
 
                         <p class="help-block">
-                            Optional. Make sure this file is inside the VM before running
-                            <code>$ vagrant up</code>
+                            Optional. Make sure this file is inside the VM before running <code>$ vagrant up</code>
                         </p>
                     </div>
                 </div>
