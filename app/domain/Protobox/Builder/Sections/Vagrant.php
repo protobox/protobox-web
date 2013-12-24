@@ -19,17 +19,17 @@ class Vagrant extends Section {
 			
 			'local_vm_os' => [
 				[
-					'label' => 'CentOS 6.4 x64 - VirtualBox 4.3',
-					'url' => 'http://box.puphpet.com/centos64-x64-vbox43.box',
-					'name' => 'centos64-x64-vbox43-1383512148',
+					'label' => 'Ubuntu Precise x64',
+					'url' => 'http://files.vagrantup.com/precise64.box',
+					'name' => 'precise64',
 					'php' => '55',
 					'php_versions' => ['5.4', '5.5'],
 					'selected' => true,
 				],
 				[
-					'label' => 'CentOS 6.4 x64 - Virtualbox 4.2',
-					'url' => 'http://box.puphpet.com/centos64-x64-vbox4210.box',
-					'name' => 'centos64-x64-vbox4210-1383511158',
+					'label' => 'Ubuntu Lucid x64',
+					'url' => 'http://files.vagrantup.com/lucid64.box',
+					'name' => 'lucid64',
 					'php' => '55',
 					'php_versions' => ['5.4', '5.5'],
 				]
@@ -37,7 +37,7 @@ class Vagrant extends Section {
 			'local_vm_name' => 'protobox',
 			'local_vm_ip' => '192.168.5.10',
 			'local_vm_memory' => '512',
-
+			
 		];
 	}
 
