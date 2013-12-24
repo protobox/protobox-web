@@ -19,7 +19,7 @@ class Vagrant extends Section {
 			
 			'local_vm_os' => [
 				[
-					'label' => 'Ubuntu Precise x64',
+					'label' => 'Ubuntu 12.04 Precise x64',
 					'url' => 'http://files.vagrantup.com/precise64.box',
 					'name' => 'precise64',
 					'php' => '55',
@@ -27,7 +27,7 @@ class Vagrant extends Section {
 					'selected' => true,
 				],
 				[
-					'label' => 'Ubuntu Lucid x64',
+					'label' => 'Ubuntu 10.04 Lucid x64',
 					'url' => 'http://files.vagrantup.com/lucid64.box',
 					'name' => 'lucid64',
 					'php' => '55',
