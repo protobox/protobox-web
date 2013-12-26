@@ -11,7 +11,7 @@
           <ul class="nav block-sidenav">
                @foreach($builder->sections() as $section)
                <li class="{{ $section == 'vagrant' ? 'active' : '' }}">
-                    <a href="#section-{{ $section }}" data-toggle="tab">{{ trans('builder/'.$section.'.name') }}</a>
+                    <a href="#section-{{ $section }}" id="sel-{{ $section }}" data-toggle="tab">{{ trans('builder/'.$section.'.name') }}</a>
                </li>
                @endforeach
           </ul>

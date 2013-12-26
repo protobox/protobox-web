@@ -6,7 +6,7 @@ class BuilderController extends BaseController {
     {
         $this->beforeFilter('csrf', ['only' => ['create']]);
 
-        $this->afterFilter('clear_input', ['only' => ['create']]);
+        //$this->afterFilter('clear_input', ['only' => ['create']]);
     }
 
     public function index()

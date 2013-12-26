@@ -14,4 +14,29 @@ class Application {
 		return [];
 	}
 
+	public function rules()
+	{
+		return [];
+	}
+
+	public function fields()
+	{
+		return [];
+	}
+
+	public function load($output)
+	{
+		return [];
+	}
+
+	public function output()
+	{
+		return [];
+	}
+
+	public function valid()
+	{
+		return true;
+	}
+
 }

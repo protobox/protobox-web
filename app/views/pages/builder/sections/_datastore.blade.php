@@ -72,7 +72,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#mysql-database-template" data-id-start="{{ count($section->param('mysql_databases', [])) }}" data-replace="dbid:[id]" data-append=".row">Add another MySQL database</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#mysql-database-template" data-id-start="{{ count(Input::old('mysql.databases', $section->param('mysql_databases', []))) }}" data-replace="dbid:[id],dbnewid:[newid]" data-append=".row">Add another MySQL database</button>
             </div>
         </div>
 

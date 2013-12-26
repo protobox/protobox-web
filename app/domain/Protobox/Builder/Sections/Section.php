@@ -20,6 +20,11 @@ class Section {
 		$this->builder = $builder;
 	}
 
+	public function getBuilder()
+	{
+		return $this->builder;
+	}
+
 	public function defaults()
 	{
 		return [];

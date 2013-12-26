@@ -59,7 +59,7 @@
         </div>
         <!-- end apache settings -->
 
-        @foreach(Input::old('apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
+        @foreach(Input::old('webserver.apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
         <!-- apache / vhost -->
         @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'data'])
         <!-- end apache / vhost -->
@@ -73,7 +73,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#apache-vhosts-template" data-id-start="{{ count(Input::old('apache.vhosts', $section->param('apache_virtualhosts', []))) }}" data-replace="vhostid:[id]" data-append=".row">Add another Apache vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#apache-vhosts-template" data-id-start="{{ count(Input::old('apache.vhosts', $section->param('apache_virtualhosts', []))) }}" data-replace="vhostid:[id],vhostnewid:[newid]" data-append=".row">Add another Apache vhost</button>
             </div>
         </div>
 
@@ -112,7 +112,7 @@
         </div>
         <!-- end nginx settings -->
 
-        @foreach(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', [])) as $vhostid => $vhost)
+        @foreach(Input::old('webserver.nginx.vhosts', $section->param('nginx_virtualhosts', [])) as $vhostid => $vhost)
         <!-- nginx / vhost -->
         @include('pages.builder.sections.webserver._nginx_virtualhost', ['type' => 'data'])
         <!-- end nginx / vhost -->
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#nginx-vhosts-template" data-id-start="{{ count(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', []))) }}" data-replace="vhostid:[id]" data-append=".row">Add another Nginx vhost</button>
+                <button type="button" class="btn btn-success btn-lg btn-block" data-template="#nginx-vhosts-template" data-id-start="{{ count(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', []))) }}" data-replace="vhostid:[id],vhostnewid:[newid]" data-append=".row">Add another Nginx vhost</button>
             </div>
         </div>
 

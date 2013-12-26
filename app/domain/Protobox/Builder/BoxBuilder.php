@@ -82,18 +82,15 @@ class BoxBuilder {
 	public function valid()
 	{
 		// Custom validation
-		$valid = true;
-
 		foreach($this->store as $section)
 		{
 			if ( ! $section->valid())
 			{
 				$this->errors = $section->errors();
-				break;
+
+				return false;
 			}
 		}
-
-		if ( ! $valid) return false;
 
 		// Validate all the fields
 		$rules = $names = [];
@@ -108,7 +105,7 @@ class BoxBuilder {
 		$this->validation = $this->validator->make($this->request->all(), $rules);
 
 		$this->validation->setAttributeNames($names);
-
+		
 		return $this->validation->passes();
 	}
 

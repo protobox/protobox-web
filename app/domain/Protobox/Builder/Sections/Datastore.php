@@ -64,8 +64,8 @@ class Datastore extends Section {
 	{
 		$mysql = $this->builder->request()->get('mysql');
 		$fields = [
-			'mysql.install' => 'MySQL Installation',
-			'mysql.root_password' => 'MySQL Root Password',
+			'mysql.install' => 'Data Store: MySQL Installation',
+			'mysql.root_password' => 'Data Store: MySQL Root Password',
 		];
 
 		if (isset($mysql['databases']))
@@ -73,10 +73,10 @@ class Datastore extends Section {
 			foreach($mysql['databases'] as $dbid => $db)
 			{
 				$fields += [
-					'mysql.databases.'.$dbid.'.name' => 'MySQL Database #'.($dbid+1).' Name',
-					'mysql.databases.'.$dbid.'.host' => 'MySQL Database #'.($dbid+1).' Host',
-					'mysql.databases.'.$dbid.'.user' => 'MySQL Database #'.($dbid+1).' User',
-					'mysql.databases.'.$dbid.'.password' => 'MySQL Database #'.($dbid+1).' Password'
+					'mysql.databases.'.$dbid.'.name' => 'Data Store: MySQL Database #'.($dbid+1).' Name',
+					'mysql.databases.'.$dbid.'.host' => 'Data Store: MySQL Database #'.($dbid+1).' Host',
+					'mysql.databases.'.$dbid.'.user' => 'Data Store: MySQL Database #'.($dbid+1).' User',
+					'mysql.databases.'.$dbid.'.password' => 'Data Store: MySQL Database #'.($dbid+1).' Password'
 				];
 			}
 		}
@@ -97,7 +97,7 @@ class Datastore extends Section {
 			(int) $mariadb['install'] == 1
 		)
 		{
-			$this->setError('Please choose either mysql or mariadb for your database, not both.');
+			$this->setError('Data Store: Please choose either mysql or mariadb for your database, not both.');
 
 			return false;
 		}

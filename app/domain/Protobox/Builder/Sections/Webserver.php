@@ -50,21 +50,87 @@ class Webserver extends Section {
 		];
 	}
 
+	public function rules()
+	{
+		$webserver = $this->builder->request()->get('webserver');
+		$rules = [];
+
+		if (isset($webserver['apache']['vhosts']))
+		{
+			foreach((array)$webserver['apache']['vhosts'] as $id => $dat)
+			{
+				$rules += [
+					//'webserver.apache.vhosts.'.$id.'.name' => 'required',
+					'webserver.apache.vhosts.'.$id.'.servername' => 'required',
+					'webserver.apache.vhosts.'.$id.'.docroot' => 'required',
+					'webserver.apache.vhosts.'.$id.'.port' => 'required',
+				];
+			}
+		}
+
+		if (isset($webserver['nginx']['vhosts']))
+		{
+			foreach((array)$webserver['nginx']['vhosts'] as $id => $dat)
+			{
+				$rules += [
+					//'webserver.nginx.vhosts.'.$id.'.name' => 'required',
+					'webserver.nginx.vhosts.'.$id.'.servername' => 'required',
+					'webserver.nginx.vhosts.'.$id.'.docroot' => 'required',
+					'webserver.nginx.vhosts.'.$id.'.port' => 'required',
+				];
+			}
+		}
+
+		return $rules;
+	}
+
+	public function fields()
+	{
+		$webserver = $this->builder->request()->get('webserver');
+		$fields = [];
+
+		if (isset($webserver['apache']['vhosts']))
+		{
+			foreach((array)$webserver['apache']['vhosts'] as $id => $dat)
+			{
+				$fields += [
+					'webserver.apache.vhosts.'.$id.'.name' => 'Web Server: Apache Virtualhost #'.($id+1).' Name',
+					'webserver.apache.vhosts.'.$id.'.servername' => 'Web Server: Apache Virtualhost #'.($id+1).' Server Name',
+					'webserver.apache.vhosts.'.$id.'.docroot' => 'Web Server: Apache Virtualhost #'.($id+1).' Document Root',
+					'webserver.apache.vhosts.'.$id.'.port' => 'Web Server: Apache Virtualhost #'.($id+1).' Port',
+				];
+			}
+		}
+
+		if (isset($webserver['nginx']['vhosts']))
+		{
+			foreach((array)$webserver['nginx']['vhosts'] as $id => $dat)
+			{
+				$fields += [
+					'webserver.nginx.vhosts.'.$id.'.name' => 'Web Server: Nginx Virtualhost #'.($id+1).' Name',
+					'webserver.nginx.vhosts.'.$id.'.servername' => 'Web Server: Nginx Virtualhost #'.($id+1).' Server Name',
+					'webserver.nginx.vhosts.'.$id.'.docroot' => 'Web Server: Nginx Virtualhost #'.($id+1).' Document Root',
+					'webserver.nginx.vhosts.'.$id.'.port' => 'Web Server: Nginx Virtualhost #'.($id+1).' Port',
+				];
+			}
+		}
+
+		return $fields;
+	}
+
 	public function valid()
 	{
 		$webserver = $this->builder->request()->get('webserver');
 
 		// Check to see if apache and nginx is installed
 		if (
-			isset($webserver['apache']) && 
-			isset($webserver['nginx']) && 
 			isset($webserver['apache']['install']) && 
 			isset($webserver['nginx']['install']) && 
 			(int) $webserver['apache']['install'] == 1 && 
 			(int) $webserver['nginx']['install'] == 1
 		)
 		{
-			$this->setError('Please choose either apache or nginx for your web server, not both.');
+			$this->setError('Web Server: Please choose either apache or nginx for your web server, not both.');
 
 			return false;
 		}
@@ -154,12 +220,12 @@ class Webserver extends Section {
 		{
 			$apache_vhosts[] = [
 				'name' => 'app',
-				'servername' => $vhost['servername'],
-				'serveraliases' => $vhost['serveraliases'],
-				'docroot' => $vhost['docroot'],
-				'port' => $vhost['port'],
-				'setenv' => $vhost['setenv'],
-				'override' => $vhost['override']
+				'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
+				'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
+				'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
+				'port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
+				'setenv' => isset($vhost['setenv']) ? $vhost['setenv'] : [],
+				'override' => isset($vhost['override']) ? $vhost['override'] : []
 			];
 		}
 
@@ -167,12 +233,12 @@ class Webserver extends Section {
 		{
 			$nginx_vhosts[] = [
 				'name' => 'app',
-				'server_name' => $vhost['servername'],
-				'server_aliases' => $vhost['serveraliases'],
-				'www_root' => $vhost['docroot'],
-				'listen_port' => $vhost['port'],
+				'server_name' => isset($vhost['servername']) ? $vhost['servername'] : '',
+				'server_aliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
+				'www_root' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
+				'listen_port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
 				'index_files' => ['index.html', 'index.htm', 'index.php'],
-				'envvars' => $vhost['setenv']
+				'envvars' => isset($vhost['setenv']) ? $vhost['setenv'] : []
 			];
 		}
 

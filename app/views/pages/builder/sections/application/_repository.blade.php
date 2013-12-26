@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Repository</h3>
+                <h3 class="panel-title">Repository #{{ $type != 'template' ? (int) $appid + 1 : '{appnewid}' }}</h3>
             </div>
 
             <div class="panel-body">
@@ -10,7 +10,7 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-name">Name</label>
-                        <input type="text" id="application-repository-{{ $appid }}-name" name="applications[repository][{{ $appid }}][name]" placeholder="{{ $type == 'template' ? $section->param('repository_name') : $vhost['name'] }}" value="{{ $type == 'template' ? $section->param('repository_name') : $vhost['name'] }}" class="form-control">
+                        <input type="text" id="application-repository-{{ $appid }}-name" name="applications[repository][{{ $appid }}][name]" placeholder="{{ $type == 'template' ? $section->param('repository_name') : $app['name'] }}" value="{{ $type == 'template' ? $section->param('repository_name') : $app['name'] }}" class="form-control">
 
                         <p class="help-block">
                         The name of this application for your own reference.
@@ -18,7 +18,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-install">
-                            <input type="checkbox" id="application-repository-{{ $appid }}-install" name="applications[repository][{{ $appid }}][install]" {{ $type == 'template' ? ($section->param('repository_install') ? 'checked="checked"' : '') : ($vhost['install'] ? 'checked="checked"' : '') }} value="1">
+                            <input type="checkbox" id="application-repository-{{ $appid }}-install" name="applications[repository][{{ $appid }}][install]" {{ $type == 'template' ? ($section->param('repository_install') ? 'checked="checked"' : '') : (isset($app['install']) && $app['install'] ? 'checked="checked"' : '') }} value="1">
                             Install
                         </label>
 
@@ -32,22 +32,22 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="application-repository-{{ $appid }}-path">Document Root</label>
-                        <input type="text" id="application-repository-{{ $appid }}-path" name="applications[repository][{{ $appid }}][path]" placeholder="{{ $type == 'template' ? $section->param('repository_path') : $vhost['path'] }}" value="{{ $type == 'template' ? $section->param('repository_path') : $vhost['path'] }}" class="form-control">
+                        <input type="text" id="application-repository-{{ $appid }}-path" name="applications[repository][{{ $appid }}][path]" placeholder="{{ $type == 'template' ? $section->param('repository_path') : $app['path'] }}" value="{{ $type == 'template' ? $section->param('repository_path') : $app['path'] }}" class="form-control">
 
-                        <p class="help-block">Location of your site's index.php file, or other landing page. This should match the <code>document root</code> from <a href="#section-webserver"  data-toggle="tab">apache or nginx</a> settings.</p>
+                        <p class="help-block">Location of your site's index.php file, or other landing page. This should match the <code>document root</code> from <a href="#" data-tab-switch="sel-webserver">apache or nginx</a> settings.</p>
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-source">Git Repository</label>
-                        <input type="text" id="application-repository-{{ $appid }}-source" name="applications[repository][{{ $appid }}][source]" placeholder="{{ $type == 'template' ? $section->param('repository_source') : $vhost['source'] }}" value="{{ $type == 'template' ? $section->param('repository_source') : $vhost['source'] }}" class="form-control">
+                        <input type="text" id="application-repository-{{ $appid }}-source" name="applications[repository][{{ $appid }}][source]" placeholder="{{ $type == 'template' ? $section->param('repository_source') : $app['source'] }}" value="{{ $type == 'template' ? $section->param('repository_source') : $app['source'] }}" class="form-control">
 
                         <p class="help-block">Insert the GIT repository URL here.</p>
                     </div>
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-revision">Git Branch / Tag</label>
-                        <input type="text" id="application-repository-{{ $appid }}-revision" name="applications[repository][{{ $appid }}][revision]" placeholder="{{ $type == 'template' ? $section->param('repository_revision') : $vhost['revision'] }}" value="{{ $type == 'template' ? $section->param('repository_revision') : $vhost['revision'] }}" class="form-control">
+                        <input type="text" id="application-repository-{{ $appid }}-revision" name="applications[repository][{{ $appid }}][revision]" placeholder="{{ $type == 'template' ? $section->param('repository_revision') : $app['revision'] }}" value="{{ $type == 'template' ? $section->param('repository_revision') : $app['revision'] }}" class="form-control">
 
                         <p class="help-block">Insert the git branch or tag name here. Defaults to <code>master</code> branch.</p>
                     </div>
@@ -63,9 +63,11 @@
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                         @else
-                            @foreach($vhost['preinstall'] as $cmd)
+                            @if(isset($app['preinstall']))
+                            @foreach($app['preinstall'] as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
+                            @endif
                         @endif
                         </select>
                     </div>
@@ -77,9 +79,11 @@
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                         @else
-                            @foreach($vhost['postinstall'] as $cmd)
+                            @if(isset($app['postinstall']))
+                            @foreach($app['postinstall'] as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
+                            @endif
                         @endif
                         </select>
                     </div>

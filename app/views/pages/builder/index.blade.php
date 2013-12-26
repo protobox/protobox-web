@@ -24,10 +24,11 @@
         </div>
         <div class="col-md-9" role="main">
             {{ Form::open(['method' => 'post']) }}
-            <div class="alert alert-warning fade in">
+
+            {{-- <div class="alert alert-warning fade in">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <strong>Protobox</strong> website is a work in progress. We will remove this notice when it is in a usable form.
-            </div>
+            </div> --}}
 
             @if(count($errors->all()))
             <div class="alert alert-danger fade in" id="global_error_box">

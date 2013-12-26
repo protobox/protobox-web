@@ -45,4 +45,73 @@ class Applications extends Section {
 		return $defaults;
 	}
 
+	public function rules()
+	{
+		$rules = [];
+
+		foreach($this->applications() as $app => $name)
+		{
+			$rules += $this->app[$app]->rules();
+		}
+
+		return $rules;
+	}
+
+	public function fields()
+	{
+		$fields = [];
+
+		foreach($this->applications() as $app => $name)
+		{
+			$fields += $this->app[$app]->fields();
+		}
+
+		return $fields;
+	}
+
+	public function load($output)
+	{
+		if ( ! isset($output['applications'])) return [];
+
+		$out = [];
+
+		foreach($this->applications() as $app => $name)
+		{
+			$out += $this->app[$app]->load($output);
+		}
+
+		if (empty($out)) return $output;
+
+		return [
+			'applications' => $out
+		];
+	}
+
+	public function output()
+	{
+		$output = [];
+
+		foreach($this->applications() as $app => $name)
+		{
+			$output += $this->app[$app]->output();
+		}
+
+		if (empty($output)) return $output;
+
+		return [
+			'applications' => $output
+		];
+	}
+
+	public function valid()
+	{
+		foreach($this->applications() as $app => $name)
+		{
+			if ( ! $this->app[$app]->valid())
+				return false;
+		}
+
+		return true;
+	}
+
 }

@@ -168,7 +168,7 @@
             if ( ! templatesAdded[name])
                 templatesAdded[name] = [];
 
-            var id_start    = parseInt($this.data('id-start')),
+            var id_start    = parseInt($this.data('id-start')) - 1,
                 replacement = $this.data('replace'),
                 append      = $this.data('append'),
                 default_id  = templatesAdded[name].length > 0
@@ -183,6 +183,8 @@
 
                 if (replace[1] == '[id]') {
                     content = content.replace(re, name_id);
+                } else if (replace[1] == '[newid]') {
+                    content = content.replace(re, name_id + 1);
                 } else {
                     content = content.replace(re, replace[1]);
                 }
@@ -216,13 +218,14 @@
             group       = $this.data('application'),
             app         = $('#' + group).val(),
             name        = 'application-' + app + '-template',
-            template    = $('#' + name);
+            template    = $('#' + name),
+            start       = $('#application-' + app + '-start').val();
 
         if (template) {
             if ( ! templatesAdded[name])
                 templatesAdded[name] = [];
 
-            var id_start    = 0,
+            var id_start    = parseInt(start) - 1,
                 replacement = $this.data('replace'),
                 append      = $this.data('append'),
                 default_id  = templatesAdded[name].length > 0
@@ -237,15 +240,28 @@
 
                 if (replace[1] == '[id]') {
                     content = content.replace(re, name_id);
+                } else if (replace[1] == '[newid]') {
+                    content = content.replace(re, name_id + 1);
                 } else {
                     content = content.replace(re, replace[1]);
                 }
             });
 
-            var $row = $(content).prependTo($(append));
+            var $row = $(content).appendTo($(append));
             Protobox.prototype.selectize($row);
 
             templatesAdded[name].push(name_id);
+        }
+    }
+
+    Protobox.prototype.tabSwitch = function (e) {
+        var $this   = $(this),
+            elm     = $this.data('tab-switch'),
+            target  = $('#' + elm);
+
+        if (target) {
+            e.preventDefault && e.preventDefault();
+            target.tab('show');
         }
     }
 
@@ -364,6 +380,8 @@
         $(document).on('click', '[data-template-remove]', Protobox.prototype.templateRemove);
 
         $(document).on('click', '[data-application]', Protobox.prototype.applicationTemplate);
+
+        $(document).on('click', '[data-tab-switch]', Protobox.prototype.tabSwitch);
 
         //Eldarion ajax error handling
         //$(document).on('eldarion-ajax:success', Protobox.prototype.ajaxErrors);
