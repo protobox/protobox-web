@@ -1,12 +1,14 @@
 <?php
 
-// Home
+// Builder
 Route::get('/', ['as' => 'builder', 'uses' => 'BuilderController@index']);
 Route::post('/', ['as' => 'builder.create', 'uses' => 'BuilderController@create']);
-
-// Upload + Share
-Route::post('upload', ['as' => 'upload', 'uses' => 'ShareController@create']);
-Route::get('share/{id}', ['as' => 'share', 'uses' => 'ShareController@show']);
+Route::post('upload', ['as' => 'builder.upload', 'uses' => 'BuilderController@upload']);
+Route::get('share/{id}', ['as' => 'builder.show', 'uses' => 'BuilderController@show']);
+Route::get('share/{id}/edit', ['as' => 'builder.edit', 'uses' => 'BuilderController@edit']);
+Route::get('share/{id}/raw', ['as' => 'builder.raw', 'uses' => 'BuilderController@raw']);
+Route::get('share/{id}/download', ['as' => 'builder.download', 'uses' => 'BuilderController@download']);
+Route::get('share/{id}/delete', ['as' => 'builder.delete', 'uses' => 'BuilderController@delete']);
 
 // About
 Route::get('about', ['as' => 'about', 'uses' => 'HomeController@about']);
@@ -24,6 +26,10 @@ Route::get('contributors', ['as' => 'contributors', 'uses' => 'ContributorsContr
 
 // Explore
 Route::get('explore', ['as' => 'explore', 'uses' => 'ExploreController@index']);
+Route::get('box/{id}', ['as' => 'explore.show', 'uses' => 'ExploreController@show']);
+Route::get('box/{id}/edit', ['as' => 'explore.edit', 'uses' => 'ExploreController@edit']);
+Route::get('box/{id}/raw', ['as' => 'explore.raw', 'uses' => 'ExploreController@raw']);
+Route::get('box/{id}/download', ['as' => 'explore.download', 'uses' => 'ExploreController@download']);
 
 // Paste Bin
 Route::get('bin', ['as' => 'bin', 'uses' => 'PastesController@create']);

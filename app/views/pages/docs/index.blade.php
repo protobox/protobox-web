@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('partials.header_build')
+
 <div class="container bs-docs-container">
     <div class="row">
         <div class="col-md-3">

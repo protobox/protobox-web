@@ -32,6 +32,8 @@ class CoreServiceProvider extends ServiceProvider {
     protected function registerRepositories()
     {
         $this->app->bind('Protobox\Bin\PasteRepositoryInterface', 'Protobox\Bin\EloquentPasteRepository');
+        $this->app->bind('Protobox\Explore\BoxRepositoryInterface', 'Protobox\Explore\EloquentBoxRepository');
+        $this->app->bind('Protobox\Builder\BoxRepositoryInterface', 'Protobox\Builder\EloquentBoxRepository');
     }
 
     /**

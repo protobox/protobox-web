@@ -24,7 +24,7 @@
 <script src="{{ asset('assets/js/scripts-all.js') }}"></script>
 <script>
 var PROTOBOX_CONFIG = {
-    UPLOAD: '{{ URL::route('upload') }}',
+    UPLOAD: '{{ URL::route('builder.upload') }}',
     TOKEN: '{{ csrf_token() }}'
 };
 </script>

@@ -15,8 +15,8 @@
                 {{-- <li class="{{ Request::is('bin') || Request::is('bin/*') ? 'active' : '' }}"><a href="{{ URL::route('bin') }}">{{ strtoupper(trans('global.nav_main.paste')) }}</a></li> --}}
                 <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="{{ URL::route('about') }}">{{ strtoupper(trans('global.nav_main.about')) }}</a></li>
                 <li class="{{ Request::is('docs') || Request::is('docs/*') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}">{{ strtoupper(trans('global.nav_main.docs')) }}</a></li>
-                <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.login')) }}</a></li>
-                <li class="{{ Request::is('register') ? 'active ' : '' }}register"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.register')) }}</a></li>
+                {{-- <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.login')) }}</a></li> --}}
+                {{-- <li class="{{ Request::is('register') ? 'active ' : '' }}register"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.register')) }}</a></li> --}}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://github.com/protobox/protobox/issues" target="_blank">{{ strtoupper(trans('global.nav_main.issues')) }}</a></li>
