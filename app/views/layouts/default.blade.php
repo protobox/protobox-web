@@ -21,7 +21,7 @@
 
 @section('scripts')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="{{ asset('assets/js/scripts.v0.0.1.min.js') }}"></script>
+<script src="{{ asset('assets/js/scripts-all.js') }}"></script>
 <script>
 var PROTOBOX_CONFIG = {
     UPLOAD: '{{ URL::route('builder.upload') }}',

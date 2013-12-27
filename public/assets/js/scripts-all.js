@@ -1657,16 +1657,18 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
             persist: false,
             create: false,
             onItemAdd: function(value, $item) {
-                var targetContainer     = '#' + $(this['$input'])[0].getAttribute('data-target-container');
-                var targetNameStructure = $(this['$input'])[0].getAttribute('data-target-name');
-                var elementName         = targetNameStructure + '[' + this.options[value].text + ']';
-
-                var suffix = prompt('Enter Value:') || '0';
-                var label  = this.options[value].text + ' = ' + suffix;
-                var data   = $.extend({}, this.options[value], {
-                    text: label
-                });
-
+                var targetContainer     = '#' + $(this['$input'])[0].getAttribute('data-target-container'),
+                    targetNameStructure = $(this['$input'])[0].getAttribute('data-target-name'),
+                    elementName         = targetNameStructure + '[' + this.options[value].text + ']';
+alert(targetContainer);
+alert(targetNameStructure);
+alert(elementName);
+                var suffix = prompt('Enter Value:') || '0',
+                    label  = this.options[value].text + ' = ' + suffix,
+                    data   = $.extend({}, this.options[value], {
+                        text: label
+                    });
+alert(label);
                 // Append this user input as a new hidden element
                 $('<input>').attr({
                     type:  'hidden',
@@ -1677,15 +1679,14 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
                 this.updateOption(value, data);
             },
             onItemRemove: function(value, $item) {
-                var targetContainer     = '#' + $(this['$input'])[0].getAttribute('data-target-container');
-                var targetNameStructure = $(this['$input'])[0].getAttribute('data-target-name');
-                var elementName         = targetNameStructure + '[' + this.options[value].value + ']';
+                var targetContainer     = '#' + $(this['$input'])[0].getAttribute('data-target-container'),
+                    targetNameStructure = $(this['$input'])[0].getAttribute('data-target-name'),
+                    elementName         = targetNameStructure + '[' + this.options[value].value + ']',
+                    data = $.extend({}, this.options[value], {
+                        text: value
+                    });
 
                 $(targetContainer + ' input[name="' + elementName + '"]').remove();
-
-                var data = $.extend({}, this.options[value], {
-                    text: value
-                });
 
                 this.updateOption(value, data);
             }
@@ -1693,22 +1694,21 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
 
         // Adds pre-selected option values to selectize field
         for (var i = 0; i < $selectTagsUserInput.length; i++) {
-            var $selectElement = $selectTagsUserInput[i].selectize;
-            var targetContainer = '#' + $selectTagsUserInput[i].getAttribute('data-target-container');
-            var $selectedItems = $(targetContainer);
+            var $selectElement = $selectTagsUserInput[i].selectize,
+                targetContainer = '#' + $selectTagsUserInput[i].getAttribute('data-target-container'),
+                $selectedItems = $(targetContainer);
 
             if (!$selectedItems.length) {
                 continue;
             }
 
             $selectedItems.children().each(function() {
-                var optionName  = this.getAttribute('data-option-name');
-                var optionValue = $(this).val();
-
-                var label = $selectElement.options[optionName].text + ' = ' + optionValue;
-                var data  = $.extend({}, $selectElement.options[optionName], {
-                    text: label
-                });
+                var optionName  = this.getAttribute('data-option-name'),
+                    optionValue = $(this).val(),
+                    label = $selectElement.options[optionName].text + ' = ' + optionValue,
+                    data  = $.extend({}, $selectElement.options[optionName], {
+                        text: label
+                    });
 
                 $selectElement.updateOption(optionName, data);
             });
