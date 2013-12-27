@@ -100,16 +100,13 @@
             onItemAdd: function(value, $item) {
                 var targetContainer     = '#' + $(this['$input'])[0].getAttribute('data-target-container'),
                     targetNameStructure = $(this['$input'])[0].getAttribute('data-target-name'),
-                    elementName         = targetNameStructure + '[' + this.options[value].text + ']';
-alert(targetContainer);
-alert(targetNameStructure);
-alert(elementName);
-                var suffix = prompt('Enter Value:') || '0',
-                    label  = this.options[value].text + ' = ' + suffix,
-                    data   = $.extend({}, this.options[value], {
+                    elementName         = targetNameStructure + '[' + this.options[value].text + ']',
+                    suffix              = prompt('Enter Value:') || '0',
+                    label               = this.options[value].text + ' = ' + suffix,
+                    data                = $.extend({}, this.options[value], {
                         text: label
                     });
-alert(label);
+
                 // Append this user input as a new hidden element
                 $('<input>').attr({
                     type:  'hidden',
@@ -150,10 +147,7 @@ alert(label);
                     data  = $.extend({}, $selectElement.options[optionName], {
                         text: label
                     });
-alert(optionName);
-alert(optionValue);
-alert($selectElement.options[optionName]);
-alert($selectElement.options[optionName].text);
+
                 $selectElement.updateOption(optionName, data);
             });
         }

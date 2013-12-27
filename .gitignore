@@ -7,5 +7,7 @@ Thumbs.db
 node_modules/*
 app/assets/components/*
 app/config/production/*
+app/storage/docs
 app/storage/docs/*
+app/storage/boxes
 app/storage/boxes/*
