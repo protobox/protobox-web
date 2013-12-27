@@ -37,7 +37,7 @@ class BuilderController extends BaseController {
         $newbox = $this->box->create();
 
         $newbox->update([
-            'code' => $builder->output(['document' => 'build_'.$newbox->publicID()]),
+            'code' => $builder->output(['document' => 'build_'.strtolower($newbox->publicID())]),
         ]);
 
         $newbox->save();
