@@ -86,7 +86,7 @@ class Server extends Section {
 
 		return [
 			'server' => [
-				'packages' => isset($server['packages']) ? $server['packages'] : [],
+				'packages' => isset($server['packages']) && count($server['packages']) ? $server['packages'] : [''],
 				'ssh' => [
 					'authorized_keys' => [],
 					'private_keys' => [],

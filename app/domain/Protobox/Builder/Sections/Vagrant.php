@@ -126,7 +126,6 @@ class Vagrant extends Section {
 						'virtualbox' => [
 							'modifyvm' => [
 								'name' => $vagrant['local_name'],
-								'natdnshostresolver1' => 'on',
 								'memory' => $vagrant['local_memory']
 							],
 							'setextradata' => [
