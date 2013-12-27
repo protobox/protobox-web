@@ -22,7 +22,7 @@ class CreateBoxesTable extends Migration {
             $t->integer('comment_count');
             $t->integer('view_count');
             $t->integer('download_count');
-            $t->integer('forked_count');
+            $t->integer('fork_count');
             $t->dateTime('last_viewed');
             $t->timestamps();
             $t->softDeletes();

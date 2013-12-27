@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container main-content">
     <div class="row">
         <div class="col-md-3">
             <h1 class="primary">Protoboxes</h1>
@@ -12,7 +12,7 @@
         @if(count($boxes))
         	@foreach($boxes as $box)
         	<ul class="protoboxes">
-	        	<li><a href="{{ URL::route('explore.show', ['id' => $box->publicID()]) }}"><strong>{{ $box->name }}</strong></a>: {{ $box->desc }}</li>
+	        	<li><a href="{{ URL::route('explore.show', ['id' => $box->publicID()]) }}"><strong>{{ $box->name }}</strong></a>: {{ $box->description }}</li>
         	</ul>
         	@endforeach
         @else

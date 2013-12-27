@@ -1,4 +1,4 @@
-/*! protobox - v0.0.1 - 2013-12-26
+/*! protobox - v0.0.1 - 2013-12-27
 * http://github.com/protobox/protobox
 * Copyright (c) 2013 
 */
@@ -4255,6 +4255,15 @@ body {
   margin-top: 10px;
   margin-bottom: 30px;
   text-align: center;
+}
+.main-content {
+  margin-top: 30px;
+}
+.protoboxes {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0px;
+  border-bottom: 1px solid #eee;
 }
 .footer {
   text-align: center;

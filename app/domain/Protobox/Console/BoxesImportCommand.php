@@ -99,10 +99,6 @@ class BoxesImportCommand extends Command {
 	protected function getArguments()
 	{
 		return [];
-
-		//return array(
-		//	array('example', InputArgument::REQUIRED, 'An example argument.'),
-		//);
 	}
 
 	/**
@@ -113,10 +109,6 @@ class BoxesImportCommand extends Command {
 	protected function getOptions()
 	{
 		return [];
-
-		//return array(
-		//	array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
-		//);
 	}
 
 }
