@@ -10,7 +10,7 @@ class Server extends Section {
 			// Packages
 			//
 			
-			'packages' => ['vim'],
+			'packages' => [],
 
 			//
 			// SSH
