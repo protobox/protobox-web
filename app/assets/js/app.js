@@ -150,7 +150,10 @@ alert(label);
                     data  = $.extend({}, $selectElement.options[optionName], {
                         text: label
                     });
-
+alert(optionName);
+alert(optionValue);
+alert($selectElement.options[optionName]);
+alert($selectElement.options[optionName].text);
                 $selectElement.updateOption(optionName, data);
             });
         }
