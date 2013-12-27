@@ -160,7 +160,7 @@ class Datastore extends Section {
 				'host' => isset($db['host']) ? $db['host'] : '',
 				'user' => isset($db['user']) ? $db['user'] : '',
 				'password' => isset($db['password']) ? $db['password'] : '',
-				'grant' => isset($db['grant']) ? $db['grant'] : [],
+				'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
 				'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
 			];
 		}

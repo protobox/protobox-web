@@ -82,20 +82,18 @@ class Server extends Section {
 			]
 		];
 
-		$dot_files = [];
-
 		return [
 			'server' => [
 				'packages' => isset($server['packages']) && count($server['packages']) ? $server['packages'] : '[]',
 				'ssh' => [
-					'authorized_keys' => [],
-					'private_keys' => [],
-					'config' => []
+					'authorized_keys' => '[]',
+					'private_keys' => '[]',
+					'config' => '[]'
 				],
 				'dotfiles' => [
 					'install' => isset($server['dotfiles']['install']) ? (int) $server['dotfiles']['install'] : 0,
 					'repo' => isset($server['dotfiles']['repo']) ? $server['dotfiles']['repo'] : '',
-					'files' => $dot_files,
+					'files' => '[]',
 					'bash_aliases' => null
 				]
 			]

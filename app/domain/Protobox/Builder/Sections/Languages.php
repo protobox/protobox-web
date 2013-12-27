@@ -175,7 +175,7 @@ class Languages extends Section {
 			'php' => [
 				'install' => isset($output['php']['install']) ? $output['php']['install'] : 0,
 				'version' => isset($output['php']['version']) ? $output['php']['version'] : '',
-				'modules' => isset($output['php']['modules']) ? $output['php']['modules'] : [],
+				'modules' => isset($output['php']['modules']) ? array_map(function($v) { return str_replace('php5-', '', $v); }, $output['php']['modules']) : [],
 				'pear' => [
 					'install' => isset($output['php']['pear']['install']) ? (int) $output['php']['pear']['install'] : 0,
 					'modules' => isset($output['php']['pear']['modules']) ? $output['php']['pear']['modules'] : [],
@@ -220,8 +220,8 @@ class Languages extends Section {
 		return [
 			'php' => [
 				'install' => isset($php['install']) ? (int) $php['install'] : 0,
-				'version' => $php['version'],
-				'modules' => $php['modules'],
+				'version' => isset($php['version']) ? $php['version'] : '',
+				'modules' => isset($php['modules']) && count($php['modules']) ? array_map(function($v) { return 'php5-'.$v; }, $php['modules']) : '[]',
 				'pear' => [
 					'install' => isset($php['pear']['install']) ? (int) $php['pear']['install'] : 0,
 					'modules' => isset($php['pear']['modules']) && count($php['pear']['modules']) ? $php['pear']['modules'] : '[]',
@@ -242,7 +242,7 @@ class Languages extends Section {
 				'xdebug' => [
 					'install' => isset($php['xdebug']['install']) ? (int) $php['xdebug']['install'] : 0,
 					'webgrind' => isset($php['xdebug']['webgrind']) ? (int) $php['xdebug']['webgrind'] : 0,
-					'settings' => isset($php['xdebug']['settings']) ? $php['xdebug']['settings'] : [],
+					'settings' => isset($php['xdebug']['settings']) && count($php['xdebug']['settings']) ? $php['xdebug']['settings'] : '[]',
 				],
 				'xhprof' => [
 					'install' => isset($php['xhprof']['install']) ? (int) $php['xhprof']['install'] : 0,

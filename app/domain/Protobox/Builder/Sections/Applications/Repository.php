@@ -106,8 +106,8 @@ class Repository extends Application {
 					'provider' => 'git',
 					'source' => isset($dat['source']) ? $dat['source'] : '',
 					'revision' => isset($dat['revision']) ? $dat['revision'] : '',
-					'preinstall' => isset($dat['preinstall']) ? $dat['preinstall'] : [],
-					'postinstall' => isset($dat['postinstall']) ? $dat['postinstall'] : [],
+					'preinstall' => isset($dat['preinstall']) && count($dat['preinstall']) ? $dat['preinstall'] : '[]',
+					'postinstall' => isset($dat['postinstall']) && count($dat['postinstall']) ? $dat['postinstall'] : '[]',
 				]
 			];
 		}

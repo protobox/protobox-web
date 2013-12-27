@@ -127,7 +127,7 @@ class Drupal extends Application {
 					'user_email' => isset($dat['useremail']) ? $dat['useremail'] : '',
 					'user_name' => isset($dat['username']) ? $dat['username'] : '',
 					'user_password' => isset($dat['userpass']) ? $dat['userpass'] : '',
-					'modules' => isset($dat['modules']) ? $dat['modules'] : [],
+					'modules' => isset($dat['modules']) && count($dat['modules']) ? $dat['modules'] : '[]',
 				]
 			];
 		}
