@@ -3,10 +3,16 @@
 	"description": "Protobox - Website",
 	"keywords": ["protobox"],
 	"license": "MIT",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/protobox/Yaml.git"
+		}
+	],
 	"require": {
 		"laravel/framework": "4.0.*",
 		"mitch/hashids": "dev-master",
-		"symfony/yaml": "2.5.*@dev",
+		"symfony/yaml": "dev-arrayfix",
 		"erusev/parsedown": "dev-master"
 	},
 	"autoload": {
