@@ -83,11 +83,11 @@ class Vagrant extends Section {
 	{
 		return [
 			'vagrant' => [
-				'box' => isset($output['vm']['box']) ? $output['vm']['box'] : '',
-				'box_url' => isset($output['vm']['box_url']) ? $output['vm']['box_url'] : '',
-				'local_name' => isset($output['vm']['hostname']) ? $output['vm']['hostname'] : '',
-				'local_ip' => isset($output['vm']['network']['private_network']) ? $output['vm']['network']['private_network'] : '',
-				'local_memory' => isset($output['vm']['provider']['virtualbox']['modifyvm']['memory']) ? $output['vm']['provider']['virtualbox']['modifyvm']['memory'] : '',
+				'box' => isset($output['vagrant']['vm']['box']) ? $output['vagrant']['vm']['box'] : '',
+				'box_url' => isset($output['vagrant']['vm']['box_url']) ? $output['vagrant']['vm']['box_url'] : '',
+				'local_name' => isset($output['vagrant']['vm']['hostname']) ? $output['vagrant']['vm']['hostname'] : '',
+				'local_ip' => isset($output['vagrant']['vm']['network']['private_network']) ? $output['vagrant']['vm']['network']['private_network'] : '',
+				'local_memory' => isset($output['vagrant']['vm']['provider']['virtualbox']['modifyvm']['memory']) ? $output['vagrant']['vm']['provider']['virtualbox']['modifyvm']['memory'] : '',
 			]
 		];
 	}
@@ -113,48 +113,50 @@ class Vagrant extends Section {
 		];
 
 		return [
-			'vm' => [
-				'box' => $vagrant['box'],
-				'box_url' => $vagrant['box_url'],
-				'hostname' => $vagrant['local_name'],
-				'network' => [
-					'private_network' => $vagrant['local_ip'],
-					'forwarded_port' => $ports
-				],
-				'provider' => [
-					'virtualbox' => [
-						'modifyvm' => [
-							'name' => $vagrant['local_name'],
-							'natdnshostresolver1' => 'on',
-							'memory' => $vagrant['local_memory']
-						],
-						'setextradata' => [
-							'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root' => 1
-						]
-					]
-				],
-				'provision' => [
-					'ansible' => [
-						'playbook' => 'ansible/site.yml'
-					]
-				],
-				'synced_folder' => $folders,
-				'usable_port_range' => '2200..2250'
-			],
-			'ssh' => [
-				'host' => null,
-				'port' => null,
-				'private_key_path' => null,
-				'public_key_path' => null,
-				'username' => 'vagrant',
-				'guest_port' => null,
-				'keep_alive' => true,
-				'forward_agent' => false,
-				'forward_x11' => false,
-				'shell' => 'bash -l'
-			],
 			'vagrant' => [
-				'host' => ':detect'
+				'vm' => [
+					'box' => $vagrant['box'],
+					'box_url' => $vagrant['box_url'],
+					'hostname' => $vagrant['local_name'],
+					'network' => [
+						'private_network' => $vagrant['local_ip'],
+						'forwarded_port' => $ports
+					],
+					'provider' => [
+						'virtualbox' => [
+							'modifyvm' => [
+								'name' => $vagrant['local_name'],
+								'natdnshostresolver1' => 'on',
+								'memory' => $vagrant['local_memory']
+							],
+							'setextradata' => [
+								'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root' => 1
+							]
+						]
+					],
+					'provision' => [
+						'ansible' => [
+							'playbook' => 'ansible/site.yml'
+						]
+					],
+					'synced_folder' => $folders,
+					'usable_port_range' => '2200..2250'
+				],
+				'ssh' => [
+					'host' => null,
+					'port' => null,
+					'private_key_path' => null,
+					'public_key_path' => null,
+					'username' => 'vagrant',
+					'guest_port' => null,
+					'keep_alive' => true,
+					'forward_agent' => false,
+					'forward_x11' => false,
+					'shell' => 'bash -l'
+				],
+				'vagrant' => [
+					'host' => ':detect'
+				]
 			]
 		];
 	}

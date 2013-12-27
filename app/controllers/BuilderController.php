@@ -34,10 +34,13 @@ class BuilderController extends BaseController {
             return Redirect::route('builder')->withInput()->withErrors($builder->errors());
         }
 
-        $newbox = $this->box->create([
-            'code' => $builder->output(),
-            'view_count' => 0
+        $newbox = $this->box->create();
+
+        $newbox->update([
+            'code' => $builder->output(['document' => 'build_'.$newbox->publicID()]),
         ]);
+
+        $newbox->save();
 
         return Redirect::route('builder.show', ['id' => $newbox->publicID()]);
     }

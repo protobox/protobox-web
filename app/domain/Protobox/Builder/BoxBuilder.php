@@ -118,19 +118,27 @@ class BoxBuilder {
 	{
 		$output = Yaml::parse($data);
 		
-		$code = $this->prepare();
+		$code = $this->prepare($output);
 
 		foreach($this->store as $section)
 		{
 			$code += $section->load($output);
 		}
-
+		
 		return $code;
 	}
 
-	public function output()
+	public function output($options = [])
 	{
-		$code = $this->prepare();
+		$output = [
+			'protobox' => [
+				'document' => isset($options['document']) ? $options['document'] : '',
+				'name' => 'custom',
+				'description' => 'A custom box built from getprotobox.com'
+			]
+		];
+
+		$code = $this->prepare($output);
 
 		foreach($this->store as $section)
 		{
@@ -145,7 +153,9 @@ class BoxBuilder {
 		return [
 			'protobox' => [
 				'version' => Config::get('protobox.version'),
-				'document' => isset($output['protobox']['document']) ? $output['protobox']['document'] : 'abc123'
+				'document' => isset($output['protobox']['document']) ? $output['protobox']['document'] : '',
+				'name' => isset($output['protobox']['name']) ? $output['protobox']['name'] : '',
+				'description' => isset($output['protobox']['description']) ? $output['protobox']['description'] : '',
 			]
 		];
 	}

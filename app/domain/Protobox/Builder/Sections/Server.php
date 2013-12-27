@@ -86,11 +86,11 @@ class Server extends Section {
 
 		return [
 			'server' => [
-				'packages' => isset($server['dotfiles']['repo']) ? $server['packages'] : [],
+				'packages' => isset($server['packages']) ? $server['packages'] : [],
 				'ssh' => [
-					'authorized_keys' => $ssh_authorized_keys,
-					'private_keys' => $ssh_private_keys,
-					'config' => $ssh_config
+					'authorized_keys' => [],
+					'private_keys' => [],
+					'config' => []
 				],
 				'dotfiles' => [
 					'install' => isset($server['dotfiles']['install']) ? (int) $server['dotfiles']['install'] : 0,
