@@ -15,9 +15,9 @@ class CreateBoxesTable extends Migration {
 		{
             $t->increments('id');
             $t->integer('author_id')->nullable();
-            $t->string('name', 60);
+            $t->string('name', 120);
             $t->string('description');
-            $t->string('document', 100);
+            $t->string('document', 120);
             $t->text('code');
             $t->integer('comment_count');
             $t->integer('view_count');

@@ -4,7 +4,9 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Protobox\Explore\BoxRepositoryInterface;
+use Symfony\Component\Yaml\Yaml;
 use File;
+use App;
 
 class BoxesImportCommand extends Command {
 
@@ -43,8 +45,6 @@ class BoxesImportCommand extends Command {
 	 */
 	public function fire()
 	{
-		dd($this->box);
-
 		$path = storage_path().'/boxes/';
 		$files = File::allFiles($path);
 
@@ -56,28 +56,36 @@ class BoxesImportCommand extends Command {
 
 			$id = str_replace(['/', '.yml'], ['_', ''], $filepath);
 			$content = File::get($file);
+			$data = Yaml::parse($content);
 
-			$builder = App::make('boxbuilder');
-			$data = $builder->load($content);
+			$document = $data['protobox']['document'];
+			$box = $this->box->getByDocument($document);
 
-			$box = $this->box->findById($id);
-
-			if ( ! $box)
+			if ($box)
 			{
-				$box = $this->box->create([
-					'name' => $data['protobox']['name'],
-					'description' => $data['protobox']['description'],
+				$box->update([
+					'name' => isset($data['protobox']['name']) ? $data['protobox']['name'] : 'NoName',
+					'description' => isset($data['protobox']['description']) ? $data['protobox']['description'] : '',
 					'code' => $content
 				]);
+
+				$box->save();
 			}
 			else
 			{
-				$this->box->update([
-
+				$box = $this->box->create([
+					'document' => $document,
+					'name' => isset($data['protobox']['name']) ? $data['protobox']['name'] : 'NoName',
+					'description' => isset($data['protobox']['description']) ? $data['protobox']['description'] : '',
+					'code' => $content
 				]);
+
+				$box->document = $document;
+
+				$box->save();
 			}
-			
-			$this->info($filepath.' - '.$id);
+
+			$this->info($id);
 		}
 
 		$this->info('Done');

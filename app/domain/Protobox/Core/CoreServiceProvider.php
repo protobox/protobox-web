@@ -3,6 +3,7 @@
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\MessageBag;
 use Protobox\Console\BoxesImportCommand;
+use Protobox\Explore\BoxRepositoryInterface;
 
 class CoreServiceProvider extends ServiceProvider {
 
@@ -43,7 +44,7 @@ class CoreServiceProvider extends ServiceProvider {
     {
         $this->app['command.boxes.import'] = $this->app->share(function($app)
         {
-            return new BoxesImportCommand;
+            return new BoxesImportCommand($app['Protobox\Explore\BoxRepositoryInterface']);
         });
 
         $this->commands('command.boxes.import');
