@@ -2,6 +2,7 @@
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\MessageBag;
+use Protobox\Console\BoxesImportCommand;
 
 class CoreServiceProvider extends ServiceProvider {
 
@@ -21,6 +22,8 @@ class CoreServiceProvider extends ServiceProvider {
     {
         $this->registerRepositories();
 
+        $this->registerCommands();
+
         $this->registerSessionBinder();
     }
 
@@ -36,6 +39,16 @@ class CoreServiceProvider extends ServiceProvider {
         $this->app->bind('Protobox\Builder\BoxRepositoryInterface', 'Protobox\Builder\EloquentBoxRepository');
     }
 
+    protected function registerCommands()
+    {
+        $this->app['command.boxes.import'] = $this->app->share(function($app)
+        {
+            return new BoxesImportCommand;
+        });
+
+        $this->commands('command.boxes.import');
+    }
+
     /**
      * Get the services provided by the provider.
      *
@@ -43,7 +56,7 @@ class CoreServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return [];
+        return ['command.boxes.import'];
     }
 
     protected function registerSessionBinder()

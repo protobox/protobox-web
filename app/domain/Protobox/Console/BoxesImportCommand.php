@@ -1,11 +1,12 @@
-<?php
+<?php namespace Protobox\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Protobox\Builder\EloquentBoxRepository as Box;
+use Protobox\Explore\BoxRepositoryInterface;
+use File;
 
-class BoxesImport extends Command {
+class BoxesImportCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -21,14 +22,18 @@ class BoxesImport extends Command {
 	 */
 	protected $description = 'Imports boxes from filesystem';
 
+	protected $box;
+
 	/**
 	 * Create a new command instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(BoxRepositoryInterface $box)
 	{
 		parent::__construct();
+
+		$this->box = $box;
 	}
 
 	/**
@@ -38,13 +43,44 @@ class BoxesImport extends Command {
 	 */
 	public function fire()
 	{
-		$files = File::allFiles(storage_path().'/boxes');
-		$model = new Box;
+		dd($this->box);
+
+		$path = storage_path().'/boxes/';
+		$files = File::allFiles($path);
 
 		foreach($files as $file)
 		{
-			dd($file);
+			$filepath = str_replace($path, '', $file);
+
+			if ($filepath == 'README.md') continue;
+
+			$id = str_replace(['/', '.yml'], ['_', ''], $filepath);
+			$content = File::get($file);
+
+			$builder = App::make('boxbuilder');
+			$data = $builder->load($content);
+
+			$box = $this->box->findById($id);
+
+			if ( ! $box)
+			{
+				$box = $this->box->create([
+					'name' => $data['protobox']['name'],
+					'description' => $data['protobox']['description'],
+					'code' => $content
+				]);
+			}
+			else
+			{
+				$this->box->update([
+
+				]);
+			}
+			
+			$this->info($filepath.' - '.$id);
 		}
+
+		$this->info('Done');
 	}
 
 	/**
