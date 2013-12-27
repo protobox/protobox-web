@@ -224,11 +224,11 @@ class Languages extends Section {
 				'modules' => $php['modules'],
 				'pear' => [
 					'install' => isset($php['pear']['install']) ? (int) $php['pear']['install'] : 0,
-					'modules' => isset($php['pear']['modules']) && count($php['pear']['modules']) ? $php['pear']['modules'] : [''],
+					'modules' => isset($php['pear']['modules']) && count($php['pear']['modules']) ? $php['pear']['modules'] : '[]',
 				],
 				'pecl' => [
 					'install' => isset($php['pecl']['install']) ? (int) $php['pecl']['install'] : 0,
-					'modules' => isset($php['pecl']['modules']) && count($php['pecl']['modules']) ? $php['pecl']['modules'] : [''],
+					'modules' => isset($php['pecl']['modules']) && count($php['pecl']['modules']) ? $php['pecl']['modules'] : '[]',
 				],
 				'composer' => [
 					'install' => isset($php['composer']['install']) ? (int) $php['composer']['install'] : 0,

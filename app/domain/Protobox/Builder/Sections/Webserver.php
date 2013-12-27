@@ -245,7 +245,7 @@ class Webserver extends Section {
 		return [
 			'apache' => [
 				'install' => isset($webserver['apache']['install']) ? (int) $webserver['apache']['install'] : 0,
-				'modules' => isset($webserver['apache']['modules']) ? $webserver['apache']['modules'] : [''],
+				'modules' => isset($webserver['apache']['modules']) ? $webserver['apache']['modules'] : '[]',
 				'user' => 'vagrant',
 				'group' => 'www-data',
 				'default_vhost' => false,
