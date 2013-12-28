@@ -23,25 +23,15 @@
                         </select>
 
                         <p class="help-block">
-                            Packages to install via the OS package manager, separated by comma. Do not add Apache/Nginx or PHP here - you will choose those later.
+                            Packages to install via the OS package manager.  Do not add Apache/Nginx or PHP here - you will choose those later.
                         </p>
-
-                        <p class="help-block">
-                            Some common packages are (do not mix!):
-                        </p>
-
                         <div class="row">
                             <div class="col-xs-6 col-sm-4 col-md-3">
-                                Debian / Ubuntu:
+                                Common packages:
                                 <ul>
                                     <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="vim">vim</a></li>
-                                </ul>
-                            </div>
-
-                            <div class="col-xs-6 col-sm-4 col-md-3">
-                                CentOS:
-                                <ul>
-                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="vim-common">vim-common</a></li>
+                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="curl">curl</a></li>
+                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="git">git</a></li>
                                 </ul>
                             </div>
                         </div>

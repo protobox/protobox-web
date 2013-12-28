@@ -73,7 +73,7 @@
 
                         <p class="help-block">
                             Separated by comma, "All" is probably fine.
-                            <a href="http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride" target="_blank">Click here for more hardcore information.</a>
+                            <a href="http://httpd.apache.org/docs/2.2/mod/core.html#allowoverride" target="_blank">Click here for technical information.</a>
                         </p>
                     </div>
                 </div>
