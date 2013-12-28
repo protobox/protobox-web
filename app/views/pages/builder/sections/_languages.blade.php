@@ -258,8 +258,7 @@
                                 </div>
 
                                 <p class="help-block">
-                                    Not using Xdebug? Still pounding out <code>var_dump()</code> and <code>print_r()</code> and <code>echo</code>?<br>
-                                    <a href="https://jtreminio.com/2012/07/xdebug-and-you-why-you-should-be-using-a-real-debugger">Xdebug and You: Why You Should be Using a Real Debugger</a>
+                                    <a href="https://jtreminio.com/2012/07/xdebug-and-you-why-you-should-be-using-a-real-debugger">Learn why you should be using a real debugger.</a>
                                 </p>
                             </div>
                         </div>
