@@ -11,7 +11,7 @@
                         <label for="nginx-vhosts-{{ $vhostid }}-servername">Server Name</label>
                         <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="webserver[nginx][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
 
-                        <p class="help-block">Don't forget to add to your computer's hosts file!</p>
+                        <p class="help-block">The URL you want to use to access this site on your computer. Don't forget to add this to your <code>hosts</code> file!</p>
                     </div>
 
                     <div class="col-md-6">
@@ -24,7 +24,7 @@
                         @endif
                         </select>
 
-                        <p class="help-block">Separated by comma</p>
+                        <p class="help-block">Server aliases are secondary ways to access this site on your computer. Typically <code>www.{{ $vhost['servername'] }}</code> or any other subdomains you want to have.</p>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                         <label for="nginx-vhosts-{{ $vhostid }}-docroot">Document Root</label>
                         <input type="text" id="nginx-vhosts-{{ $vhostid }}-docroot" name="webserver[nginx][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" class="form-control">
 
-                        <p class="help-block">Location of your site's index.php file, or other landing page.</p>
+                        <p class="help-block">The location of your site's index file, or other landing page on the file system.</p>
                     </div>
 
                     <div class="col-md-6">
@@ -41,8 +41,7 @@
                         <input type="text" id="nginx-vhosts-{{ $vhostid }}-port" name="webserver[nginx][vhosts][{{ $vhostid }}][port]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" class="form-control">
 
                         <p class="help-block">
-                            80 for normal browsing, if you choose another append it to the URL,
-                            ex: http://{{ $vhost['servername'] }}:1337
+                            80 for normal browsing, if you choose another append it to the URL, ex: http://{{ $vhost['servername'] }}:1337
                         </p>
                     </div>
                 </div>
@@ -58,7 +57,7 @@
                         @endif
                         </select>
 
-                        <p class="help-block">"name value", separated by comma</p>
+                        <p class="help-block">These should be "name value" list of environmental variables you want to access in your code.</p>
                     </div>
 
                     <div class="col-md-6">

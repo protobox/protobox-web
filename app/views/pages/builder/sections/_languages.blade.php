@@ -51,7 +51,7 @@
                                 @endforeach
 
                                 <p class="help-block">
-                                    Ubuntu appears to have occasional problems using a non-default PHP repo version. If using Ubuntu, proceed with caution.
+                                    Please select a PHP version that is compatible with the OS that you selected in the <a href="#" data-tab-switch="sel-vagrant">vagrant configuration</a>.
                                 </p>
                             </div>
                         </div>
@@ -227,9 +227,7 @@
                                 </label>
 
                                 <p class="help-block">
-                                    CLI debugging will be automatically available. Simply run <code>$ xdebug foo.php</code>!
-                                    <a href="http://devincharge.com/debug-cli-remote-server/" target="_blank">Follow instructions here to setup PHPStorm to listen for a CLI connection</a>.
-                                    Other IDEs should be similar.
+                                    CLI debugging will automatically be available via <code>$ xdebug foo.php</code>. <a href="http://devincharge.com/debug-cli-remote-server/" target="_blank">Learn more about debugging a remote server</a>.
                                 </p>
                             </div>
 
@@ -284,8 +282,8 @@
                                 </label>
 
                                 <p class="help-block">
-                                    Logs will be available from <a>http://&lt;ip_address&gt;/xhprof</a>.<br>
-                                    The IP address is the <a href="#vagrant">one you chose here</a>.<br>
+                                    Logs will be available from <a>http://&lt;ip_address&gt;/xhprof</a>.<br />
+                                    The IP address is the <a href="#" data-tab-switch="sel-vagrant">one you chose here</a>.<br />
                                     <a href="http://www.geekyboy.com/archives/718#xhprof-usage" target="_blank">Learn how to use XHProf</a>
                                 </p>
                             </div>
@@ -315,7 +313,7 @@
                                 </label>
 
                                 <p class="help-block">
-                                    <a href="http://www.phpmyadmin.net/home_page/index.php" target="_blank">phpMyAdmin</a> will be available at <code>http://localhost/phpmyadmin</code>
+                                    <a href="http://www.phpmyadmin.net/home_page/index.php" target="_blank">phpMyAdmin</a> will be available at <code>http://ipaddress/phpmyadmin</code>
                                 </p>
                             </div>
                         </div>
@@ -345,7 +343,7 @@
                                 </label>
 
                                 <p class="help-block">
-                                    <a href="http://mailcatcher.me/" target="_blank">Mailcatcher</a> will be available available at: <code>http://localhost:1080/</code>
+                                    <a href="http://mailcatcher.me/" target="_blank">Mailcatcher</a> will be available available at: <code>http://ipaddress:1080/</code>
                                 </p>
                             </div>
                         </div>

@@ -44,7 +44,7 @@
                                 @endforeach
 
                                 <p class="help-block">
-                                Choose the operating system for your VM. It will be downloaded the first time you run Vagrant. <a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">Read more about vagrant boxes here</a>.
+                                Choose the operating system for your virtual machine. It may take some time to downloaded the box the first time you run Vagrant. <a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">Read more about vagrant boxes here</a>.
                                 </p>
 
                                 {{-- <p class="help-block">
@@ -59,7 +59,7 @@
                                 <input type="text" id="vagrant-local-name" name="vagrant[local_name]" placeholder="{{ $section->param('local_vm_name') }}" value="{{ Input::old('vagrant.local_name', $section->param('local_vm_name')) }}" class="form-control">
 
                                 <p class="help-block">
-                                Your personal name for the box. Should be unique to your system. If you have multiple boxes running, name each one differently.
+                                Your personal name for the box. This should be unique to your system. If you have multiple boxes running, name each one differently.
                                 </p>
                             </div>
                         </div>
@@ -70,14 +70,14 @@
                                 <input type="text" id="vagrant-local-ip" name="vagrant[local_ip]" placeholder="{{ $section->param('local_vm_ip') }}" pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}$" oninvalid="setCustomValidity('IP address format: {{ $section->param('local_vm_ip') }}')" value="{{ Input::old('vagrant.local_ip', $section->param('local_vm_ip')) }}" class="form-control">
 
                                 <p class="help-block">
-                                IP address to use for accessing the VM. This is the IP address you will need to enter into your <code>hosts</code> file for every virtual hosts you create later on.
+                                IP address to use for accessing the virtual machine. This is the IP address you will need to enter into your <code>hosts</code> file for every <a href="#" data-tab-switch="sel-webserver">virtualhost</a> you create later on.
                                 </p>
                             </div>
                             <div class="col-md-6 {{ $errors->first('vagrant.local_memory', 'has-error') }}">
                                 <label for="vagrant-local-memory">Local VM Memory</label>
                                 <input type="number" id="vagrant-local-memory" name="vagrant[local_memory]" placeholder="{{ $section->param('local_vm_memory') }}" pattern="^[1-9][0-9]*$" min="64" value="{{ Input::old('vagrant.local_memory', $section->param('local_vm_memory')) }}" class="form-control">
 
-                                <p class="help-block">Memory to assign to VM in megabytes (only integers)</p>
+                                <p class="help-block">Memory to assign to the virtual machine in megabytes (only integers allowed)</p>
                             </div>
                         </div>
                     </div>

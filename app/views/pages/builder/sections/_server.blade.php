@@ -23,15 +23,15 @@
                         </select>
 
                         <p class="help-block">
-                            Packages to install via the OS package manager.  Do not add Apache/Nginx or PHP here - you will choose those later.
+                            Packages to install via the OS package manager. Do not add Apache, Nginx, or PHP here since you will configure them in later steps.
                         </p>
                         <div class="row">
                             <div class="col-xs-6 col-sm-4 col-md-3">
                                 Common packages:
                                 <ul>
-                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="vim">vim</a></li>
-                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="curl">curl</a></li>
-                                    <li><a href="#" class="addClickedToSelectizeElement" data-target="server-packages" data-value="git">git</a></li>
+                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="vim">vim</a></li>
+                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="curl">curl</a></li>
+                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="git">git</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -133,8 +133,7 @@
                 <p>AND / OR</p>
 
                 <p>
-                    You can also add all your ssh keys and config files  (<code>.bash_aliases</code>, <code>.vimrc</code>, <code>.gitconfig</code>, etc),
-                    to the <code>./data/dot/</code> folder. During initial startup they will automatically be copied to the VM.
+                    You can also add all your ssh keys and config files  (<code>.bash_aliases</code>, <code>.vimrc</code>, <code>.gitconfig</code>, etc), to the <code>./data/dot/</code> folder. During initial startup they will automatically be copied to the virtual machine.
                 </p>
             </div>
 
