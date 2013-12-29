@@ -15,7 +15,7 @@
 {{-- <div class="tab-content">
     <div class="tab-pane active" id="section-monitoring-newrelic"> --}}
 
-        <!-- newrelic -->
+        <!-- newrelic settings -->
         <div class="row">
             <div class="col-xs-12">
                 <div class="panel panel-default">

@@ -7,14 +7,44 @@
 @if (count($section->queues()))
 <ul class="nav nav-pills nav-section">
     @foreach($section->queues() as $type => $name)
-    <li class="{{ $type == 'beanstalkd' ? 'active' : '' }}"><a href="#section-queues-{{ $type }}" data-toggle="tab">{{ $name }}</a></li>
+    <li class="{{ $type == 'rabbitmq' ? 'active' : '' }}"><a href="#section-queues-{{ $type }}" data-toggle="tab">{{ $name }}</a></li>
     @endforeach
 </ul>
 @endif
 
 <div class="tab-content">
-    <div class="tab-pane active" id="section-queues-beanstalkd">
-    	<!-- beanstalkd settings -->
+	<div class="tab-pane active" id="section-queues-rabbitmq">
+		<!-- rabbitmq settings -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">RabbitMQ</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <!-- install -->
+                        <div class="row form-group">
+                            <div class="col-md-12">
+                                <label for="rabbitmq-install">
+                                    <input type="checkbox" id="rabbitmq-install" name="rabbitmq[install]" {{ Input::old('rabbitmq.install', $section->param('rabbitmq_install')) ? 'checked="checked"' : '' }} value="1">
+                                    Install
+                                </label>
+
+                                <p class="help-block">
+                                You can toggle this setting to turn on/off the <a href="http://www.rabbitmq.com/" target="_blank">RabbitMQ</a> installation.
+                                </p>
+                            </div>
+                        </div>
+                        <!-- end install -->
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- rabbitmq settings -->
+	</div>
+	<div class="tab-pane" id="section-queues-beanstalkd">
+		<!-- beanstalkd settings -->
 		<div class="alert alert-warning fade in">
 			<strong>Beanstalkd</strong> is coming soon.
 		</div>
