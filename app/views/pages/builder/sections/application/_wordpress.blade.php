@@ -49,7 +49,7 @@
                         <label for="application-wordpress-{{ $appid }}-version">Wordpress Version</label>
                         <input type="text" id="application-wordpress-{{ $appid }}-version" name="applications[wordpress][{{ $appid }}][version]" placeholder="{{ $type == 'template' ? $section->param('wordpress_version') : $app['version'] }}" value="{{ $type == 'template' ? $section->param('wordpress_version') : $app['version'] }}" class="form-control">
 
-                        <p class="help-block">The wordpress version number you wish to install.</p>
+                        <p class="help-block">The wordpress version number you wish to install. <a href="http://wordpress.org/download/release-archive/" target="_blank">Compatible version numbers</a>.</p>
                     </div>
                 </div>
 

@@ -11,6 +11,7 @@ class Applications extends Section {
 			'drupal' => 'Drupal',
 			'laravel' => 'Laravel',
 			'lemonstand' => 'Lemonstand',
+			'pyrocms' => 'PyroCMS',
 			'sylius' => 'Sylius',
 			'symfony' => 'Symfony',
 			'wordpress' => 'Wordpress',

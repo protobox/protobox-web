@@ -107,7 +107,6 @@ class Lemonstand extends Application {
 				'firstname' => isset($dat['options']['firstname']) ? $dat['options']['firstname'] : '',
 				'lastname' => isset($dat['options']['lastname']) ? $dat['options']['lastname'] : '',
 				'email' => isset($dat['options']['email']) ? $dat['options']['email'] : '',
-				'useremail' => isset($dat['options']['user_email']) ? $dat['options']['user_email'] : '',
 				'username' => isset($dat['options']['username']) ? $dat['options']['username'] : '',
 				'password' => isset($dat['options']['password']) ? $dat['options']['password'] : '',
 				'defaulttheme' => isset($dat['options']['defaulttheme']) ? (int) $dat['options']['defaulttheme'] : '',
