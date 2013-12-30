@@ -25,7 +25,7 @@ class Webserver extends Section {
 				[
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
-					'docroot' => '/srv/www/web/app',
+					'docroot' => '/srv/www/web/protobox',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev'],
 					'override' => ['All']
@@ -41,7 +41,7 @@ class Webserver extends Section {
 				[
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
-					'docroot' => '/srv/www/web/app',
+					'docroot' => '/srv/www/web/protobox',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev']
 				]
