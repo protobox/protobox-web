@@ -139,7 +139,7 @@
                 <p>AND / OR</p>
 
                 <p>
-                    You can also add all your ssh keys and config files  (<code>.bash_aliases</code>, <code>.vimrc</code>, <code>.gitconfig</code>, etc), to the <code>./data/dot/</code> folder. During initial startup they will automatically be copied to the virtual machine.
+                    You can also add all your dotfiles (<code>.bash_aliases</code>, <code>.vimrc</code>, <code>.gitconfig</code>, etc), to the <code>./data/dot/</code> folder. During initial startup they will automatically be copied to the virtual machine.
                 </p>
             </div>
 
