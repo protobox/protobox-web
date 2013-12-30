@@ -43,7 +43,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="mysql-root_password">Root Password</label>
-                                <input type="text" id="mysql-root_password" name="mysql[root_password]" value="{{ Input::old('datastore.mysql.root_password', $section->param('mysql_root_password')) }}" class="form-control">
+                                <input type="text" id="mysql-root_password" name="mysql[root_password]" value="{{ Input::old('mysql.root_password', $section->param('mysql_root_password')) }}" class="form-control">
 
                                 <p class="help-block">
                                     Assign a password to the root user. <strong>Database will only be installed when a password is entered here.</strong>

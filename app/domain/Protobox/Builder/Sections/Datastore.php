@@ -44,16 +44,23 @@ class Datastore extends Section {
 		$mariadb = $this->builder->request()->get('mariadb');
 		$rules = [];
 
-		if (isset($mysql['install']) && (int) $mysql['install'] == 1 && isset($mysql['databases']))
+		if (isset($mysql['install']) && (int) $mysql['install'] == 1)
 		{
-			foreach($mysql['databases'] as $dbid => $db)
+			$rules += [
+				'mysql.root_password' => 'required'
+			];
+
+			if (isset($mysql['databases']))
 			{
-				$rules += [
-					'mysql.databases.'.$dbid.'.name' => 'required',
-					'mysql.databases.'.$dbid.'.host' => 'required',
-					'mysql.databases.'.$dbid.'.user' => 'required',
-					'mysql.databases.'.$dbid.'.password' => 'required'
-				];
+				foreach($mysql['databases'] as $dbid => $db)
+				{
+					$rules += [
+						'mysql.databases.'.$dbid.'.name' => 'required',
+						'mysql.databases.'.$dbid.'.host' => 'required',
+						'mysql.databases.'.$dbid.'.user' => 'required',
+						'mysql.databases.'.$dbid.'.password' => 'required'
+					];
+				}
 			}
 		}
 
@@ -108,6 +115,7 @@ class Datastore extends Section {
 	public function load($output)
 	{
 		$mysql_databases = [];
+
 		if (isset($output['mysql']['databases']))
 		{
 			foreach ($output['mysql']['databases'] as $db)
@@ -168,7 +176,7 @@ class Datastore extends Section {
 		return [
 			'mysql' => [
 				'install' => isset($mysql['install']) ? (int) $mysql['install'] : 0,
-				'root_password' => isset($mysql['mysql']['root_password']) ? $mysql['root_password'] : '',
+				'root_password' => isset($mysql['root_password']) ? $mysql['root_password'] : '',
 				'databases' => $mysql_databases,
 			],
 
