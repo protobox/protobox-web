@@ -10,7 +10,7 @@ class Devtools extends Section {
 			// Local Tunnel
 			//
 			
-			'ngrok_install' => 1,
+			'ngrok_install' => 0,
 
 		];
 	}
