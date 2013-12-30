@@ -23,17 +23,23 @@
                         </select>
 
                         <p class="help-block">
-                            Packages to install via the OS package manager. Do not add Apache, Nginx, or PHP here since you will configure them in later steps.
+                            Packages to install via the OS package manager. Do not install any web servers, databases, or languages here since you will configure them in later steps. <code>curl</code> and <code>git</code> are automatically installed.
                         </p>
                         <div class="row">
                             <div class="col-xs-6 col-sm-4 col-md-3">
-                                Common packages:
+                                Debian / Ubuntu:
                                 <ul>
                                     <li><a href="#" class="add-input" data-target="server-packages" data-value="vim">vim</a></li>
-                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="curl">curl</a></li>
-                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="git">git</a></li>
                                 </ul>
                             </div>
+                            {{-- 
+                            <div class="col-xs-6 col-sm-4 col-md-3">
+                                CentOS:
+                                <ul>
+                                    <li><a href="#" class="add-input" data-target="server-packages" data-value="vim-common">vim-common</a></li>
+                                </ul>
+                            </div>
+                            --}}
                         </div>
                     </div>
                 </div>

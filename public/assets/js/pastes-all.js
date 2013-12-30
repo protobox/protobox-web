@@ -1,4 +1,4 @@
-/*! protobox - v0.0.1 - 2013-12-27
+/*! protobox - v0.0.2 - 2013-12-30
 * http://github.com/protobox/protobox
 * Copyright (c) 2013 
 */

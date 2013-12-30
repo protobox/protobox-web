@@ -55,6 +55,30 @@
         });
     }
 
+    Protobox.prototype.addInput = function (e) {
+        var $this   = $(this),
+            target  = $this.data('target'),
+            val     = $this.data('value'),
+            title   = $this.data('title') != null ? $this.data('title') : $this.text(),
+            elm     = $('#' + target);
+
+        if(elm) {
+            e.preventDefault && e.preventDefault();
+            var sel = elm[0].selectize;
+
+            if (sel) {
+                sel.addOption({
+                    value: val,
+                    text: title
+                });
+
+                sel.addItem(val);
+            }
+        }
+
+        return false;
+    }
+
     Protobox.prototype.selectize = function ($element) {
         // input or select elements; allows user to create their own tags
         $('.tags, .select-tags-editable', $element).selectize({
@@ -372,12 +396,10 @@
     $(function () {
         $(document).on('click', '.update-input', Protobox.prototype.updateInput)
         $(document).on('change', 'select.update-input', Protobox.prototype.updateInput);
-
+        $(document).on('click', '.add-input', Protobox.prototype.addInput);
         $(document).on('click', '[data-template]', Protobox.prototype.template);
         $(document).on('click', '[data-template-remove]', Protobox.prototype.templateRemove);
-
         $(document).on('click', '[data-application]', Protobox.prototype.applicationTemplate);
-
         $(document).on('click', '[data-tab-switch]', Protobox.prototype.tabSwitch);
 
         //Eldarion ajax error handling
