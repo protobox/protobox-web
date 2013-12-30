@@ -52,31 +52,32 @@ class Webserver extends Section {
 
 	public function rules()
 	{
-		$webserver = $this->builder->request()->get('webserver');
+		$apache = $this->builder->request()->get('apache');
+		$nginx = $this->builder->request()->get('nginx');
 		$rules = [];
 
-		if (isset($webserver['apache']['vhosts']))
+		if (isset($nginx['vhosts']))
 		{
-			foreach((array)$webserver['apache']['vhosts'] as $id => $dat)
+			foreach((array)$nginx['vhosts'] as $id => $dat)
 			{
 				$rules += [
-					//'webserver.apache.vhosts.'.$id.'.name' => 'required',
-					'webserver.apache.vhosts.'.$id.'.servername' => 'required',
-					'webserver.apache.vhosts.'.$id.'.docroot' => 'required',
-					'webserver.apache.vhosts.'.$id.'.port' => 'required',
+					//'apache.vhosts.'.$id.'.name' => 'required',
+					'apache.vhosts.'.$id.'.servername' => 'required',
+					'apache.vhosts.'.$id.'.docroot' => 'required',
+					'apache.vhosts.'.$id.'.port' => 'required',
 				];
 			}
 		}
 
-		if (isset($webserver['nginx']['vhosts']))
+		if (isset($nginx['vhosts']))
 		{
-			foreach((array)$webserver['nginx']['vhosts'] as $id => $dat)
+			foreach((array)$nginx['vhosts'] as $id => $dat)
 			{
 				$rules += [
-					//'webserver.nginx.vhosts.'.$id.'.name' => 'required',
-					'webserver.nginx.vhosts.'.$id.'.servername' => 'required',
-					'webserver.nginx.vhosts.'.$id.'.docroot' => 'required',
-					'webserver.nginx.vhosts.'.$id.'.port' => 'required',
+					//'nginx.vhosts.'.$id.'.name' => 'required',
+					'nginx.vhosts.'.$id.'.servername' => 'required',
+					'nginx.vhosts.'.$id.'.docroot' => 'required',
+					'nginx.vhosts.'.$id.'.port' => 'required',
 				];
 			}
 		}
@@ -86,31 +87,32 @@ class Webserver extends Section {
 
 	public function fields()
 	{
-		$webserver = $this->builder->request()->get('webserver');
+		$apache = $this->builder->request()->get('apache');
+		$nginx = $this->builder->request()->get('nginx');
 		$fields = [];
-
-		if (isset($webserver['apache']['vhosts']))
+		
+		if (isset($apache['vhosts']))
 		{
-			foreach((array)$webserver['apache']['vhosts'] as $id => $dat)
+			foreach((array)$apache['vhosts'] as $id => $dat)
 			{
 				$fields += [
-					'webserver.apache.vhosts.'.$id.'.name' => 'Web Server: Apache Virtualhost #'.($id+1).' Name',
-					'webserver.apache.vhosts.'.$id.'.servername' => 'Web Server: Apache Virtualhost #'.($id+1).' Server Name',
-					'webserver.apache.vhosts.'.$id.'.docroot' => 'Web Server: Apache Virtualhost #'.($id+1).' Document Root',
-					'webserver.apache.vhosts.'.$id.'.port' => 'Web Server: Apache Virtualhost #'.($id+1).' Port',
+					'apache.vhosts.'.$id.'.name' => 'Web Server: Apache Virtualhost #'.($id+1).' Name',
+					'apache.vhosts.'.$id.'.servername' => 'Web Server: Apache Virtualhost #'.($id+1).' Server Name',
+					'apache.vhosts.'.$id.'.docroot' => 'Web Server: Apache Virtualhost #'.($id+1).' Document Root',
+					'apache.vhosts.'.$id.'.port' => 'Web Server: Apache Virtualhost #'.($id+1).' Port',
 				];
 			}
 		}
 
-		if (isset($webserver['nginx']['vhosts']))
+		if (isset($nginx['vhosts']))
 		{
-			foreach((array)$webserver['nginx']['vhosts'] as $id => $dat)
+			foreach((array)$nginx['vhosts'] as $id => $dat)
 			{
 				$fields += [
-					'webserver.nginx.vhosts.'.$id.'.name' => 'Web Server: Nginx Virtualhost #'.($id+1).' Name',
-					'webserver.nginx.vhosts.'.$id.'.servername' => 'Web Server: Nginx Virtualhost #'.($id+1).' Server Name',
-					'webserver.nginx.vhosts.'.$id.'.docroot' => 'Web Server: Nginx Virtualhost #'.($id+1).' Document Root',
-					'webserver.nginx.vhosts.'.$id.'.port' => 'Web Server: Nginx Virtualhost #'.($id+1).' Port',
+					'nginx.vhosts.'.$id.'.name' => 'Web Server: Nginx Virtualhost #'.($id+1).' Name',
+					'nginx.vhosts.'.$id.'.servername' => 'Web Server: Nginx Virtualhost #'.($id+1).' Server Name',
+					'nginx.vhosts.'.$id.'.docroot' => 'Web Server: Nginx Virtualhost #'.($id+1).' Document Root',
+					'nginx.vhosts.'.$id.'.port' => 'Web Server: Nginx Virtualhost #'.($id+1).' Port',
 				];
 			}
 		}
@@ -120,14 +122,15 @@ class Webserver extends Section {
 
 	public function valid()
 	{
-		$webserver = $this->builder->request()->get('webserver');
+		$apache = $this->builder->request()->get('apache');
+		$nginx = $this->builder->request()->get('nginx');
 
 		// Check to see if apache and nginx is installed
 		if (
-			isset($webserver['apache']['install']) && 
-			isset($webserver['nginx']['install']) && 
-			(int) $webserver['apache']['install'] == 1 && 
-			(int) $webserver['nginx']['install'] == 1
+			isset($apache['install']) && 
+			isset($nginx['install']) && 
+			(int) $apache['install'] == 1 && 
+			(int) $nginx['install'] == 1
 		)
 		{
 			$this->setError('Web Server: Please choose either apache or nginx for your web server, not both.');
@@ -141,12 +144,17 @@ class Webserver extends Section {
 	public function load($output)
 	{
 		$apache_vhosts = [];
+
 		if (isset($output['apache']['vhosts']))
 		{
-			foreach ($output['apache']['vhosts'] as $vhost)
+			foreach ($output['apache']['vhosts'] as $vhostid => $vhost)
 			{
+				$name = isset($vhost['name']) ? $vhost['name'] : '';
+
+				if ($name == 'protobox') continue;
+
 				$apache_vhosts[] = [
-					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'name' => $name,
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
 					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
@@ -158,12 +166,17 @@ class Webserver extends Section {
 		}
 
 		$nginx_vhosts = [];
+
 		if (isset($output['nginx']['vhosts']))
 		{
-			foreach ($output['nginx']['vhosts'] as $vhost)
+			foreach ($output['nginx']['vhosts'] as $vhostid => $vhost)
 			{
+				$name = isset($vhost['name']) ? $vhost['name'] : '';
+
+				if ($name == 'protobox') continue;
+
 				$nginx_vhosts[] = [
-					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'name' => $name,
 					'servername' => isset($vhost['server_name']) ? $vhost['server_name'] : '',
 					'serveraliases' => isset($vhost['server_aliases']) ? $vhost['server_aliases'] : [],
 					'docroot' => isset($vhost['www_root']) ? $vhost['www_root'] : '',
@@ -190,7 +203,8 @@ class Webserver extends Section {
 
 	public function output()
 	{
-		$webserver = $this->builder->request()->get('webserver');
+		$apache = $this->builder->request()->get('apache');
+		$nginx = $this->builder->request()->get('nginx');
 
 		$apache_vhosts = [
 			[
@@ -216,7 +230,7 @@ class Webserver extends Section {
 			]
 		];
 
-		foreach($webserver['apache']['vhosts'] as $vhost)
+		foreach($apache['vhosts'] as $vhostid => $vhost)
 		{
 			$apache_vhosts[] = [
 				'name' => 'app',
@@ -229,7 +243,7 @@ class Webserver extends Section {
 			];
 		}
 
-		foreach($webserver['nginx']['vhosts'] as $vhost)
+		foreach($nginx['vhosts'] as $vhostid => $vhost)
 		{
 			$nginx_vhosts[] = [
 				'name' => 'app',
@@ -244,8 +258,8 @@ class Webserver extends Section {
 
 		return [
 			'apache' => [
-				'install' => isset($webserver['apache']['install']) ? (int) $webserver['apache']['install'] : 0,
-				'modules' => isset($webserver['apache']['modules']) && count($webserver['apache']['modules']) ? $webserver['apache']['modules'] : '[]',
+				'install' => isset($apache['install']) ? (int) $apache['install'] : 0,
+				'modules' => isset($apache['modules']) && count($apache['modules']) ? $apache['modules'] : '[]',
 				'user' => 'vagrant',
 				'group' => 'www-data',
 				'default_vhost' => false,
@@ -253,7 +267,7 @@ class Webserver extends Section {
 				'vhosts' => $apache_vhosts
 			],
 			'nginx' => [
-				'install' => isset($webserver['nginx']['install']) ? (int) $webserver['nginx']['install'] : 0,
+				'install' => isset($nginx['install']) ? (int) $nginx['install'] : 0,
 				'mpm_module' => 'fpm',
 				'vhosts' => $nginx_vhosts
 			]

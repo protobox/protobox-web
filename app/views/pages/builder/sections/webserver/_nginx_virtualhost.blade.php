@@ -9,14 +9,14 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="webserver[nginx][vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
+                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-servername" name="nginx[vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
 
                         <p class="help-block">The URL you want to use to access this site on your computer. Don't forget to add this to your <code>hosts</code> file!</p>
                     </div>
 
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
-                        <select id="nginx-vhosts-{{ $vhostid }}-serveraliases" name="webserver[nginx][vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
+                        <select id="nginx-vhosts-{{ $vhostid }}-serveraliases" name="nginx[vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type != 'template' && isset($vhost['serveraliases']))
                             @foreach($vhost['serveraliases'] as $alias)
                             <option value="{{ $alias }}" selected="selected">{{ $alias }}</option>
@@ -31,14 +31,14 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-docroot">Document Root</label>
-                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-docroot" name="webserver[nginx][vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" class="form-control">
+                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-docroot" name="nginx[vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" class="form-control">
 
                         <p class="help-block">The location of your site's index file, or other landing page on the file system.</p>
                     </div>
 
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-port">Port</label>
-                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-port" name="webserver[nginx][vhosts][{{ $vhostid }}][port]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" class="form-control">
+                        <input type="text" id="nginx-vhosts-{{ $vhostid }}-port" name="nginx[vhosts][{{ $vhostid }}][port]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" class="form-control">
 
                         <p class="help-block">
                             80 for normal browsing, if you choose another append it to the URL, ex: http://{{ $vhost['servername'] }}:1337
@@ -49,7 +49,7 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="nginx-vhosts-{{ $vhostid }}-setenv">Environment Variables</label>
-                        <select id="nginx-vhosts-{{ $vhostid }}-setenv" name="webserver[nginx][vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
+                        <select id="nginx-vhosts-{{ $vhostid }}-setenv" name="nginx[vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type != 'template' && isset($vhost['setenv']))
                             @foreach($vhost['setenv'] as $env)
                             <option value="{{ $env }}" selected="selected">{{ $env }}</option>

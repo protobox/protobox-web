@@ -1,5 +1,3 @@
-<input type="hidden" name="webserver[_prevent_empty]" />
-
 <div class="page-header">
     <h1>{{ trans('builder/'.$name.'.name') }}</h1>
 </div>
@@ -15,6 +13,7 @@
 <div class="tab-content">
     <!-- apache -->
     <div class="tab-pane active" id="section-webserver-apache">
+        <input type="hidden" name="apache[_prevent_empty]" />
 
         <!-- apache settings -->
         <div class="row">
@@ -29,7 +28,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="apache-install">
-                                    <input type="checkbox" id="apache-install" name="webserver[apache][install]" {{ Input::old('apache.install', $section->param('apache_install')) ? 'checked="checked"' : '' }} value="1">
+                                    <input type="checkbox" id="apache-install" name="apache[install]" {{ Input::old('apache.install', $section->param('apache_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -44,7 +43,7 @@
                         <div class="row form-group">
                             <div class="col-xs-12">
                                 <label for="apache-modules">Apache Modules</label>
-                                <select id="apache-modules" name="webserver[apache][modules][]" multiple="multiple" class="form-control select-tags-editable">
+                                <select id="apache-modules" name="apache[modules][]" multiple="multiple" class="form-control select-tags-editable">
                                     @foreach(Input::old('apache.modules', $section->param('apache_modules_available', [])) as $name => $value)
                                     <option value="{{ $value }}" {{ in_array($value, Input::old('apache.modules', $section->param('apache_modules', []))) ? 'selected="selected"' : '' }}>{{ $value }}</option>
                                     @endforeach
@@ -59,7 +58,7 @@
         </div>
         <!-- end apache settings -->
 
-        @foreach(Input::old('webserver.apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
+        @foreach(Input::old('apache.vhosts', $section->param('apache_virtualhosts', [])) as $vhostid => $vhost)
         <!-- apache / vhost -->
         @include('pages.builder.sections.webserver._apache_virtualhost', ['type' => 'data'])
         <!-- end apache / vhost -->
@@ -81,6 +80,7 @@
 
     <!-- nginx -->
     <div class="tab-pane" id="section-webserver-nginx">
+    <input type="hidden" name="nginx[_prevent_empty]" />
 
         <!-- nginx settings -->
         <div class="row">
@@ -95,7 +95,7 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label for="nginx-install">
-                                    <input type="checkbox" id="nginx-install" name="webserver[nginx][install]" {{ Input::old('nginx.install', $section->param('nginx_install')) ? 'checked="checked"' : '' }} value="1">
+                                    <input type="checkbox" id="nginx-install" name="nginx[install]" {{ Input::old('nginx.install', $section->param('nginx_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
                                 </label>
 
@@ -112,7 +112,7 @@
         </div>
         <!-- end nginx settings -->
 
-        @foreach(Input::old('webserver.nginx.vhosts', $section->param('nginx_virtualhosts', [])) as $vhostid => $vhost)
+        @foreach(Input::old('nginx.vhosts', $section->param('nginx_virtualhosts', [])) as $vhostid => $vhost)
         <!-- nginx / vhost -->
         @include('pages.builder.sections.webserver._nginx_virtualhost', ['type' => 'data'])
         <!-- end nginx / vhost -->
