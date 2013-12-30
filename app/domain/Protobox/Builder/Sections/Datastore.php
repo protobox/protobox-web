@@ -109,6 +109,26 @@ class Datastore extends Section {
 			return false;
 		}
 
+		// Check for unique database names
+		if (isset($mysql['databases']))
+		{
+			$mysql_unique_names = [];
+
+			foreach($mysql['databases'] as $dbid => $db)
+			{
+				$name = isset($db['name']) ? $db['name'] : 'noname';
+
+				if (isset($mysql_unique_names[$name]))
+				{
+					$this->setError('Data Store: Make sure the MySQL database names are unique for each one.');
+
+					return false;
+				}
+
+				$mysql_unique_names[$name] = true;
+			}
+		}
+
 		return true;
 	}
 
@@ -118,7 +138,7 @@ class Datastore extends Section {
 
 		if (isset($output['mysql']['databases']))
 		{
-			foreach ($output['mysql']['databases'] as $db)
+			foreach ($output['mysql']['databases'] as $dbid => $db)
 			{
 				$mysql_databases[] = [
 					'name' => isset($db['name']) ? $db['name'] : '',
@@ -161,7 +181,7 @@ class Datastore extends Section {
 			]
 		];
 
-		foreach($mysql['databases'] as $db)
+		foreach($mysql['databases'] as $dbid => $db)
 		{
 			$mysql_databases[] = [
 				'name' => isset($db['name']) ? $db['name'] : '',
