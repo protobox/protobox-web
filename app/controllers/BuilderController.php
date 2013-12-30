@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\MessageBag;
 use Protobox\Builder\BoxRepositoryInterface;
 
 class BuilderController extends BaseController {
