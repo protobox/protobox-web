@@ -170,16 +170,7 @@ class Datastore extends Section {
 		$mysql = $this->builder->request()->get('mysql');
 		$mariadb = $this->builder->request()->get('mariadb');
 
-		$mysql_databases = [
-			[
-				'name' => 'app',
-				'host' => 'localhost',
-				'user' => 'user',
-				'password' => 'user',
-				'grant' => ['All'],
-				'sql_file' => ''
-			]
-		];
+		$mysql_databases = [];
 
 		foreach($mysql['databases'] as $dbid => $db)
 		{
