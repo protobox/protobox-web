@@ -394,7 +394,7 @@
     };
 
     $(function () {
-        $(document).on('click', '.update-input', Protobox.prototype.updateInput)
+        $(document).on('click', '.update-input', Protobox.prototype.updateInput);
         $(document).on('change', 'select.update-input', Protobox.prototype.updateInput);
         $(document).on('click', '.add-input', Protobox.prototype.addInput);
         $(document).on('click', '[data-template]', Protobox.prototype.template);
