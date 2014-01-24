@@ -53,6 +53,23 @@
                     </div>
                 </div>
 
+                <!-- license -->
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="application-lemonstand-{{ $appid }}-holder">License Holder</label>
+                        <input type="text" id="application-lemonstand-{{ $appid }}-holder" name="applications[lemonstand][{{ $appid }}][holder]" placeholder="{{ $type == 'template' ? $section->param('lemonstand_holder') : $app['holder'] }}" value="{{ $type == 'template' ? $section->param('lemonstand_holder') : $app['holder'] }}" class="form-control">
+                    
+                        <p class="help-block">The License Holder from your <a href="http://v1.lemonstand.com/myaccount/" target="_blank">Lemonstand > My Account</a> area.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="application-lemonstand-{{ $appid }}-serial">Serial Number</label>
+                        <input type="text" id="application-lemonstand-{{ $appid }}-serial" name="applications[lemonstand][{{ $appid }}][serial]" placeholder="{{ $type == 'template' ? $section->param('lemonstand_serial') : $app['serial'] }}" value="{{ $type == 'template' ? $section->param('lemonstand_serial') : $app['serial'] }}" class="form-control">
+                    
+                        <p class="help-block">The Serial Number from your <a href="http://v1.lemonstand.com/myaccount/" target="_blank">Lemonstand > My Account</a> area.</p>
+                    </div>
+                </div>
+                <!-- end license -->
+
                 <!-- admin -->
                 <div class="row form-group">
                     <div class="col-md-6">
