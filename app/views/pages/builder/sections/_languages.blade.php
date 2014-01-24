@@ -386,7 +386,7 @@
                                 </label>
 
                                 <p class="help-block">
-                                You can toggle this setting to turn on/off the <a href="http://www.hhvm.com/blog/3203/nightly-packages" target="_blank">HHVM Nighty Package</a> installation.
+                                You can toggle this setting to turn on/off the <a href="http://www.hhvm.com/blog/3203/nightly-packages" target="_blank">HHVM Nightly Package</a> installation.
                                 </p>
                             </div>
                         </div>
