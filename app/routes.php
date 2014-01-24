@@ -10,9 +10,6 @@ Route::get('share/{id}/raw', ['as' => 'builder.raw', 'uses' => 'BuilderControlle
 Route::get('share/{id}/download', ['as' => 'builder.download', 'uses' => 'BuilderController@download']);
 Route::get('share/{id}/delete', ['as' => 'builder.delete', 'uses' => 'BuilderController@delete']);
 
-// About
-Route::get('about', ['as' => 'about', 'uses' => 'HomeController@about']);
-
 // Auth
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 Route::get('signup', ['as' => 'signup', 'uses' => 'AuthController@signup']);
@@ -32,13 +29,13 @@ Route::get('box/{id}/raw', ['as' => 'explore.raw', 'uses' => 'ExploreController@
 Route::get('box/{id}/download', ['as' => 'explore.download', 'uses' => 'ExploreController@download']);
 
 // Paste Bin
-Route::get('bin', ['as' => 'bin', 'uses' => 'PastesController@create']);
-Route::post('bin', ['as' => 'bin.store', 'uses' => 'PastesController@store']);
-Route::get('bin/{id}', ['as' => 'bin.show', 'uses' => 'PastesController@show']);
-Route::get('bin/{id}/fork', ['as' => 'bin.fork', 'uses' => 'PastesController@edit']);
-Route::post('bin/{id}/fork', ['as' => 'bin.update', 'uses' => 'PastesController@update']);
+//Route::get('bin', ['as' => 'bin', 'uses' => 'PastesController@create']);
+//Route::post('bin', ['as' => 'bin.store', 'uses' => 'PastesController@store']);
+//Route::get('bin/{id}', ['as' => 'bin.show', 'uses' => 'PastesController@show']);
+//Route::get('bin/{id}/fork', ['as' => 'bin.fork', 'uses' => 'PastesController@edit']);
+//Route::post('bin/{id}/fork', ['as' => 'bin.update', 'uses' => 'PastesController@update']);
 //Route::delete('bin/{id}', ['as' => 'bin.delete', 'uses' => 'PastesController@delete']);
-Route::get('bin/{id}/raw', ['as' => 'bin.raw', 'uses' => 'PastesController@raw']);
+//Route::get('bin/{id}/raw', ['as' => 'bin.raw', 'uses' => 'PastesController@raw']);
 
 // Docs
 Route::get('docs/{path?}', ['as' => 'docs', 'uses' => 'DocsController@index'])->where('path', '.+');
