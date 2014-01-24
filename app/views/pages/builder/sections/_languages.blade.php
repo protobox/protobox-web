@@ -369,7 +369,7 @@
                     <div class="panel-body">
                         <!-- hhvm install -->
                         <div class="row form-group">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <label for="hhvm-install">
                                     <input type="checkbox" id="hhvm-install" name="hhvm[install]" {{ Input::old('hhvm.install', $section->param('hhvm_install')) ? 'checked="checked"' : '' }} value="1">
                                     Install
@@ -377,6 +377,16 @@
 
                                 <p class="help-block">
                                 You can toggle this setting to turn on/off the HHVM installation.
+                                </p>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="hhvm-nightly">
+                                    <input type="checkbox" id="hhvm-nightly" name="hhvm[nightly]" {{ Input::old('hhvm.nightly', $section->param('hhvm_nightly')) ? 'checked="checked"' : '' }} value="1">
+                                    Install
+                                </label>
+
+                                <p class="help-block">
+                                You can toggle this setting to turn on/off the <a href="http://www.hhvm.com/blog/3203/nightly-packages" target="_blank">HHVM Nighty Package</a> installation.
                                 </p>
                             </div>
                         </div>

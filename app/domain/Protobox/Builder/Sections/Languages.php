@@ -112,7 +112,8 @@ class Languages extends Section {
 			// HHVM
 			//
 
-			'hhvm_install' => 0
+			'hhvm_install' => 0,
+			'hhvm_nightly' => 0
 
 		];
 	}
@@ -207,7 +208,8 @@ class Languages extends Section {
 			],
 
 			'hhvm' => [
-				'install' => isset($output['hhvm']['install']) ? $output['hhvm']['install'] : 0,
+				'install' => isset($output['hhvm']['install']) ? (int) $output['hhvm']['install'] : 0,
+				'nightly' => isset($output['hhvm']['nightly']) ? (int) $output['hhvm']['nightly'] : 0,
 			]
 		];
 	}
@@ -253,7 +255,8 @@ class Languages extends Section {
 			],
 
 			'hhvm' => [
-				'install' => isset($hhvm['install']) ? (int) $hhvm['install'] : 0
+				'install' => isset($hhvm['install']) ? (int) $hhvm['install'] : 0,
+				'nightly' => isset($hhvm['nightly']) ? (int) $hhvm['nightly'] : 0
 			]
 		];
 	}
