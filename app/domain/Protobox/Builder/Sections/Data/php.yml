@@ -1179,43 +1179,53 @@ ini:
 
 xdebug_settings:
     - auto_trace
+    - cli_color
+    - collect_assignments
     - collect_includes
     - collect_params
     - collect_return
     - collect_vars
+    - coverage_enable
     - default_enable
-    - dump.COOKIE
-    - dump.ENV
-    - dump.FILES
-    - dump.GET
-    - dump.POST
-    - dump.REQUEST
-    - dump.SERVER
-    - dump.SESSION
+    - dump_COOKIE
+    - dump_ENV
+    - dump_FILES
+    - dump_GET
+    - dump_POST
+    - dump_REQUEST
+    - dump_SERVER
+    - dump_SESSION
     - dump_globals
     - dump_once
     - dump_undefined
     - extended_info
+    - file_link_format
+    - force_display_errors
+    - force_error_reporting
+    - halt_level
     - idekey
     - manual_url
     - max_nesting_level
-    - profiler_aggregate
+    - overload_var_dump
     - profiler_append
     - profiler_enable
     - profiler_enable_trigger
     - profiler_output_dir
     - profiler_output_name
     - remote_autostart
-    - remote_enable
     - remote_connect_back
+    - remote_cookie_expire_time
+    - remote_enable
     - remote_handler
     - remote_host
     - remote_log
     - remote_mode
     - remote_port
+    - scream
     - show_exception_trace
     - show_local_vars
     - show_mem_delta
+    - trace_enable_trigger
     - trace_format
     - trace_options
     - trace_output_dir
