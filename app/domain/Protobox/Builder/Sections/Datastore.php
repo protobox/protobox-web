@@ -33,6 +33,24 @@ class Datastore extends Section {
 					'grant' => ['All'],
 					'sql_file' => ''
 				]
+			],
+
+			//
+			// Mariadb
+			//
+			
+			'mariadb_install' => 1,
+			'mariadb_versions' => ['5.5', '10.0'],
+			'mariadb_root_password' => 'root',
+			'mariadb_databases' => [
+				[
+					'name' => 'app',
+					'host' => 'localhost',
+					'user' => 'user',
+					'password' => 'user',
+					'grant' => ['All'],
+					'sql_file' => ''
+				]
 			]
 
 		];
@@ -40,9 +58,11 @@ class Datastore extends Section {
 
 	public function rules()
 	{
+		$rules = [];
 		$mysql = $this->builder->request()->get('mysql');
 		$mariadb = $this->builder->request()->get('mariadb');
-		$rules = [];
+
+		// Mysql
 
 		if (isset($mysql['install']) && (int) $mysql['install'] == 1)
 		{
@@ -64,13 +84,40 @@ class Datastore extends Section {
 			}
 		}
 
+		// Mariadb
+
+		if (isset($mariadb['install']) && (int) $mariadb['install'] == 1)
+		{
+			$rules += [
+				'mariadb.root_password' => 'required'
+			];
+
+			if (isset($mariadb['databases']))
+			{
+				foreach($mariadb['databases'] as $dbid => $db)
+				{
+					$rules += [
+						'mariadb.databases.'.$dbid.'.name' => 'required',
+						'mariadb.databases.'.$dbid.'.host' => 'required',
+						'mariadb.databases.'.$dbid.'.user' => 'required',
+						'mariadb.databases.'.$dbid.'.password' => 'required'
+					];
+				}
+			}
+		}
+
 		return $rules;
 	}
 
 	public function fields()
 	{
+		$fields = [];
 		$mysql = $this->builder->request()->get('mysql');
-		$fields = [
+		$mariadb = $this->builder->request()->get('mariadb');
+
+		// Mysql
+
+		$fields += [
 			'mysql.install' => 'Data Store: MySQL Installation',
 			'mysql.root_password' => 'Data Store: MySQL Root Password',
 		];
@@ -84,6 +131,26 @@ class Datastore extends Section {
 					'mysql.databases.'.$dbid.'.host' => 'Data Store: MySQL Database #'.($dbid+1).' Host',
 					'mysql.databases.'.$dbid.'.user' => 'Data Store: MySQL Database #'.($dbid+1).' User',
 					'mysql.databases.'.$dbid.'.password' => 'Data Store: MySQL Database #'.($dbid+1).' Password'
+				];
+			}
+		}
+
+		// Mariadb
+
+		$fields += [
+			'mariadb.install' => 'Data Store: MariaDB Installation',
+			'mariadb.root_password' => 'Data Store: MariaDB Root Password',
+		];
+
+		if (isset($mariadb['databases']))
+		{
+			foreach($mariadb['databases'] as $dbid => $db)
+			{
+				$fields += [
+					'mariadb.databases.'.$dbid.'.name' => 'Data Store: MariaDB Database #'.($dbid+1).' Name',
+					'mariadb.databases.'.$dbid.'.host' => 'Data Store: MariaDB Database #'.($dbid+1).' Host',
+					'mariadb.databases.'.$dbid.'.user' => 'Data Store: MariaDB Database #'.($dbid+1).' User',
+					'mariadb.databases.'.$dbid.'.password' => 'Data Store: MariaDB Database #'.($dbid+1).' Password'
 				];
 			}
 		}
@@ -129,6 +196,26 @@ class Datastore extends Section {
 			}
 		}
 
+		// Check for unique database names
+		if (isset($mariadb['databases']))
+		{
+			$mariadb_unique_names = [];
+
+			foreach($mariadb['databases'] as $dbid => $db)
+			{
+				$name = isset($db['name']) ? $db['name'] : 'noname';
+
+				if (isset($mariadb_unique_names[$name]))
+				{
+					$this->setError('Data Store: Make sure the MariaDB database names are unique for each one.');
+
+					return false;
+				}
+
+				$mariadb_unique_names[$name] = true;
+			}
+		}
+
 		return true;
 	}
 
@@ -151,6 +238,23 @@ class Datastore extends Section {
 			}
 		}
 
+		$mariadb_databases = [];
+
+		if (isset($output['mariadb']['databases']))
+		{
+			foreach ($output['mariadb']['databases'] as $dbid => $db)
+			{
+				$mariadb_databases[] = [
+					'name' => isset($db['name']) ? $db['name'] : '',
+					'host' => isset($db['host']) ? $db['host'] : '',
+					'user' => isset($db['user']) ? $db['user'] : '',
+					'password' => isset($db['password']) ? $db['password'] : '',
+					'grant' => isset($db['grant']) ? $db['grant'] : [],
+					'sql_file' => isset($vhost['sql_file']) ? $vhost['sql_file'] : '',
+				];
+			}
+		}
+
 		return [
 			'mysql' => [
 				'install' => isset($output['mysql']['install']) ? (int) $output['mysql']['install'] : 0,
@@ -160,7 +264,8 @@ class Datastore extends Section {
 
 			'mariadb' => [
 				'install' => isset($output['mariadb']['install']) ? (int) $output['mariadb']['install'] : 0,
-				'repository' => isset($output['mariadb']['repository']) ? $output['mariadb']['repository'] : '',
+				'version' => isset($output['mariadb']['version']) ? $output['mariadb']['version'] : '',
+				'databases' => $mariadb_databases,
 			]
 		];
 	}
@@ -184,6 +289,20 @@ class Datastore extends Section {
 			];
 		}
 
+		$mariadb_databases = [];
+
+		foreach($mariadb['databases'] as $dbid => $db)
+		{
+			$mariadb_databases[] = [
+				'name' => isset($db['name']) ? $db['name'] : '',
+				'host' => isset($db['host']) ? $db['host'] : '',
+				'user' => isset($db['user']) ? $db['user'] : '',
+				'password' => isset($db['password']) ? $db['password'] : '',
+				'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
+				'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
+			];
+		}
+
 		return [
 			'mysql' => [
 				'install' => isset($mysql['install']) ? (int) $mysql['install'] : 0,
@@ -193,6 +312,9 @@ class Datastore extends Section {
 
 			'mariadb' => [
 				'install' => isset($mariadb['install']) ? (int) $mariadb['install'] : 0,
+				'version' => isset($mariadb['version']) ? $mariadb['version'] : '',
+				'root_password' => isset($mariadb['root_password']) ? $mariadb['root_password'] : '',
+				'databases' => $mariadb_databases,
 			]
 		];
 	}
