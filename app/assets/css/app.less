@@ -69,6 +69,35 @@ body {
   font-family: @font-family-base;
 }
 
+/* Outline button for use within the docs */
+.btn-outline {
+  color: @brand-primary;
+  background-color: transparent;
+  border-color: @brand-primary;
+}
+.btn-outline:hover,
+.btn-outline:focus,
+.btn-outline:active {
+  color: #fff;
+  background-color: @brand-primary;
+  border-color: @brand-primary;
+}
+
+/* Inverted outline button (white on dark) */
+.btn-outline-inverse {
+  color: #fff;
+  background-color: transparent;
+  border-color: #cdbfe3;
+}
+.btn-outline-inverse:hover,
+.btn-outline-inverse:focus,
+.btn-outline-inverse:active {
+  color: @brand-primary;
+  text-shadow: none;
+  background-color: #fff;
+  border-color: #fff;
+}
+
 //
 // Dropzone
 // --------------------------------------------------

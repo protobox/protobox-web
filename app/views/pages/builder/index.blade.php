@@ -7,9 +7,6 @@
 
 <div class="container">
     <div class="row content-container">
-        <div class="col-md-3">
-            @include('pages.builder._menu')
-        </div>
         <div class="col-md-9" role="main">
             {{ Form::open(['method' => 'post']) }}
 
@@ -39,24 +36,30 @@
 
             <div class="build-section">
                 <div class="tab-content">
-                   @foreach($builder->sections() as $section)
-                   <li class="tab-pane {{ $section == 'vagrant' ? 'active' : '' }}" id="section-{{ $section }}">
+                    <li class="tab-pane active" id="section-getting_started">
+                        @include('pages.builder.sections._getting_started')
+                    </li>
+                    @foreach($builder->sections() as $section)
+                    <li class="tab-pane" id="section-{{ $section }}">
                         @include('pages.builder.sections._'.$section, ['section' => $builder->section($section), 'name' => $section])
-                   </li>
-                   @endforeach
+                    </li>
+                    @endforeach
                 </div>
             </div>
             <div id="create" class="build-generate">
                 <div class="row">
                     <div class="col-xs-12">
                         <button type="submit" class="btn btn-primary btn-block btn-gigantic">
-                            Create Manifest
+                            Create Configuration File
                         </button>
                     </div>
                 </div>
             </div>
             {{ Form::token() }}
             {{ Form::close() }}
+        </div>
+        <div class="col-md-3">
+            @include('pages.builder._menu')
         </div>
     </div>
     <!-- container footer -->

@@ -17,6 +17,7 @@ class BoxBuilder {
 	protected $validation;
 
 	protected $sections = [
+		'applications',
 		'vagrant',
 		'server',
 		'webserver',
@@ -24,8 +25,7 @@ class BoxBuilder {
 		'datastore',
 		'queues',
 		'monitoring',
-		'devtools',
-		'applications'
+		'devtools'
 	];
 
 	protected $store = [];

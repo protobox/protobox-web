@@ -9,8 +9,11 @@
 
      <div class="block-sidegroup">
           <ul class="nav block-sidenav">
+               <li class="active">
+                    <a href="#section-getting_started" id="sel-getting_started" data-toggle="tab">{{ trans('builder/getting_started.name') }}</a>
+               </li>
                @foreach($builder->sections() as $section)
-               <li class="{{ $section == 'vagrant' ? 'active' : '' }}">
+               <li>
                     <a href="#section-{{ $section }}" id="sel-{{ $section }}" data-toggle="tab">{{ trans('builder/'.$section.'.name') }}</a>
                </li>
                @endforeach

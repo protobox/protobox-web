@@ -1,6 +1,6 @@
-/*! protobox - v0.0.2 - 2013-12-30
+/*! protobox - v0.0.3 - 2014-01-30
 * http://github.com/protobox/protobox
-* Copyright (c) 2013 
+* Copyright (c) 2014 
 */
 +function ($) { "use strict";
 
@@ -1953,7 +1953,7 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
     };
 
     $(function () {
-        $(document).on('click', '.update-input', Protobox.prototype.updateInput)
+        $(document).on('click', '.update-input', Protobox.prototype.updateInput);
         $(document).on('change', 'select.update-input', Protobox.prototype.updateInput);
         $(document).on('click', '.add-input', Protobox.prototype.addInput);
         $(document).on('click', '[data-template]', Protobox.prototype.template);

@@ -7,7 +7,7 @@
     <meta name="description" content="{{ trans('global.desc') }}" />
     <meta name="author" content="Patrick Heeney - https://github.com/patrickheeney" />
     @section('css')
-    <link rel="stylesheet" href="{{ asset('assets/css/pastes.v0.0.2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/pastes.v0.0.3.css') }}">
     @show
 </head>
 <body onload="prettyPrint()">
@@ -23,7 +23,7 @@
 
 @section('scripts')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="{{ asset('assets/js/pastes.v0.0.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/pastes.v0.0.3.min.js') }}"></script>
 <script type="text/javascript">
 $(function() {
     $('textarea').focus().tabby();

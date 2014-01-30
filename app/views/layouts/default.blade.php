@@ -8,7 +8,7 @@
     <meta name="author" content="Patrick Heeney - https://github.com/patrickheeney" />
     @section('css')
     <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ asset('assets/css/styles.v0.0.2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.v0.0.3.min.css') }}">
     @show
 </head>
 <body>
@@ -21,7 +21,7 @@
 
 @section('scripts')
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="{{ asset('assets/js/scripts.v0.0.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.v0.0.3.min.js') }}"></script>
 <script>
 var PROTOBOX_CONFIG = {
     UPLOAD: '{{ URL::route('builder.upload') }}',
