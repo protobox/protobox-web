@@ -39,7 +39,7 @@ class Datastore extends Section {
 			// Mariadb
 			//
 			
-			'mariadb_install' => 1,
+			'mariadb_install' => 0,
 			'mariadb_versions' => ['5.5', '10.0'],
 			'mariadb_root_password' => 'root',
 			'mariadb_databases' => [
