@@ -4,6 +4,12 @@
     <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
 </div>
 
+<div class="row">
+	<div class="col-md-12">
+		<p>This section you can use to install popular web applications such as wordpress, drupal, symfony, laravel, etc. It is completely optional, so feel free to proceed to the next section.</p>
+	</div>
+</div>
+
 <div id="application-group">
 @foreach(Input::old('applications', $section->param('applications', [])) as $app_type => $app_group)
 @if($app_type != '_prevent_empty')
