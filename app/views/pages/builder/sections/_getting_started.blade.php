@@ -1,8 +1,27 @@
 <h1 id="getting_started" class="page-header">Getting Started</h1>
 <p class="lead">Protobox is a layer on top of vagrant and a web GUI to setup virtual machines for web development. A single YAML document controls everything that is installed on the virtual machine. <a href="http://getprotobox.com/docs/about">Read More</a>.</p>
 
-<h3 id="download-cdn">New Here?</h3>
-<p>The fastest way to get started is to browse our existing pre-configured boxes in our <a href="{{ Url::route('explore') }}">explore section</a>. If you are looking to install a popular application on your virtual machine, check out our <a href="#" data-tab-switch="sel-applications">applications</a> section. The <a href="#" data-tab-switch="sel-applications">applications</a> section will pre-fill the rest of the sections so you are ready generate the configuration file. Advanced users can click through the other sections to fully configure your virtual machine. You can also drop and drop your old YAML configuration files on this page to load in your existing configurations.
+<hr />
+
+<div class="row">
+    <div class="col-sm-4">
+        <h3>Explore</h3>
+        {{-- <i class="picon picon-explore"></i> --}}
+        <p>The fastest way to get started is to browse our existing pre-configured boxes in our <a href="{{ Url::route('explore') }}">explore section</a>. Once you select one, you are ready to get started.</p>
+    </div>
+    <div class="col-sm-4">
+        <h3>Applications</h3>
+        {{-- <i class="picon picon-application"></i> --}}
+        <p>If you are looking to install popular web applications on your virtual machine, check out our <a href="#" data-tab-switch="sel-applications">applications</a> section.</p>
+    </div>
+    <div class="col-sm-4">
+        <h3>Continue</h3>
+        {{-- <i class="picon picon-continue"></i> --}}
+        <p>You can edit your YAML configuration files locally or drag them on this page to load your existing configurations to  continue right where you left off.</p>
+    </div>
+</div>
+
+<hr />
 
 <div class="row">
     <div class="col-sm-4">
