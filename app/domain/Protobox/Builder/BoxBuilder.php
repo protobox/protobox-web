@@ -79,6 +79,15 @@ class BoxBuilder {
 		return isset($this->store[$section]) ? $this->store[$section] : null;
 	}
 
+	public function next_section($section)
+	{
+		$check = strtolower($section);
+		$values = array_flip($this->sections);
+		$new_id = isset($values[$check]) ? $values[$check] + 1 : null;
+
+		return $new_id && isset($this->sections[$new_id]) ? $this->sections[$new_id] : null;
+	}
+
 	public function valid()
 	{
 		// Custom validation
@@ -134,7 +143,7 @@ class BoxBuilder {
 			'protobox' => [
 				'document' => isset($options['document']) ? $options['document'] : '',
 				'name' => 'custom',
-				'description' => 'A custom box built from getprotobox.com'
+				'description' => 'A custom box built from '.(isset($options['box_id']) ? 'getprotobox.com/share/'.$options['box_id'] : 'getprotobox.com')
 			]
 		];
 

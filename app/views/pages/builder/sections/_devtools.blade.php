@@ -1,7 +1,7 @@
 <input type="hidden" name="ngrok[_prevent_empty]" />
 
 <div class="page-header">
-    <h1>{{ trans('builder/'.$name.'.name') }}</h1>
+    <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
 </div>
 
 <!-- extras settings -->
@@ -33,3 +33,7 @@
     </div>
 </div>
 <!-- end extras settings -->
+
+@include('pages.builder._continue')
+
+@include('pages.builder._create')

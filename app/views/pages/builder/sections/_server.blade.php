@@ -1,7 +1,7 @@
 <input type="hidden" name="server[_prevent_empty]" />
 
 <div class="page-header">
-    <h1>{{ trans('builder/'.$name.'.name') }}</h1>
+    <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
 </div>
 
 <!-- server packages -->
@@ -147,3 +147,7 @@
     </div>
 </div>
 <!-- end dotfiles -->
+
+@include('pages.builder._continue')
+
+@include('pages.builder._create')

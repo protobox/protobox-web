@@ -1,7 +1,7 @@
 <input type="hidden" name="queues[_prevent_empty]" />
 
 <div class="page-header">
-    <h1>{{ trans('builder/'.$name.'.name') }}</h1>
+    <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
 </div>
 
 @if (count($section->queues()))
@@ -65,3 +65,7 @@
 		<!-- amazonsqs settings -->
 	</div>
 </div>
+
+@include('pages.builder._continue')
+
+@include('pages.builder._create')

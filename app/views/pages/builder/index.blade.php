@@ -41,18 +41,9 @@
                     </li>
                     @foreach($builder->sections() as $section)
                     <li class="tab-pane" id="section-{{ $section }}">
-                        @include('pages.builder.sections._'.$section, ['section' => $builder->section($section), 'name' => $section])
+                        @include('pages.builder.sections._'.$section, ['section' => $builder->section($section), 'section_name' => $section])
                     </li>
                     @endforeach
-                </div>
-            </div>
-            <div id="create" class="build-generate">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <button type="submit" class="btn btn-primary btn-block btn-gigantic">
-                            Create Configuration File
-                        </button>
-                    </div>
                 </div>
             </div>
             {{ Form::token() }}

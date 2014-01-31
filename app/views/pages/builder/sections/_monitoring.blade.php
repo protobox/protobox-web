@@ -1,7 +1,7 @@
 <input type="hidden" name="newrelic[_prevent_empty]" />
 
 <div class="page-header">
-    <h1>{{ trans('builder/'.$name.'.name') }}</h1>
+    <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
 </div>
 
 {{-- @if (count($section->platforms()))
@@ -83,3 +83,7 @@
 
 {{--    </div>
 </div> --}}
+
+@include('pages.builder._continue')
+
+@include('pages.builder._create')

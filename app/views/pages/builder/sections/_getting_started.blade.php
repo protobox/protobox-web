@@ -2,7 +2,7 @@
 <p class="lead">Protobox is a layer on top of vagrant and a web GUI to setup virtual machines for web development. A single YAML document controls everything that is installed on the virtual machine. <a href="http://getprotobox.com/docs/about">Read More</a>.</p>
 
 <h3 id="download-cdn">New Here?</h3>
-<p>The fastest way to get started is to browse our existing pre-configured boxes in our <a href="{{ Url::route('explore') }}">explore section</a>. If you are looking to install a popular application on your virtual machine, check out our <a href="#" data-tab-switch="sel-applications">application</a> section. The <a href="#" data-tab-switch="sel-applications">application</a> section will pre-fill the rest of the sections so you are ready generate the configuration file. Advanced users can click through the other sections to fully configure your virtual machine. You can also drop and drop your old YAML configuration files on this page to load in your existing configurations.
+<p>The fastest way to get started is to browse our existing pre-configured boxes in our <a href="{{ Url::route('explore') }}">explore section</a>. If you are looking to install a popular application on your virtual machine, check out our <a href="#" data-tab-switch="sel-applications">applications</a> section. The <a href="#" data-tab-switch="sel-applications">applications</a> section will pre-fill the rest of the sections so you are ready generate the configuration file. Advanced users can click through the other sections to fully configure your virtual machine. You can also drop and drop your old YAML configuration files on this page to load in your existing configurations.
 
 <div class="row">
     <div class="col-sm-4">
@@ -23,3 +23,13 @@
 </div>
 
 <p>&nbsp;</p>
+
+<div class="build-generate">
+    <div class="row">
+        <div class="col-xs-12">
+            <a id="btn-started" class="btn btn-primary btn-block btn-gigantic" href="#" data-tab-switch="sel-applications">
+                Let's Get Started!
+            </a>
+        </div>
+    </div>
+</div>

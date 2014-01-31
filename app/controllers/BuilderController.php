@@ -36,9 +36,13 @@ class BuilderController extends BaseController {
         }
 
         $newbox = $this->box->create();
+        $box_id = strtolower($newbox->publicID());
 
         $newbox->update([
-            'code' => $builder->output(['document' => 'build_'.strtolower($newbox->publicID())]),
+            'code' => $builder->output([
+                'document' => 'build_'.$box_id, 
+                'box_id' => $box_id
+            ]),
         ]);
 
         $newbox->save();
@@ -67,7 +71,7 @@ class BuilderController extends BaseController {
         $box->save();
 
         return View::make('pages.builder.show', [
-            'paste' => $box->code,
+            'code' => $box->code,
             'id' => $hashed
         ]);
     }
