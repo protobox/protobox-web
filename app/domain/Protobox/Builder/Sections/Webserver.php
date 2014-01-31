@@ -56,9 +56,9 @@ class Webserver extends Section {
 		$nginx = $this->builder->request()->get('nginx');
 		$rules = [];
 
-		if (isset($nginx['vhosts']))
+		if (isset($apache['vhosts']))
 		{
-			foreach((array)$nginx['vhosts'] as $id => $dat)
+			foreach((array)$apache['vhosts'] as $id => $dat)
 			{
 				$rules += [
 					//'apache.vhosts.'.$id.'.name' => 'required',
