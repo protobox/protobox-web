@@ -35,8 +35,11 @@ class BuilderController extends BaseController {
             return Redirect::route('builder')->withInput()->withErrors($builder->errors());
         }
 
-        $newbox = $this->box->create();
-        $box_id = strtolower($newbox->publicID());
+        $newbox = $this->box->create([
+            'author_id' => Auth::user() ? Auth::user()->id : null
+        ]);
+
+        $box_id = $newbox->publicID();
 
         $newbox->update([
             'code' => $builder->output([
@@ -47,7 +50,7 @@ class BuilderController extends BaseController {
 
         $newbox->save();
 
-        return Redirect::route('builder.show', ['id' => $newbox->publicID()]);
+        return Redirect::route('builder.show', ['id' => $box_id]);
     }
 
     public function show($hashed)

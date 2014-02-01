@@ -162,8 +162,8 @@ class BoxBuilder {
 		return [
 			'protobox' => [
 				'version' => Config::get('protobox.version'),
+				'build' => isset($output['protobox']['build']) ? $output['protobox']['build'] : '',
 				'document' => isset($output['protobox']['document']) ? $output['protobox']['document'] : '',
-				'name' => isset($output['protobox']['name']) ? $output['protobox']['name'] : '',
 				'description' => isset($output['protobox']['description']) ? $output['protobox']['description'] : '',
 			]
 		];
