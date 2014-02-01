@@ -17,6 +17,9 @@
                     <a href="#section-{{ $section }}" id="sel-{{ $section }}" data-toggle="tab">{{ trans('builder/'.$section.'.name') }}</a>
                </li>
                @endforeach
+               <li>
+                    <a href="#section-build" id="sel-build" data-toggle="tab">{{ trans('builder/build.name') }}</a>
+               </li>
           </ul>
      </div>
 

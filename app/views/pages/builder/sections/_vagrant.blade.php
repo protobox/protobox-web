@@ -31,25 +31,19 @@
 
                                 @foreach($section->param('local_vm_os', []) as $os)
                                 <label class="radio">
-                                <input type="radio" class="update-input" name="vagrant[box_url]" value="{{ $os['url'] }}" data-update="vagrant-box:{{ $os['name'] }}" data-update="php-version:{{ $os['php'] }}" {{ Input::old('vagrant.box_url', $section->param('local_vm_os_url')) == $os['url'] ? 'checked="checked"' : '' }}>
-                                {{ $os['label'] }}
-                                {{-- @if (isset($os['php_versions']))
-                                (PHP
-                                @foreach($os['php_versions'] as $osphp)
-                                <span class="label php-version-{{ str_replace('.', '-', $osphp) }}">{{ $osphp }}</span>
-                                @endforeach
-                                )
-                                @endif --}}
+                                    <input type="radio" class="update-input" name="vagrant[box_url]" value="{{ $os['url'] }}" data-update="vagrant-box:{{ $os['name'] }}" data-update="php-version:{{ $os['php'] }}" {{ Input::old('vagrant.box_url', $section->param('local_vm_os_url')) == $os['url'] ? 'checked="checked"' : '' }} data-toggle-content="#content-{{ $os['name'] }}" data-toggle-group=".os-tags">
+                                    {{ $os['label'] }}
+                                    <div id="content-{{ $os['name'] }}" class="os-tags" {{ Input::old('vagrant.box_url', $section->param('local_vm_os_url')) != $os['url'] ? 'style="display:none"' : 'style=""' }}>
+                                        @foreach($os['tags'] as $tag)
+                                        <span class="label {{ preg_replace('/[^\da-z]/i', '-', strtolower($tag)) }}">{{ $tag }}</span>
+                                        @endforeach
+                                    </div>
                                 </label>
                                 @endforeach
 
                                 <p class="help-block">
                                 Choose the operating system for your virtual machine. It may take some time to downloaded the box the first time you run Vagrant. <a href="http://docs.vagrantup.com/v2/getting-started/boxes.html">Read more about vagrant boxes here</a>.
                                 </p>
-
-                                {{-- <p class="help-block">
-                                Note: Listed are the PHP installs that we have confirmed as working for their respective operating system. You are welcome to attempt to install higher if you'd like, but we cannot guarantee it will work. In fact in most cases it won't.
-                                </p> --}}
                             </div>
                         </div>
 

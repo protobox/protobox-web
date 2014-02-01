@@ -12,11 +12,14 @@ Route::get('share/{id}/delete', ['as' => 'builder.delete', 'uses' => 'BuilderCon
 
 // Auth
 Route::get('login', ['as' => 'login', 'uses' => 'AuthController@login']);
-Route::get('signup', ['as' => 'signup', 'uses' => 'AuthController@signup']);
-Route::get('confirm', 'AuthController@signupConfirm');
-Route::post('confirm', 'AuthController@signupCreate');
+Route::post('login', 'AuthController@loginCreate');
+Route::get('register', ['as' => 'register', 'uses' => 'AuthController@register']);
+Route::post('register', 'AuthController@registerCreate');
 Route::get('logout', ['as' => 'logout', 'uses' => 'AuthController@logout']);
 Route::get('oauth', 'AuthController@oauth');
+
+// Account
+Route::get('account', ['as' => 'account', 'uses' => 'AccountController@dashboard']);
 
 // Contributors
 Route::get('contributors', ['as' => 'contributors', 'uses' => 'ContributorsController@index']);

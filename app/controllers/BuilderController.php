@@ -40,7 +40,7 @@ class BuilderController extends BaseController {
 
         $newbox->update([
             'code' => $builder->output([
-                'document' => 'build_'.$box_id, 
+                'document' => $box_id, 
                 'box_id' => $box_id
             ]),
         ]);

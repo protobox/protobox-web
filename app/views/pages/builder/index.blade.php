@@ -44,6 +44,9 @@
                         @include('pages.builder.sections._'.$section, ['section' => $builder->section($section), 'section_name' => $section])
                     </li>
                     @endforeach
+                    <li class="tab-pane" id="section-build">
+                        @include('pages.builder.sections._build')
+                    </li>
                 </div>
             </div>
             {{ Form::token() }}

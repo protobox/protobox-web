@@ -14,12 +14,15 @@
                 <li class="{{ Request::is('explore') || Request::is('explore/*') ? 'active' : '' }}"><a href="{{ URL::route('explore') }}">{{ strtoupper(trans('global.nav_main.explore')) }}</a></li>
                 <li class="{{ Request::is('docs/about') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}/about/">{{ strtoupper(trans('global.nav_main.about')) }}</a></li>
                 <li class="{{ Request::is('docs') || Request::is('docs/*') && !Request::is('docs/about') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}">{{ strtoupper(trans('global.nav_main.docs')) }}</a></li>
-                {{-- <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.login')) }}</a></li> --}}
-                {{-- <li class="{{ Request::is('register') ? 'active ' : '' }}register"><a href="{{ URL::route('login') }}" target="_blank">{{ strtoupper(trans('global.nav_main.register')) }}</a></li> --}}
+                <li><a href="https://github.com/protobox/protobox/issues" target="_blank">{{ strtoupper(trans('global.nav_main.issues')) }}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://github.com/protobox/protobox/issues" target="_blank">{{ strtoupper(trans('global.nav_main.issues')) }}</a></li>
-                <li><a href="https://github.com/protobox/protobox" target="_blank">{{ strtoupper(trans('global.nav_main.fork')) }}</a></li>
+                @if (Auth::check())
+                <li class="{{ Request::is('account') || Request::is('account/*') ? 'active' : '' }} register"><a href="{{ URL::route('account') }}">{{ strtoupper('Account') }}</a></li>
+                @else
+                <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ URL::route('login') }}">{{ strtoupper(trans('global.nav_main.login')) }}</a></li>
+                <li class="{{ Request::is('register') ? 'active' : '' }} register"><a href="{{ URL::route('register') }}">{{ strtoupper(trans('global.nav_main.register')) }}</a></li>
+                @endif
             </ul>
         </div>
     </div>

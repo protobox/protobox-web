@@ -22,15 +22,15 @@ class Vagrant extends Section {
 					'label' => 'Ubuntu 12.04 Precise x64',
 					'url' => 'http://files.vagrantup.com/precise64.box',
 					'name' => 'precise64',
-					'php' => '55',
-					'php_versions' => ['5.4', '5.5'],
+					'php' => '54',
+					'tags' => ['PHP 5.5', 'PHP 5.4']
 				],
 				[
 					'label' => 'Ubuntu 10.04 Lucid x64',
 					'url' => 'http://files.vagrantup.com/lucid64.box',
 					'name' => 'lucid64',
-					'php' => '55',
-					'php_versions' => ['5.4', '5.5'],
+					'php' => '53',
+					'tags' => ['PHP 5.4', 'PHP 5.3']
 				]
 			],
 			'local_vm_os_url' => 'http://files.vagrantup.com/precise64.box',

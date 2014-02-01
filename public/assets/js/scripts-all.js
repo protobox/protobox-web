@@ -1,4 +1,4 @@
-/*! protobox - v0.0.4 - 2014-01-31
+/*! protobox - v0.0.5 - 2014-02-01
 * http://github.com/protobox/protobox
 * Copyright (c) 2014 
 */
@@ -1845,6 +1845,16 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
         }
     }
 
+    Protobox.prototype.toggleContent = function (e) {
+        var $this   = $(this),
+            elm     = $this.data('toggle-content'),
+            group   = $this.data('toggle-group');
+
+        if (group) $(group).hide();
+
+        if (elm) $(elm).show();
+    }
+
     Protobox.prototype.ajaxErrors = function(e) {
         if (data.errors) {
             var hnd = $el.data('append'),
@@ -1960,6 +1970,7 @@ if(k.length){for(i=k.split(d.delimiter),e=0,h=i.length;h>e;e++)j={},j[f]=i[e],j[
         $(document).on('click', '[data-template-remove]', Protobox.prototype.templateRemove);
         $(document).on('click', '[data-application]', Protobox.prototype.applicationTemplate);
         $(document).on('click', '[data-tab-switch]', Protobox.prototype.tabSwitch);
+        $(document).on('click', '[data-toggle-content]', Protobox.prototype.toggleContent);
 
         //Eldarion ajax error handling
         //$(document).on('eldarion-ajax:success', Protobox.prototype.ajaxErrors);

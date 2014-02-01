@@ -85,7 +85,7 @@ class BoxBuilder {
 		$values = array_flip($this->sections);
 		$new_id = isset($values[$check]) ? $values[$check] + 1 : null;
 
-		return $new_id && isset($this->sections[$new_id]) ? $this->sections[$new_id] : null;
+		return $new_id && isset($this->sections[$new_id]) ? $this->sections[$new_id] : 'build';
 	}
 
 	public function valid()
@@ -141,9 +141,9 @@ class BoxBuilder {
 	{
 		$output = [
 			'protobox' => [
+				'build' => 'custom',
 				'document' => isset($options['document']) ? $options['document'] : '',
-				'name' => 'custom',
-				'description' => 'A custom box built from '.(isset($options['box_id']) ? 'getprotobox.com/share/'.$options['box_id'] : 'getprotobox.com')
+				'description' => 'A custom build from '.(isset($options['box_id']) ? 'getprotobox.com/share/'.$options['box_id'] : 'getprotobox.com')
 			]
 		];
 
