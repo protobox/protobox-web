@@ -8,7 +8,7 @@ class Paste extends EloquentBaseModel {
     protected $fillable   = ['code', 'author_id', 'parent_id'];
     protected $softDelete = true;
 
-    protected $validationRules = [
+    public $validationRules = [
         'code' => 'required',
     ];
 

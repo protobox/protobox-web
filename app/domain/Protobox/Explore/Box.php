@@ -9,7 +9,7 @@ class Box extends EloquentBaseModel {
     protected $fillable   = ['name', 'description', 'code', 'author_id'];
     protected $softDelete = true;
 
-    protected $validationRules = [
+    public $validationRules = [
         'name' => 'required',
         'code' => 'required',
     ];
