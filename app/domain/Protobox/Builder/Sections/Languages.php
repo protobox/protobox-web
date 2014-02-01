@@ -14,7 +14,8 @@ class Languages extends Section {
 	{
 		return [
 			'php' => 'PHP',
-			'hhvm' => 'PHP - HipHop'
+			'hhvm' => 'PHP [HipHop]',
+			'ruby' => 'Ruby'
 		];
 	}
 
@@ -50,70 +51,84 @@ class Languages extends Section {
 			'php_timezone' => 'America/Chicago',
 			'php_timezone_available' => $this->timezone_available(),
 
-			//
-			// PEAR
-			//
+				//
+				// PEAR
+				//
 
-			'pear_install' => 0,
-			'pear_modules' => [],
-			'pear_modules_available' => $data['pear_modules'],
+				'pear_install' => 0,
+				'pear_modules' => [],
+				'pear_modules_available' => $data['pear_modules'],
 
-			//
-			// PECL
-			//
+				//
+				// PECL
+				//
 
-			'pecl_install' => 0,
-			'pecl_modules' => [],
-			'pecl_modules_available' => $data['pecl_modules'],
+				'pecl_install' => 0,
+				'pecl_modules' => [],
+				'pecl_modules_available' => $data['pecl_modules'],
 
-			//
-			// Composer
-			//
+				//
+				// Composer
+				//
 
-			'composer_install' => 1,
+				'composer_install' => 1,
 
-			//
-			// Mailcatcher
-			//
+				//
+				// Mailcatcher
+				//
 
-			'mailcatcher_install' => 0,
+				'mailcatcher_install' => 0,
 
-			//
-			// PHPMyAdmin
-			//
+				//
+				// PHPMyAdmin
+				//
 
-			'phpmyadmin_install' => 1,
+				'phpmyadmin_install' => 1,
 
-			//
-			// Xdebug
-			//
+				//
+				// Xdebug
+				//
 
-			'xdebug_install' => 1,
-			'xdebug_webgrind' => 1,
-			'xdebug_settings' => [
-				'default_enable' => 1,
-				'remote_autostart' => 0,
-				'remote_connect_back' => 1,
-				'remote_enable' => 1,
-				'remote_handler' => 'dbgp',
-				'remote_port' => 9000
-			],
-			'xdebug_settings_available' => $data['xdebug_settings'],
+				'xdebug_install' => 1,
+				'xdebug_webgrind' => 1,
+				'xdebug_settings' => [
+					'default_enable' => 1,
+					'remote_autostart' => 0,
+					'remote_connect_back' => 1,
+					'remote_enable' => 1,
+					'remote_handler' => 'dbgp',
+					'remote_port' => 9000
+				],
+				'xdebug_settings_available' => $data['xdebug_settings'],
 
-			//
-			// Xhprof
-			//
+				//
+				// Xhprof
+				//
 
-			'xhprof_install' => 0,
-			'xhprof_xhgui' => 1,
-			'xhprof_location' => '/srv/www/web/xhprof',
+				'xhprof_install' => 0,
+				'xhprof_xhgui' => 1,
+				'xhprof_location' => '/srv/www/web/xhprof',
 
 			//
 			// HHVM
 			//
 
 			'hhvm_install' => 0,
-			'hhvm_nightly' => 0
+			'hhvm_nightly' => 0,
+
+				// 
+				// Composer
+				// 
+				
+				'hhvm_composer_install' => 1,
+				'hhvm_composer_use_hhvm' => 1,
+
+			//
+			// Ruby
+			//
+
+			'ruby_install' => 0,
+			'ruby_gems' => []
 
 		];
 	}
@@ -210,6 +225,15 @@ class Languages extends Section {
 			'hhvm' => [
 				'install' => isset($output['hhvm']['install']) ? (int) $output['hhvm']['install'] : 0,
 				'nightly' => isset($output['hhvm']['nightly']) ? (int) $output['hhvm']['nightly'] : 0,
+				'composer' => [
+					'install' => isset($output['hhvm']['composer']['install']) ? (int) $output['hhvm']['composer']['install'] : 0,
+					'use_hhvm' => isset($output['hhvm']['composer']['use_hhvm']) ? (int) $output['hhvm']['composer']['use_hhvm'] : 0,
+				],
+			],
+
+			'ruby' => [
+				'install' => isset($output['ruby']['install']) ? (int) $output['ruby']['install'] : 0,
+				'gems' => isset($output['ruby']['gems']) ? $output['ruby']['gems'] : [],
 			]
 		];
 	}
@@ -218,6 +242,7 @@ class Languages extends Section {
 	{
 		$php = $this->builder->request()->get('php');
 		$hhvm = $this->builder->request()->get('hhvm');
+		$ruby = $this->builder->request()->get('ruby');
 
 		return [
 			'php' => [
@@ -256,8 +281,17 @@ class Languages extends Section {
 
 			'hhvm' => [
 				'install' => isset($hhvm['install']) ? (int) $hhvm['install'] : 0,
-				'nightly' => isset($hhvm['nightly']) ? (int) $hhvm['nightly'] : 0
-			]
+				'nightly' => isset($hhvm['nightly']) ? (int) $hhvm['nightly'] : 0,
+				'composer' => [
+					'install' => isset($hhvm['composer']['install']) ? (int) $hhvm['composer']['install'] : 0,
+					'use_hhvm' => isset($hhvm['composer']['use_hhvm']) ? (int) $hhvm['composer']['use_hhvm'] : 0,
+				],
+			],
+
+			'ruby' => [
+				'install' => isset($ruby['install']) ? (int) $ruby['install'] : 0,
+				'gems' => isset($ruby['gems']) && count($ruby['gems']) ? $ruby['gems'] : '[]',
+			],
 		];
 	}
 
