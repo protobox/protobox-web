@@ -382,7 +382,7 @@
                             <div class="col-md-6">
                                 <label for="hhvm-nightly">
                                     <input type="checkbox" id="hhvm-nightly" name="hhvm[nightly]" {{ Input::old('hhvm.nightly', $section->param('hhvm_nightly')) ? 'checked="checked"' : '' }} value="1">
-                                    Install
+                                    Use HHVM Nightlies
                                 </label>
 
                                 <p class="help-block">
