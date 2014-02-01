@@ -1,9 +1,3 @@
-<input type="hidden" name="ngrok[_prevent_empty]" />
-
-<div class="page-header">
-    <h1>{{ trans('builder/'.$section_name.'.name') }}</h1>
-</div>
-
 <!-- extras settings -->
 <div class="row">
     <div class="col-xs-12">
@@ -17,7 +11,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="devtools-ngrok-install">
-                            <input type="checkbox" id="devtools-ngrok-install" name="ngrok[install]" checked="{{ $section->param('ngrok_install') ? 'checked' : '' }}" value="{{ $section->param('ngrok_install') }}">
+                            <input type="checkbox" id="devtools-ngrok-install" name="ngrok[install]" {{ Input::old('newrelic.install', $section->param('ngrok_install')) ? 'checked="checked"' : '' }} value="1">
                             Install Ngrok
                         </label>
 
@@ -33,7 +27,3 @@
     </div>
 </div>
 <!-- end extras settings -->
-
-@include('pages.builder._continue')
-
-@include('pages.builder._create')

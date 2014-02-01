@@ -24,8 +24,7 @@ class BoxBuilder {
 		'languages',
 		'datastore',
 		'queues',
-		'monitoring',
-		'devtools'
+		'tools'
 	];
 
 	protected $store = [];

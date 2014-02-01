@@ -1,17 +1,24 @@
 <?php namespace Protobox\Builder\Sections;
 
-class Monitoring extends Section {
+class Tools extends Section {
 
-	public function platforms()
+	public function groups()
 	{
 		return [
-			'newrelic' => 'New Relic'
+			'tunneling' => 'Tunneling',
+			'monitoring' => 'Monitoring'
 		];
 	}
 
 	public function defaults()
 	{
 		return [
+
+			//
+			// Local Tunnel
+			//
+			
+			'ngrok_install' => 0,
 
 			//
 			// New Relic
@@ -43,6 +50,8 @@ class Monitoring extends Section {
 	public function fields()
 	{
 		return [
+			'ngrok.install' => 'NGrok Installation',
+
 			'newrelic.install' => 'NewRelic Installation',
 			'newrelic.license' => 'NewRelic License',
 			'newrelic.php' => 'NewRelic PHP Agent',
@@ -53,6 +62,11 @@ class Monitoring extends Section {
 	public function load($output)
 	{
 		return [
+			'ngrok' => [
+				'install' => isset($output['ngrok']['install']) ? (int) $output['ngrok']['install'] : 0,
+				'port' => isset($output['ngrok']['port']) ? (int) $output['ngrok']['port'] : 80,
+			],
+
 			'newrelic' => [
 				'install' => isset($output['newrelic']['install']) ? (int) $output['newrelic']['install'] : 0,
 				'license' => isset($output['newrelic']['license']) ? $output['newrelic']['license'] : '',
@@ -64,9 +78,15 @@ class Monitoring extends Section {
 
 	public function output()
 	{
+		$ngrok = $this->builder->request()->get('ngrok');
 		$newrelic = $this->builder->request()->get('newrelic');
 		
 		return [
+			'ngrok' => [
+				'install' => isset($ngrok['install']) ? (int) $ngrok['install'] : 0,
+				'port' => 80,
+			],
+
 			'newrelic' => [
 				'install' => isset($newrelic['install']) ? (int) $newrelic['install'] : 0,
 				'license' => isset($newrelic['license']) ? $newrelic['license'] : '',

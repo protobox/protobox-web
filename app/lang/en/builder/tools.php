@@ -2,7 +2,7 @@
 
 return array(
 
-	'name' => 'Dev Tools',
+	'name' => 'Tools',
 
 );
 
