@@ -9,15 +9,19 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-servername">Server Name</label>
-                        <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="apache[vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="apache[vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
 
-                        <p class="help-block">The URL you want to use to access this site on your computer. Don't forget to add this to your <code>hosts</code> file!</p>
+                        <p class="help-block">The URL you want to use to access this site on your computer. <a href="http://protobox.dev/docs/issues/hosts" target="_blank">Don't forget to add this to your <code>hosts</code> file!</a></p>
                     </div>
 
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-serveraliases">Server Aliases</label>
                         <select id="apache-vhosts-{{ $vhostid }}-serveraliases" name="apache[vhosts][{{ $vhostid }}][serveraliases][]" multiple="multiple" class="form-control select-tags-editable">
-                        @if($type != 'template' && isset($vhost['serveraliases']))
+                        @if($type == 'template')
+                            @foreach($section->param('apache_virtualhost_serveraliases') as $alias)
+                            <option value="{{ $alias }}" selected="selected">{{ $alias }}</option>
+                            @endforeach
+                        @elseif(isset($vhost['serveraliases']))
                             @foreach($vhost['serveraliases'] as $alias)
                             <option value="{{ $alias }}" selected="selected">{{ $alias }}</option>
                             @endforeach
@@ -31,14 +35,14 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-docroot">Document Root</label>
-                        <input type="text" id="apache-vhosts-{{ $vhostid }}-docroot" name="apache[vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" class="form-control">
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-docroot" name="apache[vhosts][{{ $vhostid }}][docroot]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_docroot') : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_docroot') : (isset($vhost['docroot']) ? $vhost['docroot'] : '') }}" class="form-control">
 
                         <p class="help-block">The location of your site's index file, or other landing page on the file system.</p>
                     </div>
 
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-port">Port</label>
-                        <input type="text" id="apache-vhosts-{{ $vhostid }}-port" name="apache[vhosts][{{ $vhostid }}][port]" placeholder="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" value="{{ $type == 'template' ? '' : (isset($vhost['port']) ? $vhost['port'] : '') }}" class="form-control">
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-port" name="apache[vhosts][{{ $vhostid }}][port]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_port') : (isset($vhost['port']) ? $vhost['port'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_port') : (isset($vhost['port']) ? $vhost['port'] : '') }}" class="form-control">
 
                         <p class="help-block">
                             80 for normal browsing, if you choose another append it to the URL, ex: http://{{ $vhost['servername'] }}:1337
@@ -50,7 +54,11 @@
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-setenv">Environment Variables</label>
                         <select id="apache-vhosts-{{ $vhostid }}-setenv" name="apache[vhosts][{{ $vhostid }}][setenv][]" multiple="multiple" class="form-control select-tags-editable">
-                        @if($type != 'template' && isset($vhost['setenv']))
+                        @if($type == 'template')
+                            @foreach($section->param('apache_virtualhost_setenv') as $env)
+                            <option value="{{ $env }}" selected="selected">{{ $env }}</option>
+                            @endforeach
+                        @elseif(isset($vhost['setenv']))
                             @foreach($vhost['setenv'] as $env)
                             <option value="{{ $env }}" selected="selected">{{ $env }}</option>
                             @endforeach
@@ -63,7 +71,11 @@
                     <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-override">Allow Override</label>
                         <select id="apache-vhosts-{{ $vhostid }}-override" name="apache[vhosts][{{ $vhostid }}][override][]" multiple="multiple" class="form-control select-tags-editable">
-                        @if($type != 'template' && isset($vhost['override']))
+                        @if($type == 'template')
+                            @foreach($section->param('apache_virtualhost_override') as $ovr)
+                            <option value="{{ $ovr }}" selected="selected">{{ $ovr }}</option>
+                            @endforeach
+                        @elseif(isset($vhost['override']))
                             @foreach($vhost['override'] as $ovr)
                             <option value="{{ $ovr }}" selected="selected">{{ $ovr }}</option>
                             @endforeach

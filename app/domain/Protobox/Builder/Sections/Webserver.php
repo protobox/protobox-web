@@ -21,6 +21,14 @@ class Webserver extends Section {
 			'apache_install' => 1,
 			'apache_modules' => ['rewrite'],
 			'apache_modules_available' => $this->apache_modules_available(),
+
+			'apache_virtualhost_servername' => 'app.dev',
+			'apache_virtualhost_serveraliases' => ['www.app.dev'],
+			'apache_virtualhost_docroot' => '/srv/www/web/protobox',
+			'apache_virtualhost_port' => '80',
+			'apache_virtualhost_setenv' => [],
+			'apache_virtualhost_override' => ['All'],
+
 			'apache_virtualhosts' => [
 				[
 					'servername' => 'app.dev',
@@ -37,6 +45,13 @@ class Webserver extends Section {
 			//
 			
 			'nginx_install' => 0,
+
+			'nginx_virtualhost_servername' => 'app.dev',
+			'nginx_virtualhost_serveraliases' => ['www.app.dev'],
+			'nginx_virtualhost_docroot' => '/srv/www/web/protobox',
+			'nginx_virtualhost_port' => '80',
+			'nginx_virtualhost_setenv' => [],
+
 			'nginx_virtualhosts' => [
 				[
 					'servername' => 'app.dev',
@@ -151,8 +166,6 @@ class Webserver extends Section {
 			{
 				$name = isset($vhost['name']) ? $vhost['name'] : '';
 
-				if ($name == 'protobox') continue;
-
 				$apache_vhosts[] = [
 					'name' => $name,
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
@@ -172,8 +185,6 @@ class Webserver extends Section {
 			foreach ($output['nginx']['vhosts'] as $vhostid => $vhost)
 			{
 				$name = isset($vhost['name']) ? $vhost['name'] : '';
-
-				if ($name == 'protobox') continue;
 
 				$nginx_vhosts[] = [
 					'name' => $name,
@@ -206,30 +217,7 @@ class Webserver extends Section {
 		$apache = $this->builder->request()->get('apache');
 		$nginx = $this->builder->request()->get('nginx');
 
-		$apache_vhosts = [
-			[
-				'name' => 'protobox',
-				'servername' => 'protobox.dev',
-				'serveraliases' => ['www.protobox.dev'],
-				'docroot' => '/srv/www/web/protobox',
-				'port' => 80,
-				'setenv' => ['APP_ENV dev'],
-				'override' => ['All']
-			]
-		];
-
-		$nginx_vhosts = [
-			[
-				'name' => 'protobox',
-				'server_name' => 'protobox.dev',
-				'server_aliases' => ['www.protobox.dev'],
-				'www_root' => '/srv/www/web/protobox',
-				'listen_port' => 80,
-				'index_files' => ['index.html', 'index.htm', 'index.php'],
-				'envvars' => ['APP_ENV dev']
-			]
-		];
-
+		$apache_vhosts = [];
 		foreach($apache['vhosts'] as $vhostid => $vhost)
 		{
 			$apache_vhosts[] = [
@@ -243,6 +231,7 @@ class Webserver extends Section {
 			];
 		}
 
+		$nginx_vhosts = [];
 		foreach($nginx['vhosts'] as $vhostid => $vhost)
 		{
 			$nginx_vhosts[] = [
