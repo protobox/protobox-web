@@ -1,5 +1,7 @@
 <?php namespace Protobox\Builder\Sections;
 
+use Str;
+
 class Vagrant extends Section {
 
 	public function machine_types()
@@ -96,6 +98,8 @@ class Vagrant extends Section {
 	{
 		$vagrant = $this->builder->request()->get('vagrant');
 
+		$name = $this->box_name($vagrant['local_name']);
+		
 		$ports = [
 			'port1' => ['host' => '', 'guest' => '']
 		];
@@ -117,7 +121,7 @@ class Vagrant extends Section {
 				'vm' => [
 					'box' => $vagrant['box'],
 					'box_url' => $vagrant['box_url'],
-					'hostname' => $vagrant['local_name'],
+					'hostname' => $name,
 					'network' => [
 						'private_network' => $vagrant['local_ip'],
 						'forwarded_port' => $ports
@@ -125,8 +129,8 @@ class Vagrant extends Section {
 					'provider' => [
 						'virtualbox' => [
 							'modifyvm' => [
-								'name' => $vagrant['local_name'],
-								'memory' => $vagrant['local_memory']
+								'name' => $name,
+								'memory' => (int) $vagrant['local_memory']
 							],
 							'setextradata' => [
 								'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root' => 1
@@ -158,6 +162,11 @@ class Vagrant extends Section {
 				]
 			]
 		];
+	}
+
+	private function box_name($name)
+	{
+		return trim(Str::slug(str_replace('_', '-', $name)), '.-');
 	}
 
 }
