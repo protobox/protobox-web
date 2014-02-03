@@ -7,7 +7,7 @@ class Applications extends Section {
 	public function applications()
 	{
 		return [
-			'repository' => 'Git Repoistory (Public or Private)',
+			'repository' => 'Git Repository (Public or Private)',
 			'drupal' => 'Drupal',
 			'laravel' => 'Laravel',
 			'lemonstand' => 'Lemonstand',
