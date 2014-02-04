@@ -26,7 +26,7 @@
                 <div class="row form-group">
                     <div class="col-md-12">
                         <label for="newrelic-license">License Key</label>
-                        <input type="text" id="mysql-license" name="newrelic[license]" value="{{ Input::old('newrelic.license', $section->param('newrelic_license')) }}" class="form-control">
+                        <input type="text" id="newrelic-license" name="newrelic[license]" value="{{ Input::old('newrelic.license', $section->param('newrelic_license')) }}" class="form-control">
 
                         <p class="help-block">
                             Insert your newrelic license key here.
