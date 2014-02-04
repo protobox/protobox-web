@@ -45,7 +45,7 @@ class Server extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$server = $this->builder->request()->get('server');
 

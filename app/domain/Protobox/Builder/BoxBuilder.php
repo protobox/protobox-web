@@ -55,7 +55,9 @@ class BoxBuilder {
 
 	public function build()
 	{
-		foreach($this->sections as $section)
+		$sections = array_merge(['protobox'], $this->sections);
+
+		foreach($sections as $section)
 		{
 			$class_name = 'Protobox\\Builder\\Sections\\' . ucwords($section);
 			$class = new $class_name;
@@ -124,9 +126,8 @@ class BoxBuilder {
 
 	public function load($data)
 	{
+		$code = [];
 		$output = Yaml::parse($data);
-		
-		$code = $this->prepare($output);
 
 		foreach($this->store as $section)
 		{
@@ -138,34 +139,14 @@ class BoxBuilder {
 
 	public function output($options = [])
 	{
-		$output = [
-			'protobox' => [
-				'build' => 'custom',
-				'document' => isset($options['document']) ? $options['document'] : '',
-				'description' => 'A custom build from '.(isset($options['box_id']) ? 'getprotobox.com/share/'.$options['box_id'] : 'getprotobox.com')
-			]
-		];
-
-		$code = $this->prepare($output);
+		$code = [];
 
 		foreach($this->store as $section)
 		{
-			$code += $section->output();
+			$code += $section->output($options);
 		}
 
 		return Yaml::dump($code, 100, 2);
-	}
-
-	private function prepare($output = [])
-	{
-		return [
-			'protobox' => [
-				'version' => Config::get('protobox.version'),
-				'build' => isset($output['protobox']['build']) ? $output['protobox']['build'] : '',
-				'document' => isset($output['protobox']['document']) ? $output['protobox']['document'] : '',
-				'description' => isset($output['protobox']['description']) ? $output['protobox']['description'] : '',
-			]
-		];
 	}
 
 }

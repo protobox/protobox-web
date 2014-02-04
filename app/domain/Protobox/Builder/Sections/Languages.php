@@ -238,7 +238,7 @@ class Languages extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$php = $this->builder->request()->get('php');
 		$hhvm = $this->builder->request()->get('hhvm');

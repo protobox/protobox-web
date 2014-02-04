@@ -88,7 +88,7 @@ class Applications extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$output = [];
 

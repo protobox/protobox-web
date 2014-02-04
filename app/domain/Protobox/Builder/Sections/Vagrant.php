@@ -94,7 +94,7 @@ class Vagrant extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$vagrant = $this->builder->request()->get('vagrant');
 

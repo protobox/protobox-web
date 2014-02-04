@@ -50,7 +50,7 @@ class Section {
 		return [];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		return [];
 	}

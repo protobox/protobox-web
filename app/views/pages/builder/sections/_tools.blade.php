@@ -19,6 +19,8 @@
 
 @include('pages.builder.sections.tools._monitoring')
 
+@include('pages.builder.sections.tools._protobox')
+
 {{--    </div>
 </div> --}}
 

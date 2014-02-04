@@ -212,7 +212,7 @@ class Webserver extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$apache = $this->builder->request()->get('apache');
 		$nginx = $this->builder->request()->get('nginx');

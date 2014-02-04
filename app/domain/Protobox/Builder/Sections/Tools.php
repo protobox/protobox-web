@@ -29,18 +29,33 @@ class Tools extends Section {
 			'newrelic_php' => 0,
 			'newrelic_node' => 0,
 
+			//
+			// Protobox Dashboard
+			//
+			
+			'protobox_dashboard_install' => 1,
+			'protobox_dashboard_path' => '/srv/www/web/protobox',
+
 		];
 	}
 
 	public function rules()
 	{
 		$newrelic = $this->builder->request()->get('newrelic');
+		$protobox = $this->builder->request()->get('protobox');
 		$rules = [];
 
 		if (isset($newrelic['install']) && (int) $newrelic['install'] == 1)
 		{
 			$rules += [
 				'newrelic.license' => 'required'
+			];
+		}
+
+		if (isset($protobox['install']) && (int) $protobox['install'] == 1)
+		{
+			$rules += [
+				'protobox.dashboard.path' => 'required'
 			];
 		}
 
@@ -55,7 +70,10 @@ class Tools extends Section {
 			'newrelic.install' => 'NewRelic Installation',
 			'newrelic.license' => 'NewRelic License',
 			'newrelic.php' => 'NewRelic PHP Agent',
-			'newrelic.node' => 'NewRelic Node Agent'
+			'newrelic.node' => 'NewRelic Node Agent',
+
+			'protobox.dashboard.install' => 'Protobox Dashboard Installation',
+			'protobox.dashboard.path' => 'Protobox Dashboard Path'
 		];
 	}
 
@@ -76,7 +94,7 @@ class Tools extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$ngrok = $this->builder->request()->get('ngrok');
 		$newrelic = $this->builder->request()->get('newrelic');

@@ -41,7 +41,7 @@ class Queues extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$rabbitmq = $this->builder->request()->get('rabbitmq');
 		

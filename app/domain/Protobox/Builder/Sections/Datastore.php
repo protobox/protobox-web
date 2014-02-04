@@ -270,7 +270,7 @@ class Datastore extends Section {
 		];
 	}
 
-	public function output()
+	public function output($options = [])
 	{
 		$mysql = $this->builder->request()->get('mysql');
 		$mariadb = $this->builder->request()->get('mariadb');
