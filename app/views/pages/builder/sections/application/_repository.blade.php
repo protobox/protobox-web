@@ -57,14 +57,14 @@
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-preinstall">Pre Install Commands</label>
-                        <select id="application-repository-{{ $appid }}-preinstall" name="applications[repository][{{ $appid }}][preinstall][]" multiple="multiple" class="form-control select-tags-editable">
+                        <select id="application-repository-{{ $appid }}-preinstall" name="applications[repository][{{ $appid }}][pre_install][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type == 'template')
                         	@foreach($section->param('repository_pre_install') as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                         @else
-                            @if(isset($app['preinstall']))
-                            @foreach($app['preinstall'] as $cmd)
+                            @if(isset($app['pre_install']))
+                            @foreach($app['pre_install'] as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                             @endif
@@ -73,14 +73,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="application-repository-{{ $appid }}-postinstall">Post Install Commands</label>
-                        <select id="application-repository-{{ $appid }}-postinstall" name="applications[repository][{{ $appid }}][postinstall][]" multiple="multiple" class="form-control select-tags-editable">
+                        <select id="application-repository-{{ $appid }}-postinstall" name="applications[repository][{{ $appid }}][post_install][]" multiple="multiple" class="form-control select-tags-editable">
                         @if($type == 'template')
                         	@foreach($section->param('repository_post_install') as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                         @else
-                            @if(isset($app['postinstall']))
-                            @foreach($app['postinstall'] as $cmd)
+                            @if(isset($app['post_install']))
+                            @foreach($app['post_install'] as $cmd)
                             <option value="{{ $cmd }}" selected="selected">{{ $cmd }}</option>
                             @endforeach
                             @endif

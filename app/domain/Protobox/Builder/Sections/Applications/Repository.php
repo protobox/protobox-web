@@ -78,8 +78,8 @@ class Repository extends Application {
 				'path' => isset($dat['path']) ? $dat['path'] : '',
 				'source' => isset($dat['options']['source']) ? $dat['options']['source'] : '',
 				'revision' => isset($dat['options']['revision']) ? $dat['options']['revision'] : '',
-				'preinstall' => isset($dat['options']['preinstall']) ? $dat['options']['preinstall'] : [],
-				'postinstall' => isset($dat['options']['postinstall']) ? $dat['options']['postinstall'] : [],
+				'pre_install' => isset($dat['options']['pre_install']) ? $dat['options']['pre_install'] : [],
+				'post_install' => isset($dat['options']['post_install']) ? $dat['options']['post_install'] : [],
 			];
 		}
 
@@ -106,8 +106,8 @@ class Repository extends Application {
 					'provider' => 'git',
 					'source' => isset($dat['source']) ? $dat['source'] : '',
 					'revision' => isset($dat['revision']) ? $dat['revision'] : '',
-					'preinstall' => isset($dat['preinstall']) && count($dat['preinstall']) ? $dat['preinstall'] : '[]',
-					'postinstall' => isset($dat['postinstall']) && count($dat['postinstall']) ? $dat['postinstall'] : '[]',
+					'pre_install' => isset($dat['pre_install']) && count($dat['pre_install']) ? $dat['pre_install'] : '[]',
+					'post_install' => isset($dat['post_install']) && count($dat['post_install']) ? $dat['post_install'] : '[]',
 				]
 			];
 		}
