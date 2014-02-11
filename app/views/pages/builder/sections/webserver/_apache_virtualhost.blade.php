@@ -11,7 +11,7 @@
                         <label for="apache-vhosts-{{ $vhostid }}-servername">Server Name</label>
                         <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="apache[vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
 
-                        <p class="help-block">The URL you want to use to access this site on your computer. <a href="http://protobox.dev/docs/issues/hosts" target="_blank">Don't forget to add this to your <code>hosts</code> file!</a></p>
+                        <p class="help-block">The URL you want to use to access this site on your computer. <a href="http://getprotobox.com/docs/issues/hosts" target="_blank">Don't forget to add this to your <code>hosts</code> file!</a></p>
                     </div>
 
                     <div class="col-md-6">
