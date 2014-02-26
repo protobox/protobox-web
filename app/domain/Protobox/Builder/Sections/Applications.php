@@ -100,7 +100,9 @@ class Applications extends Section {
 		if (empty($output)) return $output;
 
 		return [
-			'applications' => $output
+			'applications' => array_merge([
+				'install' => 1
+			], $output)
 		];
 	}
 
