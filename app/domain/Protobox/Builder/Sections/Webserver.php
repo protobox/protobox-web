@@ -218,31 +218,39 @@ class Webserver extends Section {
 		$nginx = $this->builder->request()->get('nginx');
 
 		$apache_vhosts = [];
-		foreach($apache['vhosts'] as $vhostid => $vhost)
+
+		if (isset($apache['vhosts']))
 		{
-			$apache_vhosts[] = [
-				'name' => 'app',
-				'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
-				'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
-				'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
-				'port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
-				'setenv' => isset($vhost['setenv']) ? $vhost['setenv'] : [],
-				'override' => isset($vhost['override']) ? $vhost['override'] : []
-			];
+			foreach($apache['vhosts'] as $vhostid => $vhost)
+			{
+				$apache_vhosts[] = [
+					'name' => 'app',
+					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
+					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
+					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
+					'port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
+					'setenv' => isset($vhost['setenv']) ? $vhost['setenv'] : '[]',
+					'override' => isset($vhost['override']) ? $vhost['override'] : '[]'
+				];
+			}
 		}
 
 		$nginx_vhosts = [];
-		foreach($nginx['vhosts'] as $vhostid => $vhost)
+
+		if (isset($nginx['vhosts']))
 		{
-			$nginx_vhosts[] = [
-				'name' => 'app',
-				'server_name' => isset($vhost['servername']) ? $vhost['servername'] : '',
-				'server_aliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
-				'www_root' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
-				'listen_port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
-				'index_files' => ['index.html', 'index.htm', 'index.php'],
-				'envvars' => isset($vhost['setenv']) ? $vhost['setenv'] : []
-			];
+			foreach($nginx['vhosts'] as $vhostid => $vhost)
+			{
+				$nginx_vhosts[] = [
+					'name' => 'app',
+					'server_name' => isset($vhost['servername']) ? $vhost['servername'] : '',
+					'server_aliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
+					'www_root' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
+					'listen_port' => isset($vhost['port']) ? (int) $vhost['port'] : 80,
+					'index_files' => ['index.html', 'index.htm', 'index.php'],
+					'envvars' => isset($vhost['setenv']) ? $vhost['setenv'] : '[]'
+				];
+			}
 		}
 
 		return [
@@ -253,12 +261,12 @@ class Webserver extends Section {
 				'group' => 'www-data',
 				'default_vhost' => false,
 				'mpm_module' => 'prefork',
-				'vhosts' => $apache_vhosts
+				'vhosts' => count($apache_vhosts) ? $apache_vhosts : '[]'
 			],
 			'nginx' => [
 				'install' => isset($nginx['install']) ? (int) $nginx['install'] : 0,
 				'mpm_module' => 'fpm',
-				'vhosts' => $nginx_vhosts
+				'vhosts' => count($nginx_vhosts) ? $nginx_vhosts : '[]'
 			]
 		];
 	}

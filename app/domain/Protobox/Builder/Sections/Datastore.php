@@ -277,44 +277,50 @@ class Datastore extends Section {
 
 		$mysql_databases = [];
 
-		foreach($mysql['databases'] as $dbid => $db)
+		if (isset($mysql['databases']))
 		{
-			$mysql_databases[] = [
-				'name' => isset($db['name']) ? $db['name'] : '',
-				'host' => isset($db['host']) ? $db['host'] : '',
-				'user' => isset($db['user']) ? $db['user'] : '',
-				'password' => isset($db['password']) ? $db['password'] : '',
-				'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
-				'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
-			];
+			foreach($mysql['databases'] as $dbid => $db)
+			{
+				$mysql_databases[] = [
+					'name' => isset($db['name']) ? $db['name'] : '',
+					'host' => isset($db['host']) ? $db['host'] : '',
+					'user' => isset($db['user']) ? $db['user'] : '',
+					'password' => isset($db['password']) ? $db['password'] : '',
+					'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
+					'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
+				];
+			}
 		}
 
 		$mariadb_databases = [];
 
-		foreach($mariadb['databases'] as $dbid => $db)
+		if (isset($mariadb['databases']))
 		{
-			$mariadb_databases[] = [
-				'name' => isset($db['name']) ? $db['name'] : '',
-				'host' => isset($db['host']) ? $db['host'] : '',
-				'user' => isset($db['user']) ? $db['user'] : '',
-				'password' => isset($db['password']) ? $db['password'] : '',
-				'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
-				'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
-			];
+			foreach($mariadb['databases'] as $dbid => $db)
+			{
+				$mariadb_databases[] = [
+					'name' => isset($db['name']) ? $db['name'] : '',
+					'host' => isset($db['host']) ? $db['host'] : '',
+					'user' => isset($db['user']) ? $db['user'] : '',
+					'password' => isset($db['password']) ? $db['password'] : '',
+					'grant' => isset($db['grant']) && count($db['grant']) ? $db['grant'] : '[]',
+					'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
+				];
+			}
 		}
 
 		return [
 			'mysql' => [
 				'install' => isset($mysql['install']) ? (int) $mysql['install'] : 0,
 				'root_password' => isset($mysql['root_password']) ? $mysql['root_password'] : '',
-				'databases' => $mysql_databases,
+				'databases' => count($mysql_databases) ? $mysql_databases : '[]',
 			],
 
 			'mariadb' => [
 				'install' => isset($mariadb['install']) ? (int) $mariadb['install'] : 0,
 				'version' => isset($mariadb['version']) ? $mariadb['version'] : '',
 				'root_password' => isset($mariadb['root_password']) ? $mariadb['root_password'] : '',
-				'databases' => $mariadb_databases,
+				'databases' => count($mariadb_databases) ? $mariadb_databases : '[]',
 			]
 		];
 	}
