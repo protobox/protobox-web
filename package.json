@@ -21,8 +21,8 @@
     "type": "git",
     "url": "ssh://git@github.com/protobox/protobox-web.git"
   },
-  "author": "Redfox Media",
-  "license": "Proprietary",
+  "author": "Patrick Heeney",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/protobox/protobox-web/issues"
   },
