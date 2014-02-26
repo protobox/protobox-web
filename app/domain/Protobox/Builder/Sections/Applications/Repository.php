@@ -67,10 +67,9 @@ class Repository extends Application {
 	{
 		if ( ! isset($output['applications']['repository'])) return [];
 
-		$app = $output['applications']['repository'];
 		$repos = [];
 
-		foreach((array)$app as $id => $dat)
+		foreach((array)$output['applications']['repository'] as $id => $dat)
 		{
 			$repos[] = [
 				'name' => isset($dat['name']) ? $dat['name'] : '',

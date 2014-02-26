@@ -64,10 +64,9 @@ class Wordpress extends Application {
 	{
 		if ( ! isset($output['applications']['wordpress'])) return [];
 
-		$app = $output['applications']['wordpress'];
 		$repos = [];
 
-		foreach((array)$app as $id => $dat)
+		foreach((array)$output['applications']['wordpress'] as $id => $dat)
 		{
 			$repos[] = [
 				'name' => isset($dat['name']) ? $dat['name'] : '',

@@ -58,10 +58,9 @@ class Symfony extends Application {
 	{
 		if ( ! isset($output['applications']['symfony'])) return [];
 
-		$app = $output['applications']['symfony'];
 		$repos = [];
 
-		foreach((array)$app as $id => $dat)
+		foreach((array)$output['applications']['symfony'] as $id => $dat)
 		{
 			$repos[] = [
 				'name' => isset($dat['name']) ? $dat['name'] : '',

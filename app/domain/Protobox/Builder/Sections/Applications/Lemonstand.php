@@ -92,10 +92,9 @@ class Lemonstand extends Application {
 	{
 		if ( ! isset($output['applications']['lemonstand'])) return [];
 
-		$app = $output['applications']['lemonstand'];
 		$repos = [];
 
-		foreach((array)$app as $id => $dat)
+		foreach((array)$output['applications']['lemonstand'] as $id => $dat)
 		{
 			$repos[] = [
 				'name' => isset($dat['name']) ? $dat['name'] : '',
@@ -109,9 +108,9 @@ class Lemonstand extends Application {
 				'email' => isset($dat['options']['email']) ? $dat['options']['email'] : '',
 				'username' => isset($dat['options']['username']) ? $dat['options']['username'] : '',
 				'password' => isset($dat['options']['password']) ? $dat['options']['password'] : '',
-				'defaulttheme' => isset($dat['options']['defaulttheme']) ? (int) $dat['options']['defaulttheme'] : '',
-				'defaulttwig' => isset($dat['options']['defaulttwig']) ? (int) $dat['options']['defaulttwig'] : '',
-				'demodata' => isset($dat['options']['demodata']) ? (int) $dat['options']['demodata'] : '',
+				'defaulttheme' => isset($dat['options']['defaulttheme']) ? (int) $dat['options']['defaulttheme'] : 0,
+				'defaulttwig' => isset($dat['options']['defaulttwig']) ? (int) $dat['options']['defaulttwig'] : 0,
+				'demodata' => isset($dat['options']['demodata']) ? (int) $dat['options']['demodata'] : 0,
 				'encrypt' => isset($dat['options']['encrypt']) ? $dat['options']['encrypt'] : '',
 			];
 		}
@@ -147,9 +146,9 @@ class Lemonstand extends Application {
 					'email' => isset($dat['email']) ? $dat['email'] : '',
 					'username' => isset($dat['username']) ? $dat['username'] : '',
 					'password' => isset($dat['password']) ? $dat['password'] : '',
-					'defaulttheme' => isset($dat['defaulttheme']) ? (int) $dat['defaulttheme'] : '',
-					'defaulttwig' => isset($dat['defaulttwig']) ? (int) $dat['defaulttwig'] : '',
-					'demodata' => isset($dat['demodata']) ? (int) $dat['demodata'] : '',
+					'defaulttheme' => isset($dat['defaulttheme']) ? (int) $dat['defaulttheme'] : 0,
+					'defaulttwig' => isset($dat['defaulttwig']) ? (int) $dat['defaulttwig'] : 0,
+					'demodata' => isset($dat['demodata']) ? (int) $dat['demodata'] : 0,
 					'encrypt' => isset($dat['encrypt']) ? $dat['encrypt'] : '',
 				]
 			];

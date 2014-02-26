@@ -58,10 +58,9 @@ class Sylius extends Application {
 	{
 		if ( ! isset($output['applications']['sylius'])) return [];
 
-		$app = $output['applications']['sylius'];
 		$repos = [];
 
-		foreach((array)$app as $id => $dat)
+		foreach((array)$output['applications']['sylius'] as $id => $dat)
 		{
 			$repos[] = [
 				'name' => isset($dat['name']) ? $dat['name'] : '',
