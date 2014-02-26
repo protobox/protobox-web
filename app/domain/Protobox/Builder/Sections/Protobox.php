@@ -24,7 +24,7 @@ class Protobox extends Section {
 	{
 		$protobox = $this->builder->request()->get('protobox');
 		$box_id = isset($options['box_id']) ? $options['box_id'] : null;
-
+		
 		return [
 			'protobox' => [
 				'version' => Config::get('protobox.version'),
@@ -32,7 +32,7 @@ class Protobox extends Section {
 				'document' => $box_id,
 				'description' => 'A custom build from '.($box_id ? 'getprotobox.com/share/'.$box_id : 'getprotobox.com'),
 				'dashboard' => [
-					'install' => isset($protobox['dashboard']['install']) ? (int) $protobox['dashboard']['install'] : 1,
+					'install' => isset($protobox['dashboard']['install']) ? (int) $protobox['dashboard']['install'] : 0,
 					'path' => isset($protobox['dashboard']['path']) ? $protobox['dashboard']['path'] : '',
 				],
 			]
