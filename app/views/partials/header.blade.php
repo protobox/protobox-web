@@ -13,6 +13,7 @@
                 <li class="{{ Request::is('/') || Request::is('share/*') ? 'active' : '' }}"><a href="{{ URL::to('/') }}">{{ strtoupper(trans('global.nav_main.build')) }}</a></li>
                 <li class="{{ Request::is('explore') || Request::is('explore/*') ? 'active' : '' }}"><a href="{{ URL::route('explore') }}">{{ strtoupper(trans('global.nav_main.explore')) }}</a></li>
                 <li class="{{ Request::is('docs/about') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}/about/">{{ strtoupper(trans('global.nav_main.about')) }}</a></li>
+                <li class="{{ Request::is('docs/roadmap') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}/roadmap/">{{ strtoupper(trans('global.nav_main.roadmap')) }}</a></li>
                 <li class="{{ Request::is('docs') || Request::is('docs/*') && !Request::is('docs/about') ? 'active' : '' }}"><a href="{{ URL::route('docs') }}">{{ strtoupper(trans('global.nav_main.docs')) }}</a></li>
                 <li><a href="https://github.com/protobox/protobox/issues" target="_blank">{{ strtoupper(trans('global.nav_main.issues')) }}</a></li>
             </ul>

@@ -15,6 +15,7 @@ return array(
 		'explore' => 'Explore',
 		'paste' => 'Paste',
 		'about' => 'About',
+		'roadmap' => 'Roadmap',
 		'docs' => 'Docs',
 		'login' => 'Login',
 		'register' => 'Register',
