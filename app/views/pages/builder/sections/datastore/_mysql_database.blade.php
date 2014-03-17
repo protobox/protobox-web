@@ -1,3 +1,4 @@
+{{ var_dump($db); exit }}
 <div class="row" id="datastore-mysql-{{ $dbid }}">
     <div class="col-xs-12">
         <div class="panel panel-default">

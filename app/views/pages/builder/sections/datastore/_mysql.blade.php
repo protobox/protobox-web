@@ -48,6 +48,7 @@
 @if(!$db)
 continue;
 @endif
+{{ var_dump($db) }}
 <!-- mysql / databases -->
 @include('pages.builder.sections.datastore._mysql_database', ['type' => 'data'])
 <!-- end mysql / databases -->
