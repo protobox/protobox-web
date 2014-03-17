@@ -43,6 +43,7 @@
 </div>
 <!-- end mysql settings -->
 
+{{ var_dump(Input::old('mysql.databases', $section->param('mysql_databases', []))); exit }}
 @if(count(Input::old('mysql.databases', $section->param('mysql_databases', []))))
 @foreach(Input::old('mysql.databases', $section->param('mysql_databases', [])) as $dbid => $db)
 @if(!$db)
