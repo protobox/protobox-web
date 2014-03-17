@@ -24,6 +24,14 @@ class Datastore extends Section {
 			
 			'mysql_install' => 1,
 			'mysql_root_password' => 'root',
+
+			'mysql_database_name' => 'app',
+			'mysql_database_host' => 'localhost',
+			'mysql_database_user' => 'user',
+			'mysql_database_password' => 'user',
+			'mysql_database_grant' => ['All'],
+			'mysql_database_sql_file' => '',
+
 			'mysql_databases' => [
 				[
 					'name' => 'app',
@@ -42,6 +50,14 @@ class Datastore extends Section {
 			'mariadb_install' => 0,
 			'mariadb_versions' => ['5.5', '10.0'],
 			'mariadb_root_password' => 'root',
+
+			'mariadb_database_name' => 'app',
+			'mariadb_database_host' => 'localhost',
+			'mariadb_database_user' => 'user',
+			'mariadb_database_password' => 'user',
+			'mariadb_database_grant' => ['All'],
+			'mariadb_database_sql_file' => '',
+
 			'mariadb_databases' => [
 				[
 					'name' => 'app',
@@ -233,7 +249,7 @@ class Datastore extends Section {
 					'user' => isset($db['user']) ? $db['user'] : '',
 					'password' => isset($db['password']) ? $db['password'] : '',
 					'grant' => isset($db['grant']) ? $db['grant'] : [],
-					'sql_file' => isset($vhost['sql_file']) ? $vhost['sql_file'] : '',
+					'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
 				];
 			}
 		}
@@ -250,7 +266,7 @@ class Datastore extends Section {
 					'user' => isset($db['user']) ? $db['user'] : '',
 					'password' => isset($db['password']) ? $db['password'] : '',
 					'grant' => isset($db['grant']) ? $db['grant'] : [],
-					'sql_file' => isset($vhost['sql_file']) ? $vhost['sql_file'] : '',
+					'sql_file' => isset($db['sql_file']) ? $db['sql_file'] : '',
 				];
 			}
 		}

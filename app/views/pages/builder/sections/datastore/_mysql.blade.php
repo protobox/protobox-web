@@ -43,18 +43,11 @@
 </div>
 <!-- end mysql settings -->
 
-{{ var_dump(Input::old('mysql.databases', $section->param('mysql_databases', []))); exit }}
-@if(count(Input::old('mysql.databases', $section->param('mysql_databases', []))))
 @foreach(Input::old('mysql.databases', $section->param('mysql_databases', [])) as $dbid => $db)
-@if(!$db)
-continue;
-@endif
-{{ var_dump($db) }}
 <!-- mysql / databases -->
 @include('pages.builder.sections.datastore._mysql_database', ['type' => 'data'])
 <!-- end mysql / databases -->
 @endforeach
-@endif
 
 <script type="text/template" id="mysql-database-template">
 <!-- mysql / databases -->
