@@ -45,6 +45,9 @@
 
 @if(count(Input::old('mysql.databases', $section->param('mysql_databases', []))))
 @foreach(Input::old('mysql.databases', $section->param('mysql_databases', [])) as $dbid => $db)
+@if(!$db)
+continue;
+@endif
 <!-- mysql / databases -->
 @include('pages.builder.sections.datastore._mysql_database', ['type' => 'data'])
 <!-- end mysql / databases -->
