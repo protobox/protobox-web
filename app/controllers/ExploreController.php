@@ -32,7 +32,7 @@ class ExploreController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         //Detect user agent, if its the installer redirect to raw
@@ -64,7 +64,7 @@ class ExploreController extends BaseController {
 
             if ( ! $box = $this->box->getById($id)) 
             {
-                return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+                return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
             }
 
             $box->fork_count += 1;
@@ -93,7 +93,7 @@ class ExploreController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         return Response::make($box->code)->header('Content-Type', 'text/plain');
@@ -106,7 +106,7 @@ class ExploreController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         return $this->download_file($box->code, 'custom.yml');

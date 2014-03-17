@@ -16,7 +16,7 @@ class DocsController extends BaseController
 
 		if ( ! File::exists($file)) 
 		{
-			return Response::make('pages.404.index', ['msg' => 'Docs not found'], 404);
+			return Response::view('pages.404.index', ['msg' => 'Docs not found'], 404);
 		}
 
 		$menu = File::get($storage.'/menu.md');

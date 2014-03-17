@@ -66,7 +66,7 @@ class BuilderController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         $box->view_count += 1;
@@ -88,7 +88,7 @@ class BuilderController extends BaseController {
 
             if ( ! $box = $this->box->getById($id)) 
             {
-                return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+                return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
             }
 
             $builder = App::make('boxbuilder');
@@ -144,7 +144,7 @@ class BuilderController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         return Response::make($box->code)->header('Content-Type', 'text/plain');
@@ -157,7 +157,7 @@ class BuilderController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         return $this->download_file($box->code, 'custom.yml');
@@ -170,7 +170,7 @@ class BuilderController extends BaseController {
 
         if ( ! $box = $this->box->getById($id)) 
         {
-            return Response::make('pages.404.index', ['msg' => 'Box not found'], 404);
+            return Response::view('pages.404.index', ['msg' => 'Box not found'], 404);
         }
 
         $box->delete();
