@@ -74,7 +74,7 @@ class PastesController extends BaseController
 
         if ( ! $paste = $this->pastes->getById($id)) 
         {
-            return App::abort(404, 'Paste not found');
+            return Response::make('pages.404.index', ['msg' => 'Paste not found'], 404);
         }
 
         return View::make('pages.pastes.show', [
@@ -96,7 +96,7 @@ class PastesController extends BaseController
 
         if ( ! $paste = $this->pastes->getById($id)) 
         {
-            return App::abort(404, 'Paste not found');
+            return Response::make('pages.404.index', ['msg' => 'Paste not found'], 404);
         }
 
         return View::make('pages.pastes.create', [
@@ -117,7 +117,7 @@ class PastesController extends BaseController
 
         if ( ! $paste = $this->pastes->getById($id)) 
         {
-            return App::abort(404, 'Paste not found');
+            return Response::make('pages.404.index', ['msg' => 'Paste not found'], 404);
         }
 
         $paste = $this->pastes->getNew([
@@ -160,7 +160,7 @@ class PastesController extends BaseController
 
         if ( ! $paste = $this->pastes->getById($id)) 
         {
-            return App::abort(404, 'Paste not found');
+            return Response::make('pages.404.index', ['msg' => 'Paste not found'], 404);
         }
 
         return Response::make($paste->code)->header('Content-Type', 'text/plain');

@@ -14,7 +14,10 @@ class DocsController extends BaseController
 		$page = ! $path ? $this->homepage : last($urlparts);
 		$file = $location.$page.'.md';
 
-		if ( ! File::exists($file)) App::abort(404);
+		if ( ! File::exists($file)) 
+		{
+			return Response::make('pages.404.index', ['msg' => 'Docs not found'], 404);
+		}
 
 		$menu = File::get($storage.'/menu.md');
 		$content = File::get($file);
