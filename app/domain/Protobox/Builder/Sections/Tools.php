@@ -34,7 +34,7 @@ class Tools extends Section {
 			//
 			
 			'protobox_dashboard_install' => 1,
-			'protobox_dashboard_path' => '/srv/www/web/protobox',
+			'protobox_dashboard_path' => '/vagrant/web/protobox',
 
 		];
 	}

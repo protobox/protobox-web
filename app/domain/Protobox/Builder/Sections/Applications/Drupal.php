@@ -8,7 +8,7 @@ class Drupal extends Application {
 
 			'drupal_name' => 'drupal-test',
 			'drupal_install' => 1,
-			'drupal_path' => '/srv/www/web/drupal',
+			'drupal_path' => '/vagrant/web/drupal',
 			'drupal_version' => '7.0',
 			'drupal_dbname' => 'drupal',
 			'drupal_user_email' => 'admin@admin.com',

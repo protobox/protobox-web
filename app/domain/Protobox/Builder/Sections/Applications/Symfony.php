@@ -8,7 +8,7 @@ class Symfony extends Application {
 
 			'symfony_name' => 'symfony-test',
 			'symfony_install' => 1,
-			'symfony_path' => '/srv/www/web/symfony',
+			'symfony_path' => '/vagrant/web/symfony',
 
 		];
 	}

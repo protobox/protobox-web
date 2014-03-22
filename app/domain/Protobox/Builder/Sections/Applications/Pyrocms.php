@@ -8,7 +8,7 @@ class Pyrocms extends Application {
 
       'pyrocms_name' => 'pyrocms-test',
       'pyrocms_install' => 1,
-      'pyrocms_path' => '/srv/www/web/pyrocms',
+      'pyrocms_path' => '/vagrant/web/pyrocms',
 
       'pyrocms_version' => '2.2.3',
       'pyrocms_dbname' => 'pyrocms',

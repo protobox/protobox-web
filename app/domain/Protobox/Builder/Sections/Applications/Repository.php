@@ -8,7 +8,7 @@ class Repository extends Application {
 
 			'repository_name' => 'repo-test',
 			'repository_install' => 1,
-			'repository_path' => '/srv/www/web/repo',
+			'repository_path' => '/vagrant/web/repo',
 			'repository_source' => 'git@github.com:protobox/protobox-web.git',
 			'repository_revision' => 'master',
 			'repository_pre_install' => [],

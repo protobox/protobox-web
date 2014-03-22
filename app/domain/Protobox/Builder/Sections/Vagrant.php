@@ -108,7 +108,7 @@ class Vagrant extends Section {
 			'root' => [
 				'id' => 'vagrant-root',
 				'source' => './',
-				'target' => '/srv/www/',
+				'target' => '/vagrant/',
 				'nfs' => false,
 				'owner' => 'vagrant',
 				'group' => 'www-data',

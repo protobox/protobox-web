@@ -8,7 +8,7 @@ class Laravel extends Application {
 
 			'laravel_name' => 'laravel-test',
 			'laravel_install' => 1,
-			'laravel_path' => '/srv/www/web/laravel',
+			'laravel_path' => '/vagrant/web/laravel',
 
 		];
 	}

@@ -24,7 +24,7 @@ class Webserver extends Section {
 
 			'apache_virtualhost_servername' => 'app.dev',
 			'apache_virtualhost_serveraliases' => ['www.app.dev'],
-			'apache_virtualhost_docroot' => '/srv/www/web/protobox',
+			'apache_virtualhost_docroot' => '/vagrant/web/protobox',
 			'apache_virtualhost_port' => '80',
 			'apache_virtualhost_setenv' => [],
 			'apache_virtualhost_override' => ['All'],
@@ -33,7 +33,7 @@ class Webserver extends Section {
 				[
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
-					'docroot' => '/srv/www/web/protobox',
+					'docroot' => '/vagrant/web/protobox',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev'],
 					'override' => ['All']
@@ -48,7 +48,7 @@ class Webserver extends Section {
 
 			'nginx_virtualhost_servername' => 'app.dev',
 			'nginx_virtualhost_serveraliases' => ['www.app.dev'],
-			'nginx_virtualhost_docroot' => '/srv/www/web/protobox',
+			'nginx_virtualhost_docroot' => '/vagrant/web/protobox',
 			'nginx_virtualhost_port' => '80',
 			'nginx_virtualhost_setenv' => [],
 
@@ -56,7 +56,7 @@ class Webserver extends Section {
 				[
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
-					'docroot' => '/srv/www/web/protobox',
+					'docroot' => '/vagrant/web/protobox',
 					'port' => '80',
 					'setenv' => ['APP_ENV dev']
 				]
