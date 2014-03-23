@@ -131,9 +131,6 @@ class Vagrant extends Section {
 							'modifyvm' => [
 								'name' => $name,
 								'memory' => (int) $vagrant['local_memory']
-							],
-							'setextradata' => [
-								'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root' => 1
 							]
 						]
 					],
