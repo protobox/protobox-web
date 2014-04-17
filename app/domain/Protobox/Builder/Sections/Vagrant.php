@@ -108,7 +108,7 @@ class Vagrant extends Section {
 			'root' => [
 				'id' => 'vagrant-root',
 				'source' => './',
-				'target' => '/srv/www/',
+				'target' => '/vagrant/',
 				'nfs' => false,
 				'owner' => 'vagrant',
 				'group' => 'www-data',
@@ -131,9 +131,6 @@ class Vagrant extends Section {
 							'modifyvm' => [
 								'name' => $name,
 								'memory' => (int) $vagrant['local_memory']
-							],
-							'setextradata' => [
-								'VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root' => 1
 							]
 						]
 					],

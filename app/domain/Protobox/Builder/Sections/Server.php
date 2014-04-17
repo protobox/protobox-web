@@ -52,7 +52,7 @@ class Server extends Section {
 		$ssh_authorized_keys = [
 			[
 				'name' => 'user1',
-				'file' => '/srv/www/data/ssh/github_id_rsa'
+				'file' => '/vagrant/data/ssh/github_id_rsa'
 			],
 			[
 				'name' => 'user2',
@@ -63,7 +63,7 @@ class Server extends Section {
 		$ssh_private_keys = [
 			[
 				'name' => 'github',
-				'file' => '/srv/www/data/ssh/github_id_rsa'
+				'file' => '/vagrant/data/ssh/github_id_rsa'
 			],
 			[
 				'name' => 'github',
@@ -74,7 +74,7 @@ class Server extends Section {
 		$ssh_config = [
 			[
 				'name' => 'github',
-				'file' => '/srv/www/data/ssh/git_config'
+				'file' => '/vagrant/data/ssh/git_config'
 			],
 			[
 				'name' => 'github',

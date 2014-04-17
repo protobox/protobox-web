@@ -8,7 +8,7 @@ class Sylius extends Application {
 
 			'sylius_name' => 'sylius-test',
 			'sylius_install' => 1,
-			'sylius_path' => '/srv/www/web/sylius',
+			'sylius_path' => '/vagrant/web/sylius',
 
 		];
 	}

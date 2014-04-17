@@ -8,7 +8,7 @@ class Wordpress extends Application {
 
 			'wordpress_name' => 'wordpress-test',
 			'wordpress_install' => 1,
-			'wordpress_path' => '/srv/www/web/wordpress',
+			'wordpress_path' => '/vagrant/web/wordpress',
 			'wordpress_version' => '3.8',
 			'wordpress_dbname' => 'wordpress',
 

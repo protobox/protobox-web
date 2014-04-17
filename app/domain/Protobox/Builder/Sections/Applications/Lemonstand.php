@@ -8,7 +8,7 @@ class Lemonstand extends Application {
 
 			'lemonstand_name' => 'lemonstand-test',
 			'lemonstand_install' => 1,
-			'lemonstand_path' => '/srv/www/web/lemonstand',
+			'lemonstand_path' => '/vagrant/web/lemonstand',
 
 			'lemonstand_holder' => '',
 			'lemonstand_serial' => '',

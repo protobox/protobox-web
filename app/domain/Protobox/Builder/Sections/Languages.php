@@ -107,7 +107,7 @@ class Languages extends Section {
 
 				'xhprof_install' => 0,
 				'xhprof_xhgui' => 1,
-				'xhprof_location' => '/srv/www/web/xhprof',
+				'xhprof_location' => '/vagrant/web/xhprof',
 
 			//
 			// HHVM
