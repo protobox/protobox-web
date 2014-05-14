@@ -48,7 +48,7 @@ class Languages extends Section {
 				'short_open_tag' => 'On',
 			],
 			'php_ini_available' => $data['ini'],
-			'php_timezone' => 'America/Chicago',
+			'php_timezone' => 'UTC',
 			'php_timezone_available' => $this->timezone_available(),
 
 				//
