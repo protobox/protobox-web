@@ -22,6 +22,7 @@ class Webserver extends Section {
 			'apache_modules' => ['rewrite'],
 			'apache_modules_available' => $this->apache_modules_available(),
 
+			'apache_virtualhost_name' => 'app',
 			'apache_virtualhost_servername' => 'app.dev',
 			'apache_virtualhost_serveraliases' => ['www.app.dev'],
 			'apache_virtualhost_docroot' => '/vagrant/web/protobox',
@@ -31,6 +32,7 @@ class Webserver extends Section {
 
 			'apache_virtualhosts' => [
 				[
+                    'name' => 'app',
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/vagrant/web/protobox',
@@ -46,6 +48,7 @@ class Webserver extends Section {
 			
 			'nginx_install' => 0,
 
+			'nginx_virtualhost_name' => 'app',
 			'nginx_virtualhost_servername' => 'app.dev',
 			'nginx_virtualhost_serveraliases' => ['www.app.dev'],
 			'nginx_virtualhost_docroot' => '/vagrant/web/protobox',
@@ -54,6 +57,7 @@ class Webserver extends Section {
 
 			'nginx_virtualhosts' => [
 				[
+                    'name' => 'app',
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/vagrant/web/protobox',
@@ -76,7 +80,7 @@ class Webserver extends Section {
 			foreach((array)$apache['vhosts'] as $id => $dat)
 			{
 				$rules += [
-					//'apache.vhosts.'.$id.'.name' => 'required',
+					'apache.vhosts.'.$id.'.name' => 'required',
 					'apache.vhosts.'.$id.'.servername' => 'required',
 					'apache.vhosts.'.$id.'.docroot' => 'required',
 					'apache.vhosts.'.$id.'.port' => 'required',
@@ -89,7 +93,7 @@ class Webserver extends Section {
 			foreach((array)$nginx['vhosts'] as $id => $dat)
 			{
 				$rules += [
-					//'nginx.vhosts.'.$id.'.name' => 'required',
+					'nginx.vhosts.'.$id.'.name' => 'required',
 					'nginx.vhosts.'.$id.'.servername' => 'required',
 					'nginx.vhosts.'.$id.'.docroot' => 'required',
 					'nginx.vhosts.'.$id.'.port' => 'required',
@@ -224,7 +228,7 @@ class Webserver extends Section {
 			foreach($apache['vhosts'] as $vhostid => $vhost)
 			{
 				$apache_vhosts[] = [
-					'name' => 'app',
+					'name' => isset($vhost['name']) $vhost['name'] : '',
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
 					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
@@ -242,7 +246,7 @@ class Webserver extends Section {
 			foreach($nginx['vhosts'] as $vhostid => $vhost)
 			{
 				$nginx_vhosts[] = [
-					'name' => 'app',
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
 					'server_name' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'server_aliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
 					'www_root' => isset($vhost['docroot']) ? $vhost['docroot'] : '',

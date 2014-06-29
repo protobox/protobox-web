@@ -8,6 +8,15 @@
             <div class="panel-body">
                 <div class="row form-group">
                     <div class="col-md-6">
+                        <label for="apache-vhosts-{{ $vhostid }}-name">Vhost Name</label>
+                        <input type="text" id="apache-vhosts-{{ $vhostid }}-name" name="apache[vhosts][{{ $vhostid }}][name]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_name') : (isset($vhost['name']) ? $vhost['name'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_name') : (isset($vhost['name']) ? $vhost['name'] : '') }}" class="form-control">
+
+                        <p class="help-block">The name of this vhost configuration.</p>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
                         <label for="apache-vhosts-{{ $vhostid }}-servername">Server Name</label>
                         <input type="text" id="apache-vhosts-{{ $vhostid }}-servername" name="apache[vhosts][{{ $vhostid }}][servername]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_servername') : (isset($vhost['servername']) ? $vhost['servername'] : '') }}" class="form-control">
 
