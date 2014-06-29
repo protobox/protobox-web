@@ -32,7 +32,7 @@ class Webserver extends Section {
 
 			'apache_virtualhosts' => [
 				[
-                    'name' => 'app',
+					'name' => 'app',
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/vagrant/web/protobox',
@@ -57,7 +57,7 @@ class Webserver extends Section {
 
 			'nginx_virtualhosts' => [
 				[
-                    'name' => 'app',
+					'name' => 'app',
 					'servername' => 'app.dev',
 					'serveraliases' => ['www.app.dev'],
 					'docroot' => '/vagrant/web/protobox',
