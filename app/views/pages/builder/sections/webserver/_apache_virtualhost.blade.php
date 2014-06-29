@@ -7,11 +7,11 @@
 
             <div class="panel-body">
                 <div class="row form-group">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="apache-vhosts-{{ $vhostid }}-name">Vhost Name</label>
                         <input type="text" id="apache-vhosts-{{ $vhostid }}-name" name="apache[vhosts][{{ $vhostid }}][name]" placeholder="{{ $type == 'template' ? $section->param('apache_virtualhost_name') : (isset($vhost['name']) ? $vhost['name'] : '') }}" value="{{ $type == 'template' ? $section->param('apache_virtualhost_name') : (isset($vhost['name']) ? $vhost['name'] : '') }}" class="form-control">
 
-                        <p class="help-block">The name of this vhost configuration.</p>
+                        <p class="help-block">The name of this vhost configuration for your own personal reference.</p>
                     </div>
                 </div>
 

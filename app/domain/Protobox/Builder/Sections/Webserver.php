@@ -168,10 +168,8 @@ class Webserver extends Section {
 		{
 			foreach ($output['apache']['vhosts'] as $vhostid => $vhost)
 			{
-				$name = isset($vhost['name']) ? $vhost['name'] : '';
-
 				$apache_vhosts[] = [
-					'name' => $name,
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : [],
 					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
@@ -188,10 +186,8 @@ class Webserver extends Section {
 		{
 			foreach ($output['nginx']['vhosts'] as $vhostid => $vhost)
 			{
-				$name = isset($vhost['name']) ? $vhost['name'] : '';
-
 				$nginx_vhosts[] = [
-					'name' => $name,
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
 					'servername' => isset($vhost['server_name']) ? $vhost['server_name'] : '',
 					'serveraliases' => isset($vhost['server_aliases']) ? $vhost['server_aliases'] : [],
 					'docroot' => isset($vhost['www_root']) ? $vhost['www_root'] : '',
@@ -228,7 +224,7 @@ class Webserver extends Section {
 			foreach($apache['vhosts'] as $vhostid => $vhost)
 			{
 				$apache_vhosts[] = [
-					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'name' => isset($vhost['name']) ? $this->safe_name($vhost['name']) : '',
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
 					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
@@ -246,7 +242,7 @@ class Webserver extends Section {
 			foreach($nginx['vhosts'] as $vhostid => $vhost)
 			{
 				$nginx_vhosts[] = [
-					'name' => isset($vhost['name']) ? $vhost['name'] : '',
+					'name' => isset($vhost['name']) ? $this->safe_name($vhost['name']) : '',
 					'server_name' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'server_aliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
 					'www_root' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
@@ -301,6 +297,18 @@ class Webserver extends Section {
 			'userdir',
 			'vhost_alias',
 		];
+	}
+
+	//
+	// Internal
+	//
+
+	private function safe_name($name)
+	{
+		$name = preg_replace('/[^a-z0-9]+/', '_', strtolower($name));
+		$name = trim($name, '_');
+
+		return $name;
 	}
 
 }
