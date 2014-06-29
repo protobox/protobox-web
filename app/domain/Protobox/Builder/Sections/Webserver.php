@@ -228,7 +228,7 @@ class Webserver extends Section {
 			foreach($apache['vhosts'] as $vhostid => $vhost)
 			{
 				$apache_vhosts[] = [
-					'name' => isset($vhost['name']) $vhost['name'] : '',
+					'name' => isset($vhost['name']) ? $vhost['name'] : '',
 					'servername' => isset($vhost['servername']) ? $vhost['servername'] : '',
 					'serveraliases' => isset($vhost['serveraliases']) ? $vhost['serveraliases'] : '[]',
 					'docroot' => isset($vhost['docroot']) ? $vhost['docroot'] : '',
