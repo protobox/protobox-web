@@ -66,7 +66,7 @@ class Symfony extends Application {
 				'name' => isset($dat['name']) ? $dat['name'] : '',
 				'install' => isset($dat['install']) ? (int) $dat['install'] : 0,
 				'path' => isset($dat['path']) ? $dat['path'] : '',
-				'options' => 'null',
+				'options' => [],
 			];
 		}
 
@@ -89,7 +89,7 @@ class Symfony extends Application {
 				'name' => isset($dat['name']) ? $dat['name'] : '',
 				'install' => isset($dat['install']) ? (int) $dat['install'] : 0,
 				'path' => isset($dat['path']) ? $dat['path'] : '',
-				'options' => array(),
+				'options' => [],
 			];
 		}
 
