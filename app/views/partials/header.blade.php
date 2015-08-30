@@ -18,12 +18,13 @@
                 <li><a href="https://github.com/protobox/protobox/issues" target="_blank">{{ strtoupper(trans('global.nav_main.issues')) }}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                @if (Auth::check())
+                {{-- @if (Auth::check())
                 <li class="{{ Request::is('account') || Request::is('account/*') ? 'active' : '' }} register"><a href="{{ URL::route('account') }}">{{ strtoupper('Account') }}</a></li>
                 @else
                 <li class="{{ Request::is('login') ? 'active' : '' }}"><a href="{{ URL::route('login') }}">{{ strtoupper(trans('global.nav_main.login')) }}</a></li>
                 <li class="{{ Request::is('register') ? 'active' : '' }} register"><a href="{{ URL::route('register') }}">{{ strtoupper(trans('global.nav_main.register')) }}</a></li>
-                @endif
+                @endif --}}
+                <li class="register"><a href="https://github.com/protobox/protobox" target="_blank">GitHub</a></li>
             </ul>
         </div>
     </div>
