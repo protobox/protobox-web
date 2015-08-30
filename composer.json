@@ -11,9 +11,9 @@
 	],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"mitch/hashids": "dev-master",
+		"mitch/hashids": "0.1.*",
 		"symfony/yaml": "dev-arrayfix",
-		"erusev/parsedown": "dev-master"
+		"erusev/parsedown": "1.1.*"
 	},
 	"autoload": {
 		"classmap": [
