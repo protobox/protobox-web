@@ -16,7 +16,7 @@ class Box extends EloquentBaseModel {
 
     public function publicID()
     {
-        return Hashids::encrypt($this->id);
+        return Hashids::encode($this->id);
     }
 
 }

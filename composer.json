@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"mitch/hashids": "0.1.*",
+		"mitch/hashids": "1.0.*",
 		"symfony/yaml": "dev-arrayfix",
 		"erusev/parsedown": "1.1.*"
 	},

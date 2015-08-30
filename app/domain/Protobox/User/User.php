@@ -33,7 +33,7 @@ class User extends EloquentBaseModel implements UserInterface, RemindableInterfa
 
     public function publicID()
     {
-        return Hashids::encrypt($this->id);
+        return Hashids::encode($this->id);
     }
 
 }

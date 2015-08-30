@@ -58,7 +58,7 @@ class PastesController extends BaseController
 
         $this->pastes->save($paste);
 
-        return Redirect::route('bin.show', ['id' => Hashids::encrypt($paste->id)]);
+        return Redirect::route('bin.show', ['id' => Hashids::encode($paste->id)]);
     }
 
     /**
@@ -69,7 +69,7 @@ class PastesController extends BaseController
      */
     public function show($hashed)
     {
-        $hash = Hashids::decrypt($hashed);
+        $hash = Hashids::decode($hashed);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $paste = $this->pastes->getById($id)) 
@@ -91,7 +91,7 @@ class PastesController extends BaseController
      */
     public function edit($hash)
     {
-        $hash = Hashids::decrypt($hash);
+        $hash = Hashids::decode($hash);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $paste = $this->pastes->getById($id)) 
@@ -112,7 +112,7 @@ class PastesController extends BaseController
      */
     public function update($hash)
     {
-        $hash = Hashids::decrypt($hash);
+        $hash = Hashids::decode($hash);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $paste = $this->pastes->getById($id)) 
@@ -133,7 +133,7 @@ class PastesController extends BaseController
 
         $this->pastes->save($paste);
 
-        return Redirect::route('bin.show', ['id' => Hashids::encrypt($paste->id)]);
+        return Redirect::route('bin.show', ['id' => Hashids::encode($paste->id)]);
     }
 
     /**
@@ -155,7 +155,7 @@ class PastesController extends BaseController
      */
     public function raw($hash)
     {
-        $hash = Hashids::decrypt($hash);
+        $hash = Hashids::decode($hash);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $paste = $this->pastes->getById($id)) 

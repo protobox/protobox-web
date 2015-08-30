@@ -61,7 +61,7 @@ class BuilderController extends BaseController {
             return $this->raw($hashed);
         }
 
-        $hash = Hashids::decrypt($hashed);
+        $hash = Hashids::decode($hashed);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $box = $this->box->getById($id)) 
@@ -83,7 +83,7 @@ class BuilderController extends BaseController {
     {
         try
         {
-            $hash = Hashids::decrypt($hashed);
+            $hash = Hashids::decode($hashed);
             $id = count($hash) ? $hash[0] : null;
 
             if ( ! $box = $this->box->getById($id)) 
@@ -139,7 +139,7 @@ class BuilderController extends BaseController {
 
     public function raw($hashed)
     {
-        $hash = Hashids::decrypt($hashed);
+        $hash = Hashids::decode($hashed);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $box = $this->box->getById($id)) 
@@ -152,7 +152,7 @@ class BuilderController extends BaseController {
 
     public function download($hashed)
     {
-        $hash = Hashids::decrypt($hashed);
+        $hash = Hashids::decode($hashed);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $box = $this->box->getById($id)) 
@@ -165,7 +165,7 @@ class BuilderController extends BaseController {
 
     public function delete($hashed)
     {
-        $hash = Hashids::decrypt($hashed);
+        $hash = Hashids::decode($hashed);
         $id = count($hash) ? $hash[0] : null;
 
         if ( ! $box = $this->box->getById($id)) 
